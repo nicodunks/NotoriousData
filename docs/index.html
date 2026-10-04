@@ -144,6 +144,22 @@ p.big span { display: block; font: 13px var(--mono); color: var(--mute); margin-
 .opts4 button:hover { border-color: var(--ink); }
 .opts4 button.right { border-color: var(--red); background: #fdeeee; } .opts4 button.wrong { opacity: .45; }
 
+/* final score card */
+.stage .cover.final { background: #f7f6f2; padding: 4% 6%; }
+.stage .cover.final .card { width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 2.2%; text-align: left; }
+.stage .cover.final .kicker { font: 500 clamp(12px, 1.7vw, 16px) var(--mono); color: var(--mute); }
+.stage .cover.final .big { font: 700 clamp(56px, 11vw, 120px)/.9 var(--sans); letter-spacing: -4px; color: var(--red); }
+.stage .cover.final .big small { font-size: .42em; color: var(--ink); letter-spacing: -1px; margin-left: 4px; }
+.stage .cover.final .line { font: 600 clamp(18px, 2.8vw, 30px) var(--sans); letter-spacing: -.8px; color: var(--ink); }
+.stage .cover.final .grid10 { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; margin-top: 1%; }
+.sc { border: 1px solid var(--rule); background: var(--paper); padding: 6px 8px; display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.sc b { font: 700 clamp(13px, 1.8vw, 18px) var(--sans); } .sc.ok b { color: var(--red); } .sc.no b { color: #b5b5b5; }
+.sc span { font: 500 clamp(11px, 1.5vw, 14px) var(--sans); color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sc i { font: clamp(10px, 1.2vw, 12px) var(--mono); font-style: normal; color: var(--mute); }
+.sc.no span, .sc.no i { color: #b5b5b5; }
+.stage .cover.final .foot { display: flex; justify-content: space-between; align-items: center; margin-top: 1.5%; font: clamp(10px, 1.3vw, 13px) var(--mono); color: var(--mute); }
+.stage .cover.final .gbtn { padding: 8px 18px; }
+
 /* stat cards */
 .stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin: 26px 0; }
 .stats > div { background: var(--paper); padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 6px; }
@@ -188,7 +204,8 @@ p.big span { display: block; font: 13px var(--mono); color: var(--mute); margin-
   .grid { grid-template-columns: 1fr; } .syl { grid-template-columns: 1fr; } .smgrid { grid-template-columns: 1fr; } .slist { display: flex; flex-wrap: wrap; gap: 4px 12px; border: 0; } .slist button { width: auto; border: 0; padding: 2px 0; } .slist button span { display: none; }
   .two { grid-template-columns: 1fr; }
   .tabs button { padding: 8px 12px; font-size: 14px; }
-  .stats { grid-template-columns: 1fr; } .opts4 { grid-template-columns: 1fr; } .reel { grid-template-columns: 1fr; } .minis { grid-template-columns: repeat(2, minmax(0, 1fr)); } .mv .row { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: 1fr; } .opts4 { grid-template-columns: 1fr; }
+  .stage.done { aspect-ratio: 4 / 5; } .stage .cover.final { padding: 7% 6%; } .stage .cover.final .grid10 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px; } .sc { padding: 4px 8px; flex-direction: row; align-items: baseline; gap: 6px; } .stage .cover.final .big { font-size: 72px; } .stage .cover.final .foot { flex-direction: column; align-items: flex-start; gap: 8px; } .reel { grid-template-columns: 1fr; } .minis { grid-template-columns: repeat(2, minmax(0, 1fr)); } .mv .row { grid-template-columns: 1fr; }
   .hero .in { padding: 22px 16px 30px; } .hero .whisper { right: 16px; } .stage .hud b { font-size: 24px; }
 }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
@@ -718,7 +735,7 @@ p.big span { display: block; font: 13px var(--mono); color: var(--mute); margin-
     const cv = document.getElementById('gamec'), c = cv.getContext('2d'), vid = document.getElementById('gamev');
     const ask = document.getElementById('gask'), verdict = document.getElementById('gverdict');
     const RED = '#c8202a', BLUE = '#2a5aa8', INK = '#1e1d1c';
-    let R = null, order = [], i = 0, score = 0, done = 0, phase = 'cover', t0 = 0;
+    let R = null, order = [], i = 0, score = 0, done = 0, phase = 'cover', t0 = 0, hist = [];
     const size = () => { const r = cv.getBoundingClientRect(), d = Math.min(2, devicePixelRatio || 1); cv.width = Math.round(r.width * d); cv.height = Math.round(r.height * d); };
     const sub = (a, b) => [a[0] - b[0], a[1] - b[1]], len = a => Math.hypot(a[0], a[1]), lerp = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
     // a pen stroke through the points, weight swelling in the middle (the Ghost Fight line)
@@ -779,7 +796,7 @@ p.big span { display: block; font: 13px var(--mono); color: var(--mute); margin-
     }
     const label = r => `${r.opponent}`, sublab = r => `${r.event ? r.event + ' · ' : ''}${r.date.slice(0, 4)}`;
     function hud() { document.getElementById('ground').textContent = R && phase !== 'cover' ? `Round ${Math.min(i + 1, R.length)} of ${R.length}` : ''; document.getElementById('gscore').textContent = `${score} / ${done}`; }
-    function start() { order = R.map((_, k) => k).sort(() => Math.random() - .5); i = 0; score = 0; done = 0; next(); }
+    function start() { order = R.map((_, k) => k).sort(() => Math.random() - .5); i = 0; score = 0; done = 0; hist = []; document.getElementById('gcover').classList.remove('final'); stage.classList.remove('done'); next(); }
     function next() {
       if (i >= R.length) return end();
       phase = 'ask'; stage.classList.remove('revealed'); vid.pause(); vid.removeAttribute('src'); vid.load();
@@ -791,18 +808,26 @@ p.big span { display: block; font: 13px var(--mono); color: var(--mute); margin-
       vid.src = r.clip; vid.preload = 'auto';
     }
     function guess(k, bt) {
-      if (phase !== 'ask') return; const r = R[order[i]], right = k === order[i]; done++; if (right) score++;
+      if (phase !== 'ask') return; const r = R[order[i]], right = k === order[i]; done++; if (right) score++; hist.push({ r, right });
       phase = 'reveal'; ask.querySelectorAll('button').forEach(b => { b.disabled = true; if (+b.dataset.k === order[i]) b.classList.add('right'); else if (b === bt) b.classList.add('wrong'); });
       stage.classList.add('revealed'); vid.currentTime = 0; vid.play().catch(() => {}); hud();
       verdict.innerHTML = `<b>${right ? 'Yes.' : 'No.'}</b> ${r.date.slice(0, 4)} vs ${r.opponent}${r.round ? ', round ' + r.round : ''}${r.mirrored ? ' (mirrored)' : ''}.<button class="gbtn" id="gnext">${i + 1 < R.length ? 'Next fight →' : 'See your score'}</button>`;
       document.getElementById('gnext').onclick = () => { i++; next(); };
     }
     function end() {
-      phase = 'end'; vid.pause(); stage.classList.remove('revealed'); ask.innerHTML = ''; hud();
-      const cover = document.getElementById('gcover'); cover.hidden = false;
-      const line = score >= 8 ? 'You know your McGregor.' : score >= 5 ? 'A real fan.' : 'Back to the tapes.';
-      cover.innerHTML = `<h3>${score} of ${R.length}</h3><p>${line}</p><button class="gbtn" id="gplay">Play again</button>`;
-      document.getElementById('gplay').onclick = start; verdict.innerHTML = '';
+      phase = 'end'; vid.pause(); stage.classList.remove('revealed'); ask.innerHTML = ''; verdict.innerHTML = '';
+      document.getElementById('ground').textContent = ''; document.getElementById('gscore').textContent = '';
+      const cover = document.getElementById('gcover'); cover.hidden = false; cover.classList.add('final'); stage.classList.add('done');
+      const line = score >= 9 ? 'You know your McGregor.' : score >= 7 ? 'Real fan.' : score >= 5 ? 'Casual.' : 'Back to the tapes.';
+      const cells = hist.slice().sort((a, b) => a.r.date.localeCompare(b.r.date)).map(h =>
+        `<div class="sc ${h.right ? 'ok' : 'no'}"><b>${h.right ? '✓' : '✗'}</b><span>${h.r.opponent.split(' ').slice(-1)[0]}</span><i>${h.r.date.slice(0, 4)}</i></div>`).join('');
+      cover.innerHTML = `<div class="card">
+        <div class="kicker">Can you guess the fight?</div>
+        <div class="big">${score}<small>/${R.length}</small></div>
+        <div class="line">${line}</div>
+        <div class="grid10">${cells}</div>
+        <div class="foot"><span>nicodunks.github.io/NotoriousData</span><button class="gbtn" id="gplay">Play again</button></div></div>`;
+      document.getElementById('gplay').onclick = start;
     }
     document.getElementById('gplay').onclick = () => { if (R) start(); };
     fetch('game.json').then(r => r.json()).then(d => { R = d; hud(); });
