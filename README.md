@@ -1,8 +1,8 @@
-# McGregor, Frame by Frame
+# NotoriousData
 
 Every live second of fifteen Conor McGregor fights, 2012 to 2021, measured frame by frame against the man in front of him.
 
-**Read it:** https://nicodunks.github.io/mma-frame-by-frame/
+**Read it:** https://nicodunks.github.io/NotoriousData/
 
 By Nico Christie and Peter Wang. The pipeline follows Peter Wang's [deep-sports-analysis](https://github.com/pwang724/deep-sports-analysis) (keep live play, find the people, track their joints, test per fight).
 
