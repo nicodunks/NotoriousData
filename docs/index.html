@@ -220,7 +220,9 @@ p.big span { display: block; font: 13px var(--mono); color: var(--mute); margin-
   .mark { margin-bottom: 40px; } h1 { font-size: 28px; }
   .grid { grid-template-columns: 1fr; } .syl { grid-template-columns: 1fr; } .smgrid { grid-template-columns: 1fr; } .slist { display: flex; flex-wrap: wrap; gap: 4px 12px; border: 0; } .slist button { width: auto; border: 0; padding: 2px 0; } .slist button span { display: none; }
   .two { grid-template-columns: 1fr; }
-  .tabs button { padding: 8px 12px; font-size: 14px; }
+  .tabs { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); padding-right: 24px; margin-inline: -16px; padding-left: 16px; }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tabs button { flex: none; padding: 8px 12px; font-size: 14px; }
   .stats { grid-template-columns: 1fr; } .opts4 { grid-template-columns: 1fr; }
   .stage.idle { aspect-ratio: 4 / 3; } .stage.idle .cover:not(.final) { padding-top: 9%; } .stage.idle .cover .kick { font-size: 11px; } .stage.done { aspect-ratio: 4 / 5; } .stage .cover.final { padding: 7% 6%; } .stage .cover.final .grid10 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px; } .sc { padding: 4px 8px; flex-direction: row; align-items: baseline; gap: 6px; } .stage .cover.final .big { font-size: 72px; } .stage .cover.final .foot { flex-direction: column; align-items: flex-start; gap: 8px; } .reel { grid-template-columns: 1fr; } .minis { grid-template-columns: repeat(2, minmax(0, 1fr)); } .mv .row { grid-template-columns: 1fr; }
   .hero .in { padding: 22px 16px 30px; } .hero .whisper { right: 16px; } .stage .hud b { font-size: 24px; }
@@ -452,7 +454,7 @@ p.big span { display: block; font: 13px var(--mono); color: var(--mute); margin-
   // tabs (with #hash deep links)
   const tabs = [...document.querySelectorAll('.tabs [role=tab]')];
   function show(id) { tabs.forEach(b => { const on = b.getAttribute('aria-controls') === id; b.setAttribute('aria-selected', on); document.getElementById(b.getAttribute('aria-controls')).hidden = !on; }); }
-  tabs.forEach(b => b.onclick = () => { show(b.getAttribute('aria-controls')); history.replaceState(null, '', '#' + b.id.slice(2)); });
+  tabs.forEach(b => b.onclick = () => { show(b.getAttribute('aria-controls')); history.replaceState(null, '', '#' + b.id.slice(2)); b.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' }); });
   const h = location.hash.slice(1); if (h && document.getElementById('t-' + h)) show('t-' + h);
   // pair tabs
   document.querySelectorAll('.pairs').forEach(g => g.querySelectorAll('.ptabs button').forEach(b => b.onclick = () => {
