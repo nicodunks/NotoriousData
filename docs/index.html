@@ -145,6 +145,10 @@ p.big span { display: block; font: 13px var(--mono); color: var(--mute); margin-
 .opts4 button.right { border-color: var(--red); background: #fdeeee; } .opts4 button.wrong { opacity: .45; }
 
 /* the game arena: one near-black panel */
+.stage .cover:not(.final) { justify-content: flex-start; padding-top: 11%; gap: 12px; background: linear-gradient(180deg, rgba(12,13,14,.92) 0%, rgba(12,13,14,.55) 45%, rgba(12,13,14,0) 75%); }
+.stage .cover .kick { font: 12px var(--mono); letter-spacing: .08em; color: #8b8f93; }
+.stage .cover:not(.final) h3 { font-size: clamp(26px, 4.4vw, 44px); letter-spacing: -1.4px; }
+.stage .cover:not(.final) .gbtn { padding: 10px 30px; margin-top: 4px; }
 .arena { background: #0c0d0e; padding: 10px 10px 12px; margin-top: 22px; }
 .arena .stage { border: 0; }
 .arena .opts4 button { background: #141618; border-color: #25282b; color: #ecebe8; }
@@ -218,7 +222,7 @@ p.big span { display: block; font: 13px var(--mono); color: var(--mute); margin-
   .two { grid-template-columns: 1fr; }
   .tabs button { padding: 8px 12px; font-size: 14px; }
   .stats { grid-template-columns: 1fr; } .opts4 { grid-template-columns: 1fr; }
-  .stage.done { aspect-ratio: 4 / 5; } .stage .cover.final { padding: 7% 6%; } .stage .cover.final .grid10 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px; } .sc { padding: 4px 8px; flex-direction: row; align-items: baseline; gap: 6px; } .stage .cover.final .big { font-size: 72px; } .stage .cover.final .foot { flex-direction: column; align-items: flex-start; gap: 8px; } .reel { grid-template-columns: 1fr; } .minis { grid-template-columns: repeat(2, minmax(0, 1fr)); } .mv .row { grid-template-columns: 1fr; }
+  .stage.idle { aspect-ratio: 4 / 3; } .stage.idle .cover:not(.final) { padding-top: 9%; } .stage.idle .cover .kick { font-size: 11px; } .stage.done { aspect-ratio: 4 / 5; } .stage .cover.final { padding: 7% 6%; } .stage .cover.final .grid10 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px; } .sc { padding: 4px 8px; flex-direction: row; align-items: baseline; gap: 6px; } .stage .cover.final .big { font-size: 72px; } .stage .cover.final .foot { flex-direction: column; align-items: flex-start; gap: 8px; } .reel { grid-template-columns: 1fr; } .minis { grid-template-columns: repeat(2, minmax(0, 1fr)); } .mv .row { grid-template-columns: 1fr; }
   .hero .in { padding: 22px 16px 30px; } .hero .whisper { right: 16px; } .stage .hud b { font-size: 24px; }
 }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
@@ -365,15 +369,12 @@ p.big span { display: block; font: 13px var(--mono); color: var(--mute); margin-
 
 <!-- PLAY -->
 <section role="tabpanel" id="t-play" aria-labelledby="b-play" hidden>
-  <ul class="keys">
-    <li><b>Then watch the real footage!</b></li>
-  </ul>
   <div class="arena">
-  <div class="stage" id="stage">
+  <div class="stage idle" id="stage">
     <canvas id="gamec" aria-label="McGregor in red and his opponent in blue, drawn from their tracked joints"></canvas>
     <video id="gamev" muted playsinline loop preload="none" aria-label="The real footage"></video>
     <div class="hud"><span id="ground"></span><span><b id="gscore">0 / 0</b></span></div>
-    <div class="cover" id="gcover"><h3>Which Conor fight is this?</h3><button class="gbtn" id="gplay">Play</button></div>
+    <div class="cover" id="gcover"><div class="kick">10 fights · 2012–2021</div><h3>Which Conor fight is this?</h3><button class="gbtn" id="gplay">Play</button></div>
   </div>
   <div class="opts4" id="gask"></div>
   <p class="verdict" id="gverdict"></p>
@@ -746,7 +747,7 @@ p.big span { display: block; font: 13px var(--mono); color: var(--mute); margin-
     const cv = document.getElementById('gamec'), c = cv.getContext('2d'), vid = document.getElementById('gamev');
     const ask = document.getElementById('gask'), verdict = document.getElementById('gverdict');
     const RED = '#ff3b42', BLUE = '#4f8ff0', INK = '#f2f2f0';
-    let R = null, order = [], i = 0, score = 0, done = 0, phase = 'cover', t0 = 0, hist = [];
+    let R = null, order = [], i = 0, score = 0, done = 0, phase = 'cover', t0 = 0, hist = [], demoView = {};
     const size = () => { const r = cv.getBoundingClientRect(), d = Math.min(2, devicePixelRatio || 1); cv.width = Math.round(r.width * d); cv.height = Math.round(r.height * d); };
     const sub = (a, b) => [a[0] - b[0], a[1] - b[1]], len = a => Math.hypot(a[0], a[1]), lerp = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
     // a pen stroke through the points, weight swelling in the middle (the Ghost Fight line)
@@ -794,20 +795,32 @@ p.big span { display: block; font: 13px var(--mono); color: var(--mute); margin-
       if (cv.clientWidth && Math.abs(cv.width - cv.clientWidth * Math.min(2, devicePixelRatio || 1)) > 2) size();
       const W = cv.width, H = cv.height; if (!W || !H) { requestAnimationFrame(draw); return; }
       c.fillStyle = '#0c0d0e'; c.fillRect(0, 0, W, H); { const sp = c.createRadialGradient(W * .5, H * .75, 0, W * .5, H * .75, W * .5); sp.addColorStop(0, 'rgba(255,255,255,.05)'); sp.addColorStop(1, 'rgba(255,255,255,0)'); c.fillStyle = sp; c.fillRect(0, 0, W, H); }
-      if (R && (phase === 'ask' || phase === 'reveal')) {
-        const r = R[order[i]], v = view, sc = Math.min(H * .55 / ((v.y1 - v.y0) * 9 / 16), W * .6 / (v.x1 - v.x0));
-        const mapp = p => p && [W / 2 + (p[0] - (v.x0 + v.x1) / 2) * sc, H * .80 - (v.y1 - p[1]) * sc * 9 / 16];
-        c.strokeStyle = 'rgba(255,255,255,.14)'; c.lineWidth = Math.max(1, W / 900); c.beginPath(); c.moveTo(W * .12, H * .82); c.lineTo(W * .88, H * .82); c.stroke();
-        const dur = r.seq[r.seq.length - 1].t + .5, tt = ((now - t0) / 1000) % dur; let j = 0; while (j < r.seq.length - 1 && r.seq[j + 1].t <= tt) j++;
+      const scene = (r, v, tt, alpha, floor, k = 1) => {
+        const sc = k * Math.min(H * .55 / ((v.y1 - v.y0) * 9 / 16), W * .6 / (v.x1 - v.x0));
+        const mapp = p => p && [W / 2 + (p[0] - (v.x0 + v.x1) / 2) * sc, H * floor - (v.y1 - p[1]) * sc * 9 / 16];
+        c.save(); c.globalAlpha = alpha;
+        c.strokeStyle = 'rgba(255,255,255,.14)'; c.lineWidth = Math.max(1, W / 900); c.beginPath(); c.moveTo(W * .12, H * (floor + .02)); c.lineTo(W * .88, H * (floor + .02)); c.stroke();
+        let j = 0; while (j < r.seq.length - 1 && r.seq[j + 1].t <= tt) j++;
         const fr = r.seq[j], M = fr.m.map(mapp), O = fr.o.map(mapp);
         const shM = M[5] && M[11] ? len(sub(M[5], M[11])) : 40, shO = O[5] && O[11] ? len(sub(O[5], O[11])) : 40;
-        shadow(O, shO); shadow(M, shM); person(O, BLUE); person(M, RED);
+        shadow(O, shO); shadow(M, shM); person(O, BLUE); person(M, RED); c.restore();
+      };
+      if (R && (phase === 'ask' || phase === 'reveal')) {
+        const r = R[order[i]], dur = r.seq[r.seq.length - 1].t + .5;
+        scene(r, view, ((now - t0) / 1000) % dur, 1, .80);
+      } else if (R && phase === 'cover') {
+        // attract loop: each fight's exchange in turn, dimmed, fading in and out
+        let tt = (now / 1000) % R.reduce((a, r) => a + r.seq[r.seq.length - 1].t, 0), k = 0;
+        while (tt > R[k].seq[R[k].seq.length - 1].t) { tt -= R[k].seq[R[k].seq.length - 1].t; k++; }
+        const r = R[k], dur = r.seq[r.seq.length - 1].t, fade = Math.min(1, tt / .5, (dur - tt) / .5);
+        if (!demoView[k]) demoView[k] = frameView(r);
+        scene(r, demoView[k], tt, .55 * Math.max(0, fade), .9, H / W > .7 ? .4 : .62);
       }
       requestAnimationFrame(draw);
     }
     const label = r => `${r.opponent}`, sublab = r => `${r.event ? r.event + ' · ' : ''}${r.date.slice(0, 4)}`;
-    function hud() { document.getElementById('ground').textContent = R && phase !== 'cover' ? `Round ${Math.min(i + 1, R.length)} of ${R.length}` : ''; document.getElementById('gscore').textContent = `${score} / ${done}`; }
-    function start() { order = R.map((_, k) => k).sort(() => Math.random() - .5); i = 0; score = 0; done = 0; hist = []; document.getElementById('gcover').classList.remove('final'); stage.classList.remove('done'); next(); }
+    function hud() { document.getElementById('ground').textContent = R && phase !== 'cover' ? `Round ${Math.min(i + 1, R.length)} of ${R.length}` : ''; document.getElementById('gscore').textContent = phase === 'cover' ? '' : `${score} / ${done}`; }
+    function start() { order = R.map((_, k) => k).sort(() => Math.random() - .5); i = 0; score = 0; done = 0; hist = []; document.getElementById('gcover').classList.remove('final'); stage.classList.remove('done', 'idle'); next(); }
     function next() {
       if (i >= R.length) return end();
       phase = 'ask'; stage.classList.remove('revealed'); vid.pause(); vid.removeAttribute('src'); vid.load();
