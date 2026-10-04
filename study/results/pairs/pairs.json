@@ -1,0 +1,651 @@
+{
+ "stance": [
+  {
+   "file": "pairs/stance_0.mp4",
+   "early": {
+    "fight": "2013_holloway",
+    "date": "2013-08-17",
+    "t0": 416.1490783691406,
+    "t1": 418.5180969238281,
+    "head": 16.99710574407939,
+    "guard": 19.819569086600694,
+    "range": 2.905932417765309,
+    "typ": 0.02127992175139548
+   },
+   "late": {
+    "fight": "2016_diaz2",
+    "date": "2016-08-20",
+    "t0": 465.93212890625,
+    "t1": 468.3011779785156,
+    "head": 18.733032113028628,
+    "guard": 21.359596455366145,
+    "range": 2.997085317866438,
+    "typ": 0.131291455681313
+   }
+  },
+  {
+   "file": "pairs/stance_1.mp4",
+   "early": {
+    "fight": "2015_mendes",
+    "date": "2015-07-11",
+    "t0": 92.95953369140625,
+    "t1": 95.36193084716797,
+    "head": 17.159343774029523,
+    "guard": 19.903314349776608,
+    "range": 2.3531503073447526,
+    "typ": 0.04325936984443261
+   },
+   "late": {
+    "fight": "2016_diaz1",
+    "date": "2016-03-05",
+    "t0": 286.35272216796875,
+    "t1": 288.7217712402344,
+    "head": 18.66153117423378,
+    "guard": 22.052754801484248,
+    "range": 2.6407205340746045,
+    "typ": 0.13565582546497784
+   }
+  },
+  {
+   "file": "pairs/stance_2.mp4",
+   "early": {
+    "fight": "2012_buchinger",
+    "date": "2012-12-31",
+    "t0": 656.6893920898438,
+    "t1": 659.0584106445312,
+    "head": 16.747691487031705,
+    "guard": 18.117702977623615,
+    "range": 2.998282131167987,
+    "typ": 0.2838960367830675
+   },
+   "late": {
+    "fight": "2016_alvarez",
+    "date": "2016-11-12",
+    "t0": 400.3999938964844,
+    "t1": 402.76904296875,
+    "head": 19.43395996820839,
+    "guard": 21.607020674775413,
+    "range": 3.0011569965260367,
+    "typ": 0.24054899929110718
+   }
+  }
+ ],
+ "left": [
+  {
+   "file": "pairs/left_0.mp4",
+   "early": {
+    "fight": "2012_hill",
+    "date": "2012-06-02",
+    "opponent": "Dave Hill",
+    "setup": "straight lead",
+    "peak_speed": 12.992888244729594,
+    "t_peak": 2012.0433349609375
+   },
+   "late": {
+    "fight": "2016_diaz1",
+    "date": "2016-03-05",
+    "opponent": "Nate Diaz",
+    "setup": "caught coming in",
+    "peak_speed": 12.230195383654939,
+    "t_peak": 126.39293670654297
+   }
+  },
+  {
+   "file": "pairs/left_1.mp4",
+   "early": {
+    "fight": "2015_siver",
+    "date": "2015-01-18",
+    "opponent": "Dennis Siver",
+    "setup": "behind the paw",
+    "peak_speed": 13.370756272384172,
+    "t_peak": 353.0799865722656
+   },
+   "late": {
+    "fight": "2016_diaz2",
+    "date": "2016-08-20",
+    "opponent": "Nate Diaz",
+    "setup": "behind the paw",
+    "peak_speed": 12.47473515630775,
+    "t_peak": 867.0995483398438
+   }
+  },
+  {
+   "file": "pairs/left_2.mp4",
+   "early": {
+    "fight": "2015_mendes",
+    "date": "2015-07-11",
+    "opponent": "Chad Mendes",
+    "setup": "behind the paw",
+    "peak_speed": 13.374995024266973,
+    "t_peak": 258.9253234863281
+   },
+   "late": {
+    "fight": "2021_poirier2",
+    "date": "2021-01-23",
+    "opponent": "Dustin Poirier",
+    "setup": "slip counter",
+    "peak_speed": 13.41175758051926,
+    "t_peak": 672.2048950195312
+   }
+  }
+ ],
+ "counters": [
+  {
+   "file": "pairs/counter_0.mp4",
+   "pull": {
+    "fight": "2018_khabib",
+    "date": "2018-10-06",
+    "t_onset": 671.8378295898438,
+    "head_back": 0.17489461539978973,
+    "lead_ms": 367.00439453125
+   },
+   "slip": {
+    "fight": "2016_diaz1",
+    "date": "2016-03-05",
+    "t_onset": 271.07080078125,
+    "head_down": 0.15750230216673078,
+    "lead_ms": 0.0
+   }
+  },
+  {
+   "file": "pairs/counter_1.mp4",
+   "pull": {
+    "fight": "2016_diaz2",
+    "date": "2016-08-20",
+    "t_onset": 871.1035766601562,
+    "head_back": 0.13617608446060764,
+    "lead_ms": 433.77685546875
+   },
+   "slip": {
+    "fight": "2021_poirier2",
+    "date": "2021-01-23",
+    "t_onset": 671.8712158203125,
+    "head_down": 0.05433815124732466,
+    "lead_ms": 0.0
+   }
+  },
+  {
+   "file": "pairs/counter_2.mp4",
+   "pull": {
+    "fight": "2015_mendes",
+    "date": "2015-07-11",
+    "t_onset": 385.485107421875,
+    "head_back": 0.5632534648224675,
+    "lead_ms": 300.29296875
+   },
+   "slip": {
+    "fight": "2012_hill",
+    "date": "2012-06-02",
+    "t_onset": 1884.3157958984375,
+    "head_down": 0.2698069606944977,
+    "lead_ms": 0.0
+   }
+  }
+ ],
+ "measures": {
+  "blade": {
+   "file": "pairs/measure_blade.mp4",
+   "eras": [
+    {
+     "era": "2012\u201313",
+     "fight": "2012_hill",
+     "date": "2012-06-02",
+     "opponent": "Dave Hill",
+     "t0": 1854.552734375,
+     "window_median": 46.93538728006319,
+     "era_median": 44.25420741514314
+    },
+    {
+     "era": "2014\u201315",
+     "fight": "2015_mendes",
+     "date": "2015-07-11",
+     "opponent": "Chad Mendes",
+     "t0": 91.75833129882812,
+     "window_median": 44.85203277839206,
+     "era_median": 44.504291900268335
+    },
+    {
+     "era": "2016",
+     "fight": "2016_diaz2",
+     "date": "2016-08-20",
+     "opponent": "Nate Diaz",
+     "t0": 1034.0997314453125,
+     "window_median": 38.42391871563942,
+     "era_median": 40.09435742617232
+    },
+    {
+     "era": "2021",
+     "fight": "2021_poirier2",
+     "date": "2021-01-23",
+     "opponent": "Dustin Poirier",
+     "t0": 425.6919250488281,
+     "window_median": 16.36595749386281,
+     "era_median": 25.410400481830482
+    }
+   ]
+  },
+  "width": {
+   "file": "pairs/measure_width.mp4",
+   "eras": [
+    {
+     "era": "2012\u201313",
+     "fight": "2013_holloway",
+     "date": "2013-08-17",
+     "opponent": "Max Holloway",
+     "t0": 272.2720031738281,
+     "window_median": 0.9961719866123714,
+     "era_median": 1.10842847380446
+    },
+    {
+     "era": "2014\u201315",
+     "fight": "2015_mendes",
+     "date": "2015-07-11",
+     "opponent": "Chad Mendes",
+     "t0": 91.75833129882812,
+     "window_median": 1.165039968770473,
+     "era_median": 1.203348882927766
+    },
+    {
+     "era": "2016",
+     "fight": "2016_alvarez",
+     "date": "2016-11-12",
+     "opponent": "Eddie Alvarez",
+     "t0": 285.85223388671875,
+     "window_median": 1.2370312972169781,
+     "era_median": 1.2370312972169781
+    },
+    {
+     "era": "2021",
+     "fight": "2021_poirier3",
+     "date": "2021-07-10",
+     "opponent": "Dustin Poirier",
+     "t0": 320.2557373046875,
+     "window_median": 1.605919997251239,
+     "era_median": 1.4151453822738815
+    }
+   ]
+  },
+  "length": {
+   "file": "pairs/measure_length.mp4",
+   "eras": [
+    {
+     "era": "2012\u201313",
+     "fight": "2013_holloway",
+     "date": "2013-08-17",
+     "opponent": "Max Holloway",
+     "t0": 272.2720031738281,
+     "window_median": 0.9859868685198646,
+     "era_median": 1.0913797733569952
+    },
+    {
+     "era": "2014\u201315",
+     "fight": "2015_mendes",
+     "date": "2015-07-11",
+     "opponent": "Chad Mendes",
+     "t0": 91.75833129882812,
+     "window_median": 1.007605513816741,
+     "era_median": 1.1857052154110959
+    },
+    {
+     "era": "2016",
+     "fight": "2016_alvarez",
+     "date": "2016-11-12",
+     "opponent": "Eddie Alvarez",
+     "t0": 285.85223388671875,
+     "window_median": 1.2235697186816417,
+     "era_median": 1.2293353320902032
+    },
+    {
+     "era": "2021",
+     "fight": "2021_poirier3",
+     "date": "2021-07-10",
+     "opponent": "Dustin Poirier",
+     "t0": 320.2557373046875,
+     "window_median": 1.5975254412628983,
+     "era_median": 1.4135478158753703
+    }
+   ]
+  },
+  "crouch": {
+   "file": "pairs/measure_crouch.mp4",
+   "eras": [
+    {
+     "era": "2012\u201313",
+     "fight": "2012_hill",
+     "date": "2012-06-02",
+     "opponent": "Dave Hill",
+     "t0": 1880.4451904296875,
+     "window_median": 1.594696434676098,
+     "era_median": 1.5799409081283602
+    },
+    {
+     "era": "2014\u201315",
+     "fight": "2015_mendes",
+     "date": "2015-07-11",
+     "opponent": "Chad Mendes",
+     "t0": 382.94921875,
+     "window_median": 1.546718327501699,
+     "era_median": 1.5342442504060436
+    },
+    {
+     "era": "2016",
+     "fight": "2016_alvarez",
+     "date": "2016-11-12",
+     "opponent": "Eddie Alvarez",
+     "t0": 245.0114288330078,
+     "window_median": 1.546554634915681,
+     "era_median": 1.546554634915681
+    },
+    {
+     "era": "2021",
+     "fight": "2021_poirier3",
+     "date": "2021-07-10",
+     "opponent": "Dustin Poirier",
+     "t0": 255.64891052246094,
+     "window_median": 1.5151545119299352,
+     "era_median": 1.5576025161070923
+    }
+   ]
+  },
+  "rear_knee": {
+   "file": "pairs/measure_rear_knee.mp4",
+   "eras": [
+    {
+     "era": "2012\u201313",
+     "fight": "2013_holloway",
+     "date": "2013-08-17",
+     "opponent": "Max Holloway",
+     "t0": 26.65996742248535,
+     "window_median": 170.25172493862073,
+     "era_median": 169.9506721670425
+    },
+    {
+     "era": "2014\u201315",
+     "fight": "2015_mendes",
+     "date": "2015-07-11",
+     "opponent": "Chad Mendes",
+     "t0": 123.79033660888672,
+     "window_median": 178.06473381658472,
+     "era_median": 174.4703973501164
+    },
+    {
+     "era": "2016",
+     "fight": "2016_alvarez",
+     "date": "2016-11-12",
+     "opponent": "Eddie Alvarez",
+     "t0": 291.05743408203125,
+     "window_median": 173.89116677727822,
+     "era_median": 172.47395546484418
+    },
+    {
+     "era": "2021",
+     "fight": "2021_poirier2",
+     "date": "2021-01-23",
+     "opponent": "Dustin Poirier",
+     "t0": 587.2866821289062,
+     "window_median": 173.32454720527124,
+     "era_median": 170.28592747490887
+    }
+   ]
+  },
+  "lean": {
+   "file": "pairs/measure_lean.mp4",
+   "eras": [
+    {
+     "era": "2012\u201313",
+     "fight": "2012_hill",
+     "date": "2012-06-02",
+     "opponent": "Dave Hill",
+     "t0": 1881.646484375,
+     "window_median": -1.1631833955749127,
+     "era_median": -1.2534266984662281
+    },
+    {
+     "era": "2014\u201315",
+     "fight": "2015_mendes",
+     "date": "2015-07-11",
+     "opponent": "Chad Mendes",
+     "t0": 123.79033660888672,
+     "window_median": 5.064129262618885,
+     "era_median": 5.064129262618885
+    },
+    {
+     "era": "2016",
+     "fight": "2016_diaz2",
+     "date": "2016-08-20",
+     "opponent": "Nate Diaz",
+     "t0": 1034.0997314453125,
+     "window_median": 4.38486536107655,
+     "era_median": 4.585014302147863
+    },
+    {
+     "era": "2021",
+     "fight": "2021_poirier2",
+     "date": "2021-01-23",
+     "opponent": "Dustin Poirier",
+     "t0": 637.7037353515625,
+     "window_median": 7.128845543010136,
+     "era_median": 7.231076679936029
+    }
+   ]
+  },
+  "weight": {
+   "file": "pairs/measure_weight.mp4",
+   "eras": [
+    {
+     "era": "2012\u201313",
+     "fight": "2012_hill",
+     "date": "2012-06-02",
+     "opponent": "Dave Hill",
+     "t0": 1868.2330322265625,
+     "window_median": 0.49192781649513084,
+     "era_median": 0.49533040047990895
+    },
+    {
+     "era": "2014\u201315",
+     "fight": "2015_mendes",
+     "date": "2015-07-11",
+     "opponent": "Chad Mendes",
+     "t0": 92.95953369140625,
+     "window_median": 0.4850604951451375,
+     "era_median": 0.4790528215033828
+    },
+    {
+     "era": "2016",
+     "fight": "2016_alvarez",
+     "date": "2016-11-12",
+     "opponent": "Eddie Alvarez",
+     "t0": 394.09368896484375,
+     "window_median": 0.5267633369137128,
+     "era_median": 0.5
+    },
+    {
+     "era": "2021",
+     "fight": "2021_poirier2",
+     "date": "2021-01-23",
+     "opponent": "Dustin Poirier",
+     "t0": 426.89312744140625,
+     "window_median": 0.47897629200934105,
+     "era_median": 0.47713128729752774
+    }
+   ]
+  },
+  "step_speed": {
+   "file": "pairs/measure_step_speed.mp4",
+   "eras": [
+    {
+     "era": "2012\u201313",
+     "fight": "2013_holloway",
+     "date": "2013-08-17",
+     "opponent": "Max Holloway",
+     "t0": 26.65996742248535,
+     "window_median": 0.22924363783824564,
+     "era_median": 0.31330661023068807
+    },
+    {
+     "era": "2014\u201315",
+     "fight": "2015_mendes",
+     "date": "2015-07-11",
+     "opponent": "Chad Mendes",
+     "t0": 91.75833129882812,
+     "window_median": 0.22015361612835682,
+     "era_median": 0.22196632671997785
+    },
+    {
+     "era": "2016",
+     "fight": "2016_diaz2",
+     "date": "2016-08-20",
+     "opponent": "Nate Diaz",
+     "t0": 1043.976318359375,
+     "window_median": 0.18827174742319874,
+     "era_median": 0.20661732257631904
+    },
+    {
+     "era": "2021",
+     "fight": "2021_poirier2",
+     "date": "2021-01-23",
+     "opponent": "Dustin Poirier",
+     "t0": 457.3902587890625,
+     "window_median": 0.13434077786603438,
+     "era_median": 0.18849584159453703
+    }
+   ]
+  },
+  "shoulder": {
+   "file": "pairs/measure_shoulder.mp4",
+   "eras": [
+    {
+     "era": "2012\u201313",
+     "fight": "2012_hill",
+     "date": "2012-06-02",
+     "opponent": "Dave Hill",
+     "t0": 1854.552734375,
+     "window_median": 0.0022451854202958517,
+     "era_median": -0.018516412553434246
+    },
+    {
+     "era": "2014\u201315",
+     "fight": "2015_mendes",
+     "date": "2015-07-11",
+     "opponent": "Chad Mendes",
+     "t0": 123.79033660888672,
+     "window_median": -0.08707909740552984,
+     "era_median": -0.08793281404676052
+    },
+    {
+     "era": "2016",
+     "fight": "2016_diaz2",
+     "date": "2016-08-20",
+     "opponent": "Nate Diaz",
+     "t0": 1032.8985595703125,
+     "window_median": -0.023069918346222795,
+     "era_median": -0.04176450735092058
+    },
+    {
+     "era": "2021",
+     "fight": "2021_poirier3",
+     "date": "2021-07-10",
+     "opponent": "Dustin Poirier",
+     "t0": 283.09844970703125,
+     "window_median": -0.11555787359394097,
+     "era_median": -0.10654941088500197
+    }
+   ]
+  }
+ },
+ "fatigue": [
+  {
+   "file": "pairs/fatigue_0.mp4",
+   "fight": "2016_diaz2",
+   "early_min": 3.6792239183093884,
+   "late_min": 16.379566906114267
+  },
+  {
+   "file": "pairs/fatigue_1.mp4",
+   "fight": "2018_khabib",
+   "early_min": 0.10401295075150002,
+   "late_min": 10.244203350561397
+  }
+ ],
+ "drops": [
+  {
+   "file": "pairs/drop_0.mp4",
+   "fight": "2012_buchinger",
+   "date": "2012-12-31",
+   "opponent": "Ivan Buchinger",
+   "t_hit": 737.8704833984375,
+   "mph": 12.196112582594207,
+   "sub": "knockout, round 1 \u00b7 the pull counter"
+  },
+  {
+   "file": "pairs/drop_1.mp4",
+   "fight": "2014_poirier",
+   "date": "2014-09-27",
+   "opponent": "Dustin Poirier",
+   "t_hit": 115.34856414794922,
+   "mph": null,
+   "sub": "knockout, round 1"
+  },
+  {
+   "file": "pairs/drop_2.mp4",
+   "fight": "2015_mendes",
+   "date": "2015-07-11",
+   "opponent": "Chad Mendes",
+   "t_hit": 793.9000000000001,
+   "mph": null,
+   "sub": "knockout, round 2"
+  },
+  {
+   "file": "pairs/drop_3.mp4",
+   "fight": "2016_alvarez",
+   "date": "2016-11-12",
+   "opponent": "Eddie Alvarez",
+   "t_hit": 177.84432983398438,
+   "mph": 14.405927211646013,
+   "sub": "knockdown, round 1"
+  }
+ ],
+ "vs": [
+  {
+   "file": "pairs/vs_0.mp4",
+   "fight": "2016_alvarez",
+   "mcg_mph": 20.87527446107232,
+   "opp_mph": 17.462057063954337,
+   "sub": "his fastest left"
+  },
+  {
+   "file": "pairs/vs_1.mp4",
+   "fight": "2016_alvarez",
+   "mcg_mph": 14.405927211646013,
+   "opp_mph": 17.05770544542228,
+   "sub": "the left that dropped him"
+  },
+  {
+   "file": "pairs/vs_2.mp4",
+   "fight": "2015_siver",
+   "mcg_mph": 16.289475016969384,
+   "opp_mph": 15.925659667782321,
+   "sub": "his fastest left"
+  }
+ ],
+ "counter_ie": {
+  "file": "pairs/counter_ie.mp4"
+ },
+ "blade": {
+  "file": "pairs/blade_pair.mp4",
+  "picks": [
+   {
+    "fight": "2015_mendes",
+    "t0": 391.72467041015625,
+    "bm": 47.33414168337698,
+    "bo": 9.046259165906227
+   },
+   {
+    "fight": "2016_alvarez",
+    "t0": 148.58177185058594,
+    "bm": 48.87870338061211,
+    "bo": 12.2265302094221
+   }
+  ]
+ }
+}

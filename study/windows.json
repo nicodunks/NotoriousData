@@ -1,0 +1,393 @@
+{
+ "2011_jahnsen": {
+  "video": "2011_cw_run",
+  "span": [
+   470,
+   750
+  ],
+  "date": "2011-09-08",
+  "opponent": "Aaron Jahnsen",
+  "event": "Cage Warriors Fight Night 2",
+  "shorts": {},
+  "note": "From the UFC Fight Pass \"Cage Warriors Run\" compilation; span set from the live (clock-on) frames between the \"McGREGOR vs ...\" title cards.",
+  "exclude": "Both fighters wore black shorts, so shorts colour cannot tell them apart, and no other cue was reliable enough to label frames without guessing."
+ },
+ "2012_okeefe": {
+  "video": "2011_cw_run",
+  "span": [
+   1100,
+   1287
+  ],
+  "date": "2012-02-18",
+  "opponent": "Steve O'Keeffe",
+  "event": "Cage Warriors 45",
+  "shorts": {
+   "mcgregor": [
+    [
+     34.4,
+     127.8,
+     129.6
+    ]
+   ],
+   "opponent": [
+    [
+     144.4,
+     132.4,
+     127.3
+    ]
+   ]
+  },
+  "note": "From the UFC Fight Pass \"Cage Warriors Run\" compilation; span set from the live (clock-on) frames between the \"McGREGOR vs ...\" title cards."
+ },
+ "2012_hill": {
+  "video": "2011_cw_run",
+  "span": [
+   1760,
+   2460
+  ],
+  "date": "2012-06-02",
+  "opponent": "Dave Hill",
+  "event": "Cage Warriors 47",
+  "shorts": {
+   "mcgregor": [
+    [
+     53.5,
+     130.9,
+     130.0
+    ]
+   ],
+   "opponent": [
+    [
+     183.6,
+     130.8,
+     128.6
+    ]
+   ]
+  },
+  "note": "From the UFC Fight Pass \"Cage Warriors Run\" compilation; span set from the live (clock-on) frames between the \"McGREGOR vs ...\" title cards."
+ },
+ "2012_buchinger": {
+  "date": "2012-12-31",
+  "opponent": "Ivan Buchinger",
+  "event": "Cage Warriors 51",
+  "shorts": {
+   "mcgregor": [
+    [
+     21.2,
+     128.4,
+     122.0
+    ]
+   ],
+   "opponent": [
+    [
+     148.6,
+     129.6,
+     129.0
+    ]
+   ]
+  }
+ },
+ "2013_brimage": {
+  "date": "2013-04-06",
+  "opponent": "Marcus Brimage",
+  "event": "UFC on Fuel TV 9",
+  "shorts": {
+   "mcgregor": [
+    [
+     40.5,
+     136.1,
+     130.9
+    ]
+   ],
+   "opponent": [
+    [
+     158.8,
+     139.2,
+     123.7
+    ],
+    [
+     109.1,
+     140.3,
+     130.1
+    ]
+   ]
+  }
+ },
+ "2013_holloway": {
+  "date": "2013-08-17",
+  "opponent": "Max Holloway",
+  "event": "UFC Fight Night 26",
+  "shorts": {
+   "mcgregor": [
+    [
+     53.4,
+     134.2,
+     129.1
+    ]
+   ],
+   "opponent": [
+    [
+     151.4,
+     137.0,
+     133.2
+    ]
+   ]
+  }
+ },
+ "2014_brandao": {
+  "date": "2014-07-19",
+  "opponent": "Diego Brandao",
+  "event": "UFC Fight Night 46",
+  "shorts": {
+   "mcgregor": [
+    [
+     55.8,
+     136.0,
+     132.8
+    ]
+   ],
+   "opponent": [
+    [
+     132.7,
+     143.1,
+     141.1
+    ]
+   ]
+  }
+ },
+ "2014_poirier": {
+  "date": "2014-09-27",
+  "opponent": "Dustin Poirier",
+  "event": "UFC 178",
+  "shorts": {
+   "mcgregor": [
+    [
+     152.5,
+     140.8,
+     125.1
+    ]
+   ],
+   "opponent": [
+    [
+     38.8,
+     135.4,
+     128.0
+    ]
+   ]
+  },
+  "no_clock": true,
+  "span": [
+   0,
+   118
+  ],
+  "note": "Spanish-language feed without a fight clock: live span set by eye from the contact sheet (fight 0-1:46, then stoppage and replays)."
+ },
+ "2015_siver": {
+  "date": "2015-01-18",
+  "opponent": "Dennis Siver",
+  "event": "UFC Fight Night 59",
+  "official": false,
+  "shorts": {
+   "mcgregor": [
+    [
+     43.1,
+     132.6,
+     137.6
+    ]
+   ],
+   "opponent": [
+    [
+     120.9,
+     116.4,
+     161.8
+    ]
+   ]
+  }
+ },
+ "2015_mendes": {
+  "date": "2015-07-11",
+  "opponent": "Chad Mendes",
+  "event": "UFC 189",
+  "shorts": {
+   "mcgregor": [
+    [
+     143.1,
+     135.5,
+     139.2
+    ]
+   ],
+   "opponent": [
+    [
+     24.9,
+     134.4,
+     130.9
+    ]
+   ]
+  }
+ },
+ "2015_aldo": {
+  "date": "2015-12-12",
+  "opponent": "Jose Aldo",
+  "event": "UFC 194",
+  "shorts": {},
+  "exclude": "The only upload is an \"On This Day\" package of replays of the 13-second knockout: no live broadcast footage to measure."
+ },
+ "2016_diaz1": {
+  "date": "2016-03-05",
+  "opponent": "Nate Diaz",
+  "event": "UFC 196",
+  "official": false,
+  "shorts": {
+   "mcgregor": [
+    [
+     34.3,
+     136.3,
+     131.1
+    ]
+   ],
+   "opponent": [
+    [
+     173.6,
+     134.5,
+     135.5
+    ]
+   ]
+  }
+ },
+ "2016_diaz2": {
+  "date": "2016-08-20",
+  "opponent": "Nate Diaz",
+  "event": "UFC 202",
+  "shorts": {
+   "mcgregor": [
+    [
+     80.8,
+     112.0,
+     141.9
+    ]
+   ],
+   "opponent": [
+    [
+     26.0,
+     133.5,
+     130.0
+    ]
+   ]
+  }
+ },
+ "2016_alvarez": {
+  "date": "2016-11-12",
+  "opponent": "Eddie Alvarez",
+  "event": "UFC 205",
+  "shorts": {
+   "mcgregor": [
+    [
+     164.1,
+     130.8,
+     129.9
+    ]
+   ],
+   "opponent": [
+    [
+     23.9,
+     134.5,
+     128.2
+    ]
+   ]
+  }
+ },
+ "2018_khabib": {
+  "date": "2018-10-06",
+  "opponent": "Khabib Nurmagomedov",
+  "event": "UFC 229",
+  "shorts": {
+   "mcgregor": [
+    [
+     66.5,
+     132.1,
+     135.9
+    ]
+   ],
+   "opponent": [
+    [
+     21.9,
+     132.5,
+     128.5
+    ]
+   ]
+  }
+ },
+ "2020_cerrone": {
+  "date": "2020-01-18",
+  "opponent": "Donald Cerrone",
+  "event": "UFC 246",
+  "shorts": {
+   "mcgregor": [
+    [
+     61.1,
+     127.0,
+     135.1
+    ]
+   ],
+   "opponent": [
+    [
+     32.3,
+     133.6,
+     116.1
+    ]
+   ]
+  }
+ },
+ "2021_poirier2": {
+  "date": "2021-01-23",
+  "opponent": "Dustin Poirier",
+  "event": "UFC 257",
+  "shorts": {
+   "mcgregor": [
+    [
+     73.5,
+     128.4,
+     136.9
+    ],
+    [
+     46.7,
+     127.1,
+     133.9
+    ]
+   ],
+   "opponent": [
+    [
+     15.2,
+     131.2,
+     127.8
+    ]
+   ]
+  }
+ },
+ "2021_poirier3": {
+  "date": "2021-07-10",
+  "opponent": "Dustin Poirier",
+  "event": "UFC 264",
+  "shorts": {
+   "mcgregor": [
+    [
+     51.4,
+     126.9,
+     134.7
+    ]
+   ],
+   "opponent": [
+    [
+     56.9,
+     156.9,
+     141.3
+    ],
+    [
+     90.2,
+     157.1,
+     147.1
+    ]
+   ]
+  }
+ }
+}

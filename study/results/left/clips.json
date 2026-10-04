@@ -1,0 +1,302 @@
+[
+ {
+  "file": "clips/mcg_2012_okeefe_1124_4.mp4",
+  "who": "mcg",
+  "fight": "2012_okeefe",
+  "date": "2012-02-18",
+  "opponent": "Steve O'Keeffe",
+  "setup": "caught coming in",
+  "peak_speed": 14.102853587483015,
+  "t_peak": 1124.3565673828125
+ },
+ {
+  "file": "clips/mcg_2012_hill_1884_4.mp4",
+  "who": "mcg",
+  "fight": "2012_hill",
+  "date": "2012-06-02",
+  "opponent": "Dave Hill",
+  "setup": "slip counter",
+  "peak_speed": 15.953672451539193,
+  "t_peak": 1884.3824462890625
+ },
+ {
+  "file": "clips/mcg_2012_buchinger_685_3.mp4",
+  "who": "mcg",
+  "fight": "2012_buchinger",
+  "date": "2012-12-31",
+  "opponent": "Ivan Buchinger",
+  "setup": "straight lead",
+  "peak_speed": 17.75145412158069,
+  "t_peak": 685.2846069335938
+ },
+ {
+  "file": "clips/mcg_2013_holloway_452_8.mp4",
+  "who": "mcg",
+  "fight": "2013_holloway",
+  "date": "2013-08-17",
+  "opponent": "Max Holloway",
+  "setup": "straight lead",
+  "peak_speed": 17.933262775090682,
+  "t_peak": 452.7856750488281
+ },
+ {
+  "file": "clips/mcg_2014_brandao_386_0.mp4",
+  "who": "mcg",
+  "fight": "2014_brandao",
+  "date": "2014-07-19",
+  "opponent": "Diego Brandao",
+  "setup": "counter, head still",
+  "peak_speed": 16.94573615827689,
+  "t_peak": 385.9599914550781
+ },
+ {
+  "file": "clips/mcg_2015_siver_246_9.mp4",
+  "who": "mcg",
+  "fight": "2015_siver",
+  "date": "2015-01-18",
+  "opponent": "Dennis Siver",
+  "setup": "counter, head still",
+  "peak_speed": 15.389601557766905,
+  "t_peak": 246.9199981689453
+ },
+ {
+  "file": "clips/mcg_2015_mendes_242_2.mp4",
+  "who": "mcg",
+  "fight": "2015_mendes",
+  "date": "2015-07-11",
+  "opponent": "Chad Mendes",
+  "setup": "caught coming in",
+  "peak_speed": 14.177781565639586,
+  "t_peak": 242.24200439453125
+ },
+ {
+  "file": "clips/mcg_2016_diaz1_271_2.mp4",
+  "who": "mcg",
+  "fight": "2016_diaz1",
+  "date": "2016-03-05",
+  "opponent": "Nate Diaz",
+  "setup": "slip counter",
+  "peak_speed": 17.21332037698503,
+  "t_peak": 271.2376403808594
+ },
+ {
+  "file": "clips/mcg_2016_diaz2_585_9.mp4",
+  "who": "mcg",
+  "fight": "2016_diaz2",
+  "date": "2016-08-20",
+  "opponent": "Nate Diaz",
+  "setup": "slip counter",
+  "peak_speed": 17.207661420714725,
+  "t_peak": 585.8853149414062
+ },
+ {
+  "file": "clips/mcg_2016_alvarez_308_1.mp4",
+  "who": "mcg",
+  "fight": "2016_alvarez",
+  "date": "2016-11-12",
+  "opponent": "Eddie Alvarez",
+  "setup": "straight lead",
+  "peak_speed": 19.722069374872973,
+  "t_peak": 308.14117431640625
+ },
+ {
+  "file": "clips/mcg_2018_khabib_668_8.mp4",
+  "who": "mcg",
+  "fight": "2018_khabib",
+  "date": "2018-10-06",
+  "opponent": "Khabib Nurmagomedov",
+  "setup": "slip counter",
+  "peak_speed": 18.25047723304478,
+  "t_peak": 668.8014526367188
+ },
+ {
+  "file": "clips/mcg_2018_khabib_671_9.mp4",
+  "who": "mcg",
+  "fight": "2018_khabib",
+  "date": "2018-10-06",
+  "opponent": "Khabib Nurmagomedov",
+  "setup": "pull counter",
+  "peak_speed": 14.134443287629152,
+  "t_peak": 671.904541015625
+ },
+ {
+  "file": "clips/mcg_2018_khabib_981_5.mp4",
+  "who": "mcg",
+  "fight": "2018_khabib",
+  "date": "2018-10-06",
+  "opponent": "Khabib Nurmagomedov",
+  "setup": "counter, head still",
+  "peak_speed": 17.864076483213466,
+  "t_peak": 981.4805297851562
+ },
+ {
+  "file": "clips/mcg_2020_cerrone_269_1.mp4",
+  "who": "mcg",
+  "fight": "2020_cerrone",
+  "date": "2020-01-18",
+  "opponent": "Donald Cerrone",
+  "setup": "behind the paw",
+  "peak_speed": 16.778103677323454,
+  "t_peak": 269.06878662109375
+ },
+ {
+  "file": "clips/mcg_2021_poirier2_447_5.mp4",
+  "who": "mcg",
+  "fight": "2021_poirier2",
+  "date": "2021-01-23",
+  "opponent": "Dustin Poirier",
+  "setup": "straight lead",
+  "peak_speed": 17.592631263432892,
+  "t_peak": 447.4803771972656
+ },
+ {
+  "file": "clips/mcg_2021_poirier3_280_4.mp4",
+  "who": "mcg",
+  "fight": "2021_poirier3",
+  "date": "2021-07-10",
+  "opponent": "Dustin Poirier",
+  "setup": "caught coming in",
+  "peak_speed": 26.355067297553077,
+  "t_peak": 280.386962890625
+ },
+ {
+  "file": "clips/opp_2012_okeefe_1124_4.mp4",
+  "who": "opp",
+  "fight": "2012_okeefe",
+  "date": "2012-02-18",
+  "opponent": "Steve O'Keeffe",
+  "setup": "pull counter",
+  "peak_speed": 8.284454802566154,
+  "t_peak": 1124.42333984375
+ },
+ {
+  "file": "clips/opp_2012_hill_1888_9.mp4",
+  "who": "opp",
+  "fight": "2012_hill",
+  "date": "2012-06-02",
+  "opponent": "Dave Hill",
+  "setup": "behind the paw",
+  "peak_speed": 8.687259446365545,
+  "t_peak": 1888.8536376953125
+ },
+ {
+  "file": "clips/opp_2012_buchinger_823_3.mp4",
+  "who": "opp",
+  "fight": "2012_buchinger",
+  "date": "2012-12-31",
+  "opponent": "Ivan Buchinger",
+  "setup": "counter, head still",
+  "peak_speed": 9.654554673144304,
+  "t_peak": 823.322509765625
+ },
+ {
+  "file": "clips/opp_2013_brimage_306_3.mp4",
+  "who": "opp",
+  "fight": "2013_brimage",
+  "date": "2013-04-06",
+  "opponent": "Marcus Brimage",
+  "setup": "behind the paw",
+  "peak_speed": 14.283857695047327,
+  "t_peak": 306.3059997558594
+ },
+ {
+  "file": "clips/opp_2013_holloway_249_9.mp4",
+  "who": "opp",
+  "fight": "2013_holloway",
+  "date": "2013-08-17",
+  "opponent": "Max Holloway",
+  "setup": "behind the paw",
+  "peak_speed": 16.01705802851767,
+  "t_peak": 249.88296508789062
+ },
+ {
+  "file": "clips/opp_2014_poirier_51_7.mp4",
+  "who": "opp",
+  "fight": "2014_poirier",
+  "date": "2014-09-27",
+  "opponent": "Dustin Poirier",
+  "setup": "pull counter",
+  "peak_speed": 8.162196150240778,
+  "t_peak": 51.6515998840332
+ },
+ {
+  "file": "clips/opp_2015_siver_342_6.mp4",
+  "who": "opp",
+  "fight": "2015_siver",
+  "date": "2015-01-18",
+  "opponent": "Dennis Siver",
+  "setup": "counter, head still",
+  "peak_speed": 15.045884325704115,
+  "t_peak": 342.55999755859375
+ },
+ {
+  "file": "clips/opp_2015_mendes_208_0.mp4",
+  "who": "opp",
+  "fight": "2015_mendes",
+  "date": "2015-07-11",
+  "opponent": "Chad Mendes",
+  "setup": "behind the paw",
+  "peak_speed": 21.041439444420345,
+  "t_peak": 208.00779724121094
+ },
+ {
+  "file": "clips/opp_2016_diaz1_535_1.mp4",
+  "who": "opp",
+  "fight": "2016_diaz1",
+  "date": "2016-03-05",
+  "opponent": "Nate Diaz",
+  "setup": "straight lead",
+  "peak_speed": 15.3084569690703,
+  "t_peak": 535.06787109375
+ },
+ {
+  "file": "clips/opp_2016_diaz2_90_3.mp4",
+  "who": "opp",
+  "fight": "2016_diaz2",
+  "date": "2016-08-20",
+  "opponent": "Nate Diaz",
+  "setup": "behind the paw",
+  "peak_speed": 15.293394587392221,
+  "t_peak": 90.2568359375
+ },
+ {
+  "file": "clips/opp_2016_alvarez_387_9.mp4",
+  "who": "opp",
+  "fight": "2016_alvarez",
+  "date": "2016-11-12",
+  "opponent": "Eddie Alvarez",
+  "setup": "straight lead",
+  "peak_speed": 16.497407087293816,
+  "t_peak": 387.88751220703125
+ },
+ {
+  "file": "clips/opp_2018_khabib_350_0.mp4",
+  "who": "opp",
+  "fight": "2018_khabib",
+  "date": "2018-10-06",
+  "opponent": "Khabib Nurmagomedov",
+  "setup": "slip counter",
+  "peak_speed": 11.74971962766725,
+  "t_peak": 349.98297119140625
+ },
+ {
+  "file": "clips/opp_2021_poirier2_712_5.mp4",
+  "who": "opp",
+  "fight": "2021_poirier2",
+  "date": "2021-01-23",
+  "opponent": "Dustin Poirier",
+  "setup": "behind the paw",
+  "peak_speed": 11.734564392242737,
+  "t_peak": 712.5117797851562
+ },
+ {
+  "file": "clips/opp_2021_poirier3_285_9.mp4",
+  "who": "opp",
+  "fight": "2021_poirier3",
+  "date": "2021-07-10",
+  "opponent": "Dustin Poirier",
+  "setup": "caught coming in",
+  "peak_speed": 8.019528563056646,
+  "t_peak": 285.9438171386719
+ }
+]

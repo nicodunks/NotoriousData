@@ -1,0 +1,34 @@
+  <p class="intro">We let a model from behavioural neuroscience (keypoint-MoSeq) split his movement into short, repeated pieces, "syllables", from the joints alone, knowing nothing about fighting.</p>
+  <ul class="keys">
+    <li><b>Eight syllables</b> cover nine-tenths of his time on his feet: the long stance, tall and light, stepping in, lunge and throw.</li>
+    <li><b>The same vocabulary in 2012 and 2021</b>, in about the same proportions.</li>
+  </ul>
+  <p class="small">Click a dot to circle it; drag the circle, or its edge. Colour by year to look for the old McGregor.</p>
+
+  <div class="smap">
+    <div class="ctrl smapctl">
+      <span>Colour by</span>
+      <span class="seg" role="radiogroup" aria-label="Colour by"><button role="radio" aria-checked="true" data-c="syl">Syllable</button><button role="radio" aria-checked="false" data-c="year">Year</button><button role="radio" aria-checked="false" data-c="speed">Speed</button></span>
+      <button id="smReset">Reset</button>
+    </div>
+    <div class="smgrid">
+      <div class="slist" id="slist" role="listbox" aria-label="Syllables"></div>
+      <div class="smright">
+        <canvas id="sylmapc" width="1200" height="800" aria-label="Map of every syllable occurrence; click a dot to circle it"></canvas>
+        <div class="mono small smhint">Scroll or pinch to zoom · drag to pan · click a dot to circle it · drag the circle to move it, its edge to size it</div>
+        <div class="key" id="smkey"></div>
+      </div>
+    </div>
+    <div class="lens">
+      <p class="say" id="lensSay">Click a dot, or pick a syllable.</p>
+      <div class="three" id="lensClips"></div>
+      <canvas class="fig" id="lensFig" width="900" height="560" aria-label="Every movement in the circle, stacked and moving in step"></canvas>
+      <figcaption>Every movement in the circle, stacked and moving in step; bold is their median.</figcaption>
+    </div>
+  </div>
+
+  <div class="finding" style="margin-top:56px">
+    <h2 id="sylname">The long stance</h2>
+    <p id="syldesc" class="say"></p>
+    <figure class="box"><div id="sylmap"></div><figcaption>Share of his time on his feet spent in this syllable, fight by fight. Lines are the averages before and after 2016. <span id="syluse"></span></figcaption></figure>
+  </div>

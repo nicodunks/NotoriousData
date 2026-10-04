@@ -1,0 +1,382 @@
+<title>McGregor, Measured</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout: a fight-film lab sheet. One reading column; figure bands break wider; pen skeletons are the hero. */
+:root {
+  --paper: #eef0ec; --sheet: #f7f8f5; --ink: #15171a; --ink-2: #4c5157; --ink-3: #82878d; --rule: #d3d7d1;
+  --mcg: #c22d28; --early: #2350b8; --opp: #a2a7ac;
+  --yes: #2f6b45; --lean: #8d6510; --no: #6a3d9a;
+  --display: 'Archivo Narrow', 'Arial Narrow', 'Helvetica Neue', sans-serif;
+  --body: 'IBM Plex Sans', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #111315; --sheet: #181b1e; --ink: #e9ebe7; --ink-2: #b3b8bd; --ink-3: #7f858b; --rule: #2c3135;
+  --mcg: #ec5a52; --early: #6f97f2; --opp: #6c7278; --yes: #6fbf8c; --lean: #d9a441; --no: #b18ae0; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --paper: #111315; --sheet: #181b1e; --ink: #e9ebe7; --ink-2: #b3b8bd; --ink-3: #7f858b; --rule: #2c3135;
+  --mcg: #ec5a52; --early: #6f97f2; --opp: #6c7278; --yes: #6fbf8c; --lean: #d9a441; --no: #b18ae0; color-scheme: dark }
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink); font: 16px/1.6 var(--body); margin: 0; padding-inline: 20px; padding-block: 0 64px; -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1120px; margin: 0 auto; }
+.col { max-width: 700px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 700; letter-spacing: -.01em; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(56px, 9vw, 112px); line-height: .9; letter-spacing: -.02em; text-transform: uppercase; }
+h2 { font-size: clamp(30px, 4vw, 42px); line-height: 1; margin-bottom: 14px; text-transform: uppercase; }
+h3 { font-size: 22px; line-height: 1.1; }
+p { margin: 0 0 14px; }
+.kicker, .label { font: 500 12px/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+.num, .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+a { color: inherit; text-underline-offset: 3px; text-decoration-color: var(--rule); }
+section { padding-block: 56px 8px; border-top: 1px solid var(--rule); margin-top: 48px; }
+
+/* hero */
+header.hero { padding-block: 48px 8px; display: grid; gap: 18px; }
+.hero .lede { font-size: clamp(19px, 2.2vw, 23px); line-height: 1.45; max-width: 760px; color: var(--ink-2); }
+.hero .lede strong { color: var(--ink); font-weight: 600; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 28px; font: 13px var(--mono); color: var(--ink-2); }
+.facts b { color: var(--ink); font-weight: 500; }
+.answer { background: var(--sheet); border-left: 3px solid var(--mcg); padding: 18px 22px; max-width: 760px; font-size: 17px; }
+.answer p:last-child { margin: 0; }
+
+/* stance prints */
+.prints { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 4px 6px; margin-top: 26px; }
+.print { margin: 0; display: grid; gap: 2px; }
+.print-art { background: var(--sheet); border-radius: 2px; }
+.fig-skel { width: 100%; height: auto; display: block; }
+.print figcaption { display: flex; justify-content: space-between; gap: 6px; font: 12px var(--mono); color: var(--ink-3); padding: 0 2px; }
+.print figcaption b { color: var(--ink); font-weight: 500; }
+.prints-note { font: 13px/1.5 var(--body); color: var(--ink-3); margin-top: 10px; max-width: 760px; }
+
+svg .mcg { stroke: var(--mcg); fill: var(--mcg); stroke-linecap: round; }
+svg .early { stroke: var(--early); fill: var(--early); stroke-linecap: round; opacity: .85; }
+svg line.mcg, svg line.early, svg circle.mcg[fill="none"], svg circle.early[fill="none"] { fill: none; }
+svg .faint { opacity: .35; }
+svg .ground { stroke: var(--rule); stroke-width: 1; }
+
+.overlay { display: grid; grid-template-columns: minmax(0, 280px) minmax(0, 1fr); gap: 32px; align-items: center; margin-top: 8px; }
+.fig-overlay { width: 100%; height: auto; background: var(--sheet); border-radius: 2px; }
+.legend { display: flex; gap: 18px; font: 13px var(--mono); color: var(--ink-2); margin-bottom: 10px; }
+.legend i { display: inline-block; width: 18px; height: 3px; vertical-align: middle; margin-right: 6px; border-radius: 2px; }
+.legend .l-early { background: var(--early); } .legend .l-late { background: var(--mcg); } .legend .l-opp { background: var(--opp); }
+
+/* verdict table */
+.table-wrap { overflow-x: auto; margin-top: 18px; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 10px 12px 10px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+thead th { font: 500 11px/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
+tbody th { font-weight: 600; }
+th small, td small { display: block; font: 12px/1.4 var(--body); color: var(--ink-3); font-weight: 400; }
+td.num { text-align: right; white-space: nowrap; }
+td.num small { font-family: var(--mono); }
+.chip { display: inline-block; font: 500 12px/1 var(--mono); padding: 5px 8px; border-radius: 2px; border: 1px solid currentColor; white-space: nowrap; }
+.chip.yes { color: var(--yes); } .chip.lean { color: var(--lean); } .chip.flat { color: var(--ink-3); } .chip.no { color: var(--no); } .chip.untested { color: var(--ink-3); border-style: dashed; }
+
+/* hypothesis charts */
+.hyps { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr)); gap: 40px 48px; margin-top: 26px; }
+.hyp { min-width: 0; }
+.hyp header { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 6px; }
+.hyp .read { color: var(--ink-2); font-size: 15px; }
+.chart-wrap { overflow-x: auto; }
+svg.chart { width: 100%; min-width: 360px; height: auto; display: block; }
+svg.chart .grid { stroke: var(--rule); stroke-width: 1; }
+svg.chart .axis { stroke: var(--ink-3); stroke-width: 1; }
+svg.chart .split { stroke: var(--ink-3); stroke-width: 1; stroke-dasharray: 3 4; }
+svg.chart .tick { font: 11px var(--mono); fill: var(--ink-3); }
+svg.chart .note { fill: var(--ink-2); }
+svg.chart .whisker { stroke-width: 2; stroke-linecap: round; fill: none; }
+svg.chart .trend { stroke-width: 2.5; fill: none; stroke-linecap: round; }
+svg.chart .trend.mcg { stroke: var(--mcg); opacity: .9; }
+svg.chart .trend.opp { stroke: var(--opp); opacity: .9; stroke-dasharray: 5 4; }
+svg.chart .mcg.whisker { stroke: var(--mcg); opacity: .55; }
+svg.chart .opp.whisker { stroke: var(--opp); opacity: .7; }
+svg.chart .pt.mcg { fill: var(--mcg); stroke: var(--sheet); stroke-width: 2; }
+svg.chart .pt.opp { fill: var(--opp); stroke: var(--sheet); stroke-width: 2; }
+svg.chart .hit { fill: transparent; }
+svg.chart .hit:hover + * , svg.chart circle.pt:hover { stroke: var(--ink); }
+.axis-note { font: 12px var(--mono); color: var(--ink-3); margin-top: 4px; }
+
+/* surprises */
+.surprises { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 28px 36px; margin-top: 22px; }
+.surprise { min-width: 0; }
+.surprise h3 { margin-bottom: 8px; }
+.surprise p { color: var(--ink-2); font-size: 15px; }
+
+.prose { max-width: 700px; }
+.prose p, .prose li { color: var(--ink-2); }
+.prose ol, .prose ul { padding-left: 20px; margin: 0 0 14px; }
+.prose li { margin-bottom: 8px; }
+.prose b, .prose strong { color: var(--ink); font-weight: 600; }
+.steps { counter-reset: step; list-style: none; padding: 0; display: grid; gap: 12px; max-width: 760px; }
+.steps li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; color: var(--ink-2); }
+.steps li::before { counter-increment: step; content: counter(step); font: 500 13px/1.8 var(--mono); color: var(--ink-3); }
+.steps b { color: var(--ink); }
+details { max-width: 760px; margin-top: 14px; }
+summary { cursor: pointer; font: 500 13px var(--mono); color: var(--ink-2); }
+details[open] summary { margin-bottom: 10px; }
+footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--rule); font: 13px var(--mono); color: var(--ink-3); }
+:focus-visible { outline: 2px solid var(--mcg); outline-offset: 2px; }
+@media (max-width: 640px) {
+  .overlay { grid-template-columns: 1fr; }
+  .prints { grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); }
+}
+
+/* stance */
+.crowd { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 22px; }
+.crowd figure { margin: 0; } .crowd canvas, .morph canvas { width: 100%; aspect-ratio: 3 / 4; display: block; background: var(--sheet); border-radius: 2px; }
+.crowd figcaption, .morph figcaption { font: 12px var(--mono); color: var(--ink-3); margin-top: 6px; }
+.morph { display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); gap: 32px; align-items: center; margin-top: 40px; }
+.morph .controls { display: grid; gap: 10px; font: 13px var(--mono); color: var(--ink-2); }
+.morph input[type=range] { width: 100%; accent-color: var(--mcg); }
+.verdicts td .chip { white-space: nowrap; }
+.callout { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 20px 32px; margin-top: 28px; }
+.callout div b { display: block; font: 700 34px/1 var(--display); }
+.callout div span { font: 13px/1.45 var(--body); color: var(--ink-2); }
+svg.chart .trend { stroke-width: 2.5; fill: none; stroke-linecap: round; }
+svg.chart .trend.mcg { stroke: var(--mcg); opacity: .9; }
+svg.chart .trend.opp { stroke: var(--opp); opacity: .9; stroke-dasharray: 5 4; }
+@media (max-width: 640px) { .morph { grid-template-columns: 1fr; } }
+</style>
+
+<div class="wrap">
+<header class="hero">
+  <span class="kicker">A pre-registered study of one fighter's movement · Ghost Fight lab</span>
+  <h1>McGregor,<br>measured</h1>
+  <p class="lede">{{lede}}</p>
+  <div class="facts"><span><b>{{n_fights}}</b> fights</span><span><b>{{live_min}}</b> min of live fight</span><span><b>{{standing_min}}</b> min standing, both fighters in view</span><span>2011 → 2021</span></div>
+  <div class="answer">{{answer}}</div>
+</header>
+
+<section aria-labelledby="prints-h">
+  <span class="label">The stance, fight by fight</span>
+  <h2 id="prints-h">Ten years of one man standing</h2>
+  <p class="col">Each figure is McGregor's median standing pose in one fight: every frame where both fighters are upright and apart, lined up at the hips, scaled to his own torso, turned so the opponent is always to the right, and southpaw frames mirrored to orthodox. Nothing is drawn that the model didn't see.</p>
+  <div class="prints">{{prints}}</div>
+  <div class="overlay" style="margin-top:36px">
+    <div>{{overlay}}</div>
+    <div class="col">
+      <div class="legend"><span><i class="l-early"></i>2011 – 2015</span><span><i class="l-late"></i>2016 – 2021</span></div>
+      <p>{{overlay_note}}</p>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="inst-h">
+  <span class="label">Before trusting it</span>
+  <h2 id="inst-h">Does the instrument see what we already know?</h2>
+  <div class="overlay" style="grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:start">
+    <div class="col prose">{{instrument_note}}</div>
+    <div class="table-wrap" style="margin-top:0"><table>
+      <thead><tr><th scope="col">Fight</th><th scope="col">Fighter</th><th scope="col">Known stance</th><th scope="col" class="num">Read orthodox</th><th scope="col" class="num">Right</th></tr></thead>
+      <tbody>{{instrument}}</tbody>
+    </table></div>
+  </div>
+</section>
+
+<section aria-labelledby="stance-h">
+  <span class="label">The stance · an independent assessment</span>
+  <h2 id="stance-h">Karate to boxer, checked joint by joint</h2>
+  <p class="col">The popular story has six or seven parts: a wide karate stance that narrowed, toes that went flat, a bounce that stopped, a torso that tipped forward, shoulders that hunched, weight that came onto the front foot. Each part maps onto something the skeleton can measure. Every standing frame in fifteen fights, ten a second, his opponent measured in the same frames as the camera control, and each trend re-checked using only side-on shots, where a 2-D picture of a stance is most honest.</p>
+
+  <div class="crowd">
+    <figure><canvas id="crowdE" width="600" height="800" aria-label="Real three-second stretches of McGregor standing, 2012 to 2015, overlaid"></canvas><figcaption id="crowdEcap">2012–2015</figcaption></figure>
+    <figure><canvas id="crowdL" width="600" height="800" aria-label="Real three-second stretches of McGregor standing, 2016 to 2021, overlaid"></canvas><figcaption id="crowdLcap">2016–2021</figcaption></figure>
+  </div>
+  <p class="col" style="margin-top:12px;font-size:14px;color:var(--ink-3)">Each faint figure is a real three-second stretch of McGregor standing in southpaw, playing at real speed, centred on where his hips were in that stretch. Their motion is his bounce and drift. The bold figure is the median of all of them at each moment, so it moves with them; because the stretches aren't in step, it keeps only the motion they share.</p>
+
+  <div class="morph">
+    <figure style="margin:0"><canvas id="morph" width="600" height="800" aria-label="Median stance, morphing from early to late"></canvas><figcaption id="morphcap">2012–2015</figcaption></figure>
+    <div class="controls">
+      <label for="morphT">Era <span id="morphTv">2012–2015</span></label>
+      <input id="morphT" type="range" min="0" max="1" step="0.01" value="0">
+      <label for="morphX">Exaggerate the change <span id="morphXv">1×</span></label>
+      <input id="morphX" type="range" min="1" max="5" step="1" value="1">
+      <p style="margin:6px 0 0;color:var(--ink-3)">The median 2012–2015 stance turning into the median 2016–2021 stance. At 1× this is the true difference: small. Exaggerating multiplies the difference so its direction is visible: the torso tips forward, the head comes out over the front, the hips settle back. The feet barely move.</p>
+    </div>
+  </div>
+
+  <div class="table-wrap verdicts" style="margin-top:36px"><table>
+    <thead><tr><th scope="col">The claim</th><th scope="col" class="num">His median, 2012–15 → 2016–21</th><th scope="col" class="num">Trend, him</th><th scope="col" class="num">Side-on shots only</th><th scope="col" class="num">Trend, opponents</th><th scope="col">Verdict</th></tr></thead>
+    <tbody>{{stance_rows}}</tbody>
+  </table></div>
+  <div class="prose" style="margin-top:16px">{{stance_read}}</div>
+  <h3 style="margin-top:44px">The feet</h3>
+  <div class="crowd" style="margin-top:14px">
+    <figure><canvas id="feetE" width="600" height="420" aria-label="Lower body, 2012 to 2015, real standing stretches overlaid"></canvas><figcaption>Feet, 2012–2015 · the same stretches, anchored at the ankles · dot = heel</figcaption></figure>
+    <figure><canvas id="feetL" width="600" height="420" aria-label="Lower body, 2016 to 2021, real standing stretches overlaid"></canvas><figcaption>Feet, 2016–2021 · dot = heel</figcaption></figure>
+  </div>
+  <div class="prose" style="margin-top:16px">{{feet_read}}</div>
+  <div class="table-wrap"><table>
+    <thead><tr><th scope="col">Feet</th><th scope="col" class="num">Him, 2012–15 → 2016–21</th><th scope="col" class="num">Trend, him</th><th scope="col" class="num">Opponents, same eras</th><th scope="col" class="num">His above theirs</th></tr></thead>
+    <tbody>{{feet_rows}}</tbody>
+  </table></div>
+  <div class="pair" style="max-width:none;margin-top:18px"><figure><img src="feet_2013.jpg" alt="Random standing frames of McGregor's feet, 2013 vs Holloway, with tracked ankle, heel and toe" style="width:100%;border-radius:2px"><figcaption>2013 vs Holloway · random standing frames</figcaption></figure>
+    <figure><img src="feet_2021.jpg" alt="Random standing frames of McGregor's feet, 2021 vs Poirier, with tracked ankle, heel and toe" style="width:100%;border-radius:2px"><figcaption>2021 vs Poirier · random standing frames</figcaption></figure></div>
+
+  <h3 style="margin-top:40px">Every measure, every fight</h3>
+  <p class="col" style="margin-top:8px">Red: McGregor, one dot per fight, with a robust (Theil–Sen) trend line. Grey, dashed: his opponents in the same frames. Fifteen measures were tested; at that count a single p below 0.05 is expected by chance, so the table above only calls a change his when it holds for him, holds in side-on shots, and isn't shared by the men across from him.</p>
+  <div class="hyps">{{stance_charts}}</div>
+</section>
+
+<section aria-labelledby="press-h">
+  <span class="label">Counter-striker or pressure fighter</span>
+  <h2 id="press-h">Who started it?</h2>
+  <p class="col">The other half of the story: that he began as a patient counter-striker and became a forward-walking head hunter. Every hand strike in every upright second, both fighters, sorted by what came just before it. A <b>counter</b> answers an opponent attack within 0.7 s; a <b>first strike</b> comes with no opponent attack in the 1.5 s before.</p>
+  <div class="callout">
+    <div><b style="color:var(--mcg)">{{first_mcg}}</b><span>of his strikes started an exchange, 2012–15 → 2016–21</span></div>
+    <div><b style="color:var(--mcg)">{{counter_mcg}}</b><span>were counters, same eras</span></div>
+    <div><b>8 of 11</b><span>fights where his opponent spent more time moving forward than he did</span></div>
+  </div>
+  <div class="prose" style="margin-top:18px">
+    <p><b>Neither half of the story holds.</b> He was a first striker from the start: about seven in ten of his strikes began an exchange, in 2012 and in 2021. Counters stayed near a fifth. His share of strikes at head height stayed near a half. His time spent advancing didn't rise, and in most fights his opponent moved forward more than he did.</p>
+    <p><b>The one change runs the other way.</b> Compared with the men in front of him, more of his late-career strikes came while he was moving backward (relative trend ρ +0.66, p 0.03): the opponents of 2016 to 2021 did that less, he did it a little more. The pull counter, above, is part of that.</p>
+    <p style="color:var(--ink-3);font-size:14px">Who started an exchange is read from timing alone and doesn't depend on the camera. "Moving forward" is read from his hips on screen, and a panning camera blurs who moved; it's measured identically for both fighters, but treat it as the weaker of the two.</p>
+  </div>
+  <div class="hyps">{{pressure}}</div>
+</section>
+
+<section aria-labelledby="verdict-h">
+  <span class="label">Seven claims, tested</span>
+  <h2 id="verdict-h">The verdict</h2>
+  <p class="col">Each claim was written down with its direction before any fight was measured. The test is a rank correlation between fight date and McGregor-minus-opponent in the same frames (so a change in cameras or in the division doesn't count as a change in him), with a permutation p and a Holm correction for seven tests. The opponents' own trend sits in the last column as the control.</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th scope="col">Claim</th><th scope="col">Result</th><th scope="col" class="num">ρ vs date</th><th scope="col" class="num">p</th><th scope="col" class="num">Holm p</th><th scope="col" class="num">After − before Diaz 1</th><th scope="col" class="num">ρ, him alone</th><th scope="col" class="num">ρ, opponents</th></tr></thead>
+    <tbody>{{rows}}</tbody>
+  </table></div>
+</section>
+
+<section aria-labelledby="charts-h">
+  <span class="label">Per claim</span>
+  <h2 id="charts-h">The measurements</h2>
+  <div class="legend"><span><i class="l-late"></i>McGregor</span><span><i class="l-opp"></i>his opponent, same frames</span></div>
+  <div class="hyps">{{charts}}</div>
+</section>
+
+<section aria-labelledby="surprise-h">
+  <span class="label">Exploratory, not pre-registered</span>
+  <h2 id="surprise-h">What the data said that nobody asked</h2>
+  <div class="surprises">{{surprises}}</div>
+</section>
+
+<section aria-labelledby="method-h">
+  <span class="label">After Peter Wang's tennis pipeline</span>
+  <h2 id="method-h">How it was measured</h2>
+  <div class="prose">{{method}}</div>
+  <div class="table-wrap"><table>
+    <thead><tr><th scope="col">Date</th><th scope="col">Opponent</th><th scope="col">Event</th><th scope="col" class="num">Live s</th><th scope="col" class="num">Standing s</th><th scope="col">Use</th></tr></thead>
+    <tbody>{{fight_rows}}</tbody>
+  </table></div>
+  <div class="prose" style="margin-top:14px"><ul>{{excluded}}</ul></div>
+</section>
+
+<section aria-labelledby="fool-h">
+  <span class="label">Limits</span>
+  <h2 id="fool-h">What could fool this</h2>
+  <div class="prose">{{fool}}</div>
+  <details><summary>Changes made after the pre-registration, and why</summary><div class="prose"><ol>{{prereg}}</ol></div></details>
+</section>
+
+<script>
+(function () {
+  const BONES = [[5,6],[5,7],[7,9],[6,8],[8,10],[5,11],[6,12],[11,12],[11,13],[13,15],[12,14],[14,16],[15,19],[19,17],[16,22],[22,20]];
+  const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  function fig(c, pose, col, s, ox, oy, w, alpha) {
+    if (!pose) return; c.globalAlpha = alpha; c.strokeStyle = col; c.lineWidth = w; c.lineCap = 'round';
+    const P = i => pose[i] && pose[i][0] != null ? [ox + pose[i][0] * s, oy + pose[i][1] * s] : null;
+    for (const [a, b] of BONES) { const p = P(a), q = P(b); if (p && q) { c.beginPath(); c.moveTo(...p); c.lineTo(...q); c.stroke(); } }
+    const f = [0,1,2,3,4].map(P).filter(Boolean);
+    if (f.length >= 2) { const x = f.reduce((a,p)=>a+p[0],0)/f.length, y = f.reduce((a,p)=>a+p[1],0)/f.length; c.beginPath(); c.arc(x, y, .19 * s, 0, 7); c.stroke(); }
+    c.globalAlpha = 1;
+  }
+  // the median of every point across the figures on screen this frame, so the bold figure moves with them
+  function med(poses) {
+    const out = [];
+    for (let i = 0; i < 23; i++) {
+      const xs = [], ys = [];
+      for (const p of poses) if (p && p[i] && p[i][0] != null) { xs.push(p[i][0]); ys.push(p[i][1]); }
+      if (xs.length < 5) { out.push(null); continue; }
+      xs.sort((a, b) => a - b); ys.sort((a, b) => a - b);
+      out.push([xs[xs.length >> 1], ys[ys.length >> 1]]);
+    }
+    return out;
+  }
+  function ground(c, cv, y) { c.strokeStyle = css('--rule'); c.lineWidth = 1; c.beginPath(); c.moveTo(0, y); c.lineTo(cv.width, y); c.stroke(); }
+  let D = null, k = 0, acc = 0, last = performance.now();
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function crowd(id, era, col) {
+    const cv = document.getElementById(id), c = cv.getContext('2d'); c.clearRect(0, 0, cv.width, cv.height);
+    const s = cv.width / 3.4, ox = cv.width / 2, oy = cv.height * .46;
+    ground(c, cv, oy + 1.62 * s);
+    const now = D[era].runs.map(r => r[k % r.length]);
+    for (const p of now) fig(c, p, col, s, ox, oy, 2, .16);
+    fig(c, med(now), col, s, ox, oy, 4.5, 1);
+  }
+  // the feet: each foot of each stretch anchored on that foot's own median ankle, rear foot left, lead foot right
+  const FOOT = { rear: [13, 15, 19, 17], lead: [14, 16, 22, 20] };   // southpaw: left foot is the rear foot
+  function anchorOf(run, a) {
+    const xs = [], ys = [];
+    for (const p of run) if (p[a] && p[a][0] != null) { xs.push(p[a][0]); ys.push(p[a][1]); }
+    xs.sort((x, y) => x - y); ys.sort((x, y) => x - y);
+    return xs.length > 5 ? [xs[xs.length >> 1], ys[ys.length >> 1]] : null;
+  }
+  function oneFoot(c, p, a, ids, col, s, ox, oy, w, alpha) {
+    if (!p || !a) return;
+    const P = i => p[i] && p[i][0] != null ? [ox + (p[i][0] - a[0]) * s, oy + (p[i][1] - a[1]) * s] : null;
+    const [k, an, he, to] = ids, K = P(k), A = P(an), H = P(he), T = P(to);
+    c.globalAlpha = alpha; c.strokeStyle = col; c.fillStyle = col; c.lineWidth = w; c.lineCap = 'round';
+    if (K && A) { c.beginPath(); c.moveTo(A[0] + (K[0] - A[0]) * .4, A[1] + (K[1] - A[1]) * .4); c.lineTo(...A); c.stroke(); }
+    if (A && H) { c.beginPath(); c.moveTo(...A); c.lineTo(...H); c.stroke(); }
+    if (H && T) { c.beginPath(); c.moveTo(...H); c.lineTo(...T); c.stroke(); }
+    if (H) { c.beginPath(); c.arc(...H, w * 1.5, 0, 7); c.fill(); }
+    c.globalAlpha = 1;
+  }
+  const anchors = {};
+  function feet(id, era, col) {
+    const cv = document.getElementById(id), c = cv.getContext('2d'); c.clearRect(0, 0, cv.width, cv.height);
+    const s = cv.width / 2.4, oy = cv.height * .55;
+    if (!anchors[era]) anchors[era] = { rear: D[era].runs.map(r => anchorOf(r, 15)), lead: D[era].runs.map(r => anchorOf(r, 16)) };
+    ground(c, cv, oy + .14 * s);
+    const now = D[era].runs.map(r => r[k % r.length]);
+    for (const [side, ox] of [['rear', cv.width * .28], ['lead', cv.width * .72]]) {
+      const ids = FOOT[side], an = anchors[era][side];
+      now.forEach((p, i) => oneFoot(c, p, an[i], ids, col, s, ox, oy, 1.2, .13));
+      const rel = now.map((p, i) => an[i] && p ? p.map(q => q && q[0] != null ? [q[0] - an[i][0], q[1] - an[i][1]] : null) : null).filter(Boolean);
+      oneFoot(c, med(rel), [0, 0], ids, col, s, ox, oy, 4, 1);
+      c.fillStyle = css('--ink-3'); c.font = `${Math.round(cv.width / 40)}px ui-monospace, Menlo, monospace`; c.textAlign = 'center';
+      c.fillText(side === 'rear' ? 'rear foot' : 'lead foot', ox, cv.height - 14);
+    }
+  }
+  function morph() {
+    const cv = document.getElementById('morph'), c = cv.getContext('2d'); c.clearRect(0, 0, cv.width, cv.height);
+    const T = +document.getElementById('morphT').value, X = +document.getElementById('morphX').value;
+    const e = D.early.median, l = D.late.median;
+    const p = e.map((pt, i) => pt && l[i] && pt[0] != null && l[i][0] != null ? [pt[0] + (l[i][0] - pt[0]) * T * X, pt[1] + (l[i][1] - pt[1]) * T * X] : null);
+    const s = cv.width / 3.4, ox = cv.width / 2, oy = cv.height * .46;
+    ground(c, cv, oy + 1.62 * s);
+    fig(c, e, css('--early'), s, ox, oy, 2.5, .35);
+    fig(c, p, css('--mcg'), s, ox, oy, 4.5, 1);
+    const era = T < .5 ? '2012–2015' : '2016–2021';
+    document.getElementById('morphTv').textContent = T === 0 ? '2012–2015' : T === 1 ? '2016–2021' : `${Math.round(T * 100)} % of the way`;
+    document.getElementById('morphXv').textContent = X + '×' + (X > 1 ? ' (not to scale)' : '');
+    document.getElementById('morphcap').textContent = `median stance${X > 1 ? `, change exaggerated ${X}×` : ''} · faint blue: 2012–2015`;
+  }
+  function tick(now) {
+    const dt = Math.min(.1, (now - last) / 1000); last = now;
+    if (D) { if (!reduce) { acc += dt * 10; while (acc >= 1) { acc -= 1; k++; } }
+      crowd('crowdE', 'early', css('--early')); crowd('crowdL', 'late', css('--mcg'));
+      feet('feetE', 'early', css('--early')); feet('feetL', 'late', css('--mcg')); }
+    requestAnimationFrame(tick);
+  }
+  ['morphT', 'morphX'].forEach(id => document.getElementById(id).addEventListener('input', () => D && morph()));
+  fetch('clouds.json').then(r => r.json()).then(d => { D = d;
+    document.getElementById('crowdEcap').textContent = `2012–2015 · ${d.early.runs.length} real stretches · median of ${d.early.n_frames} frames`;
+    document.getElementById('crowdLcap').textContent = `2016–2021 · ${d.late.runs.length} real stretches · median of ${d.late.n_frames} frames`;
+    morph(); });
+  requestAnimationFrame(tick);
+})();
+</script>
+
+<footer>{{closing}}</footer>
+</div>

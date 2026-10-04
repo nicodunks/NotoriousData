@@ -1,0 +1,46 @@
+[
+  {
+    "id": "01-standing",
+    "title": "Pereira\u2013Adesanya: standing exchanges",
+    "source": "pereira-adesanya",
+    "start": 250,
+    "duration": 20,
+    "url": "https://www.youtube.com/watch?v=9gLe0JfKz8w",
+    "channel": "UFC Eurasia",
+    "focus": "Striking motion, feet, hands, referee rejection",
+    "path": "work/clips/01-standing.mp4"
+  },
+  {
+    "id": "02-takedown",
+    "title": "Khabib\u2013McGregor: entry into wrestling",
+    "source": "khabib-mcgregor",
+    "start": 20,
+    "duration": 20,
+    "url": "https://www.youtube.com/watch?v=JuBBIJ7adjM",
+    "channel": "UFC",
+    "focus": "Standing-to-ground transition, overlapping fighters",
+    "path": "work/clips/02-takedown.mp4"
+  },
+  {
+    "id": "03-ground",
+    "title": "Oliveira\u2013Poirier: ground control",
+    "source": "oliveira-poirier",
+    "start": 400,
+    "duration": 20,
+    "url": "https://www.youtube.com/watch?v=clG3LV28bC0",
+    "channel": "ufcespanol",
+    "focus": "Ground occlusion, ownership of limbs, top/bottom",
+    "path": "work/clips/03-ground.mp4"
+  },
+  {
+    "id": "04-finish",
+    "title": "Oliveira\u2013Poirier: back-control sequence",
+    "source": "oliveira-poirier",
+    "start": 675,
+    "duration": 20,
+    "url": "https://www.youtube.com/watch?v=clG3LV28bC0",
+    "channel": "ufcespanol",
+    "focus": "Back control, submission setup, phase boundaries",
+    "path": "work/clips/04-finish.mp4"
+  }
+]

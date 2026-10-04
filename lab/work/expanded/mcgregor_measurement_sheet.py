@@ -1,0 +1,8 @@
+import json,cv2,numpy as np
+from pathlib import Path
+R=Path.cwd();O=R/'outputs/expanded/mcgregor/four_bout';tiles=[]
+for year,folder,cid,idx in [('2012','adaptive_expansion','Q04',0),('2013','adaptive','Q05',0),('2018','adaptive_expansion','Q11',1),('2021','adaptive','Q08',0)]:
+ B=R/'outputs/expanded/mcgregor'/folder;pose=json.load(open(B/'poses'/f'{cid}.json'));rev=json.load(open(B/'labels'/f'{cid}.json'));fr=pose['frames'][idx];rr=next(r for r in rev['frames'] if r['local_time']==fr['local_time']);p=next(p for p in fr['people'] if p['detection_index']==rr['target_detection_index']);k=np.array(p['keypoints']);assert all(rr['accepted_landmarks'][q] for q in ['RS','RA','LA']);im=cv2.imread(str(B/'evidence'/f'{cid}-{idx}-native.jpg'));cv2.line(im,tuple(k[15,:2].astype(int)),tuple(k[16,:2].astype(int)),(230,211,34),3,cv2.LINE_AA);cv2.line(im,tuple(k[6,:2].astype(int)),tuple(k[16,:2].astype(int)),(133,113,251),3,cv2.LINE_AA)
+ for j in [6,15,16]:cv2.circle(im,tuple(k[j,:2].astype(int)),5,(255,255,255),-1)
+ ratio=np.linalg.norm(k[15,:2]-k[16,:2])/np.linalg.norm(k[6,:2]-k[16,:2]);canvas=np.full((455,640,3),(25,20,17),np.uint8);canvas[55:415]=cv2.resize(im,(640,360));cv2.putText(canvas,f'{year} / source {fr["source_time"]:.2f}s / {rr["view"]}',(8,22),cv2.FONT_HERSHEY_SIMPLEX,.57,(245,235,220),1);cv2.putText(canvas,f'Ankle span / right shoulder-ankle = {ratio:.3f}',(8,44),cv2.FONT_HERSHEY_SIMPLEX,.47,(230,211,34),1);cv2.putText(canvas,f'Visible heel label: {rr["heel_contact"]}',(8,437),cv2.FONT_HERSHEY_SIMPLEX,.47,(195,195,195),1);tiles.append(canvas)
+cv2.imwrite(str(O/'validated-projection-comparison.jpg'),np.vstack([np.hstack(tiles[:2]),np.hstack(tiles[2:])]))

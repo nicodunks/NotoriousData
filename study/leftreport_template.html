@@ -1,0 +1,436 @@
+<title>The McGregor Left</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout: a fight-film lab sheet. One reading column; figure bands break wider; pen skeletons are the hero. */
+:root {
+  --paper: #eef0ec; --sheet: #f7f8f5; --ink: #15171a; --ink-2: #4c5157; --ink-3: #82878d; --rule: #d3d7d1;
+  --mcg: #c22d28; --early: #2350b8; --opp: #a2a7ac;
+  --yes: #2f6b45; --lean: #8d6510; --no: #6a3d9a;
+  --display: 'Archivo Narrow', 'Arial Narrow', 'Helvetica Neue', sans-serif;
+  --body: 'IBM Plex Sans', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #111315; --sheet: #181b1e; --ink: #e9ebe7; --ink-2: #b3b8bd; --ink-3: #7f858b; --rule: #2c3135;
+  --mcg: #ec5a52; --early: #6f97f2; --opp: #6c7278; --yes: #6fbf8c; --lean: #d9a441; --no: #b18ae0; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --paper: #111315; --sheet: #181b1e; --ink: #e9ebe7; --ink-2: #b3b8bd; --ink-3: #7f858b; --rule: #2c3135;
+  --mcg: #ec5a52; --early: #6f97f2; --opp: #6c7278; --yes: #6fbf8c; --lean: #d9a441; --no: #b18ae0; color-scheme: dark }
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink); font: 16px/1.6 var(--body); margin: 0; padding-inline: 20px; padding-block: 0 64px; -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1120px; margin: 0 auto; }
+.col { max-width: 700px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 700; letter-spacing: -.01em; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(56px, 9vw, 112px); line-height: .9; letter-spacing: -.02em; text-transform: uppercase; }
+h2 { font-size: clamp(30px, 4vw, 42px); line-height: 1; margin-bottom: 14px; text-transform: uppercase; }
+h3 { font-size: 22px; line-height: 1.1; }
+p { margin: 0 0 14px; }
+.kicker, .label { font: 500 12px/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+.num, .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+a { color: inherit; text-underline-offset: 3px; text-decoration-color: var(--rule); }
+section { padding-block: 56px 8px; border-top: 1px solid var(--rule); margin-top: 48px; }
+
+/* hero */
+header.hero { padding-block: 48px 8px; display: grid; gap: 18px; }
+.hero .lede { font-size: clamp(19px, 2.2vw, 23px); line-height: 1.45; max-width: 760px; color: var(--ink-2); }
+.hero .lede strong { color: var(--ink); font-weight: 600; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 28px; font: 13px var(--mono); color: var(--ink-2); }
+.facts b { color: var(--ink); font-weight: 500; }
+.answer { background: var(--sheet); border-left: 3px solid var(--mcg); padding: 18px 22px; max-width: 760px; font-size: 17px; }
+.answer p:last-child { margin: 0; }
+
+/* stance prints */
+.prints { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 4px 6px; margin-top: 26px; }
+.print { margin: 0; display: grid; gap: 2px; }
+.print-art { background: var(--sheet); border-radius: 2px; }
+.fig-skel { width: 100%; height: auto; display: block; }
+.print figcaption { display: flex; justify-content: space-between; gap: 6px; font: 12px var(--mono); color: var(--ink-3); padding: 0 2px; }
+.print figcaption b { color: var(--ink); font-weight: 500; }
+.prints-note { font: 13px/1.5 var(--body); color: var(--ink-3); margin-top: 10px; max-width: 760px; }
+
+svg .mcg { stroke: var(--mcg); fill: var(--mcg); stroke-linecap: round; }
+svg .early { stroke: var(--early); fill: var(--early); stroke-linecap: round; opacity: .85; }
+svg line.mcg, svg line.early, svg circle.mcg[fill="none"], svg circle.early[fill="none"] { fill: none; }
+svg .faint { opacity: .35; }
+svg .ground { stroke: var(--rule); stroke-width: 1; }
+
+.overlay { display: grid; grid-template-columns: minmax(0, 280px) minmax(0, 1fr); gap: 32px; align-items: center; margin-top: 8px; }
+.fig-overlay { width: 100%; height: auto; background: var(--sheet); border-radius: 2px; }
+.legend { display: flex; gap: 18px; font: 13px var(--mono); color: var(--ink-2); margin-bottom: 10px; }
+.legend i { display: inline-block; width: 18px; height: 3px; vertical-align: middle; margin-right: 6px; border-radius: 2px; }
+.legend .l-early { background: var(--early); } .legend .l-late { background: var(--mcg); } .legend .l-opp { background: var(--opp); }
+
+/* verdict table */
+.table-wrap { overflow-x: auto; margin-top: 18px; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 10px 12px 10px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+thead th { font: 500 11px/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
+tbody th { font-weight: 600; }
+th small, td small { display: block; font: 12px/1.4 var(--body); color: var(--ink-3); font-weight: 400; }
+td.num { text-align: right; white-space: nowrap; }
+td.num small { font-family: var(--mono); }
+.chip { display: inline-block; font: 500 12px/1 var(--mono); padding: 5px 8px; border-radius: 2px; border: 1px solid currentColor; white-space: nowrap; }
+.chip.yes { color: var(--yes); } .chip.lean { color: var(--lean); } .chip.flat { color: var(--ink-3); } .chip.no { color: var(--no); } .chip.untested { color: var(--ink-3); border-style: dashed; }
+
+/* hypothesis charts */
+.hyps { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr)); gap: 40px 48px; margin-top: 26px; }
+.hyp { min-width: 0; }
+.hyp header { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 6px; }
+.hyp .read { color: var(--ink-2); font-size: 15px; }
+.chart-wrap { overflow-x: auto; }
+svg.chart { width: 100%; min-width: 360px; height: auto; display: block; }
+svg.chart .grid { stroke: var(--rule); stroke-width: 1; }
+svg.chart .axis { stroke: var(--ink-3); stroke-width: 1; }
+svg.chart .split { stroke: var(--ink-3); stroke-width: 1; stroke-dasharray: 3 4; }
+svg.chart .tick { font: 11px var(--mono); fill: var(--ink-3); }
+svg.chart .note { fill: var(--ink-2); }
+svg.chart .whisker { stroke-width: 2; stroke-linecap: round; fill: none; }
+svg.chart .trend { stroke-width: 2.5; fill: none; stroke-linecap: round; }
+svg.chart .trend.mcg { stroke: var(--mcg); opacity: .9; }
+svg.chart .trend.opp { stroke: var(--opp); opacity: .9; stroke-dasharray: 5 4; }
+svg.chart .mcg.whisker { stroke: var(--mcg); opacity: .55; }
+svg.chart .opp.whisker { stroke: var(--opp); opacity: .7; }
+svg.chart .pt.mcg { fill: var(--mcg); stroke: var(--sheet); stroke-width: 2; }
+svg.chart .pt.opp { fill: var(--opp); stroke: var(--sheet); stroke-width: 2; }
+svg.chart .hit { fill: transparent; }
+svg.chart .hit:hover + * , svg.chart circle.pt:hover { stroke: var(--ink); }
+.axis-note { font: 12px var(--mono); color: var(--ink-3); margin-top: 4px; }
+
+/* surprises */
+.surprises { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 28px 36px; margin-top: 22px; }
+.surprise { min-width: 0; }
+.surprise h3 { margin-bottom: 8px; }
+.surprise p { color: var(--ink-2); font-size: 15px; }
+
+.prose { max-width: 700px; }
+.prose p, .prose li { color: var(--ink-2); }
+.prose ol, .prose ul { padding-left: 20px; margin: 0 0 14px; }
+.prose li { margin-bottom: 8px; }
+.prose b, .prose strong { color: var(--ink); font-weight: 600; }
+.steps { counter-reset: step; list-style: none; padding: 0; display: grid; gap: 12px; max-width: 760px; }
+.steps li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; color: var(--ink-2); }
+.steps li::before { counter-increment: step; content: counter(step); font: 500 13px/1.8 var(--mono); color: var(--ink-3); }
+.steps b { color: var(--ink); }
+details { max-width: 760px; margin-top: 14px; }
+summary { cursor: pointer; font: 500 13px var(--mono); color: var(--ink-2); }
+details[open] summary { margin-bottom: 10px; }
+footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--rule); font: 13px var(--mono); color: var(--ink-3); }
+:focus-visible { outline: 2px solid var(--mcg); outline-offset: 2px; }
+@media (max-width: 640px) {
+  .overlay { grid-template-columns: 1fr; }
+  .prints { grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); }
+}
+svg.chart .bar { stroke-width: 7; stroke-linecap: round; }
+svg.chart .bar.mcg { stroke: var(--mcg); } svg.chart .bar.opp { stroke: var(--opp); }
+.stat-row { display: flex; flex-wrap: wrap; gap: 28px 56px; margin-top: 8px; }
+.stat b { display: block; font: 700 clamp(44px, 6vw, 68px)/1 var(--display); letter-spacing: -.02em; }
+.stat b.mcg { color: var(--mcg); }
+.stat span { font: 13px/1.4 var(--mono); color: var(--ink-3); }
+.seq { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; margin-top: 22px; }
+@media (max-width: 640px) { .seq { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+/* video */
+.hero-clip { margin: 8px 0 0; max-width: 860px; }
+.hero-clip video, .clip video { width: 100%; aspect-ratio: 16 / 9; display: block; background: var(--sheet); border-radius: 2px; object-fit: cover; }
+.hero-clip figcaption { font: 12px var(--mono); color: var(--ink-3); margin-top: 6px; }
+.clips { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 14px; margin-top: 22px; }
+.clip { margin: 0; min-width: 0; }
+.clip figcaption { display: flex; justify-content: space-between; gap: 8px; font: 12px var(--mono); color: var(--ink-3); padding-top: 5px; }
+.clip figcaption b { color: var(--ink); font-weight: 500; }
+/* replay player */
+.player { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 28px; margin-top: 22px; align-items: start; }
+.stage { background: var(--sheet); border-radius: 2px; }
+.stage canvas { width: 100%; aspect-ratio: 4 / 3; display: block; }
+.controls { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; margin-top: 10px; font: 13px var(--mono); color: var(--ink-2); }
+.controls button, .controls select { font: inherit; color: var(--ink); background: transparent; border: 1px solid var(--rule); border-radius: 2px; padding: 5px 10px; cursor: pointer; }
+.controls button[aria-pressed=true] { border-color: var(--mcg); color: var(--mcg); }
+.controls input[type=range] { flex: 1; min-width: 120px; accent-color: var(--mcg); }
+.plist { max-height: 420px; overflow-y: auto; border-top: 1px solid var(--rule); }
+.plist button { display: flex; justify-content: space-between; gap: 10px; width: 100%; text-align: left; background: none; border: 0; border-bottom: 1px solid var(--rule); padding: 8px 4px; font: 13px var(--mono); color: var(--ink-2); cursor: pointer; }
+.plist button.on { color: var(--mcg); }
+.plist button span:last-child { color: var(--ink-3); }
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 22px; max-width: 860px; }
+.pair figure { margin: 0; } .pair figcaption { font: 12px var(--mono); color: var(--ink-3); margin-top: 6px; }
+.hyp.small h3 { font-size: 18px; }
+.hyp.small .read { font-size: 12.5px; }
+.vs { margin-top: 28px; } .vs h3 { font-size: 18px; margin-bottom: 8px; }
+.vs-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; max-width: 900px; }
+svg .opp { stroke: var(--opp); fill: var(--opp); }
+@media (max-width: 760px) { .player { grid-template-columns: 1fr; } }
+svg.chart .hp { fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+svg.chart .hp.mcg { stroke: var(--mcg); } svg.chart .hp.early { stroke: var(--early); } svg.chart .hp.opp { stroke: var(--opp); }
+.bigstats { display: flex; flex-wrap: wrap; gap: 24px 52px; margin: 18px 0 8px; }
+.bigstats div b { display: block; font: 700 clamp(38px, 5vw, 56px)/1 var(--display); }
+.bigstats div b.mcg { color: var(--mcg); }
+.bigstats div span { font: 13px/1.4 var(--mono); color: var(--ink-3); }
+</style>
+
+<div class="wrap">
+<header class="hero">
+  <span class="kicker">Companion to McGregor, Measured · one punch, every frame</span>
+  <h1>The<br>McGregor left</h1>
+  <p class="lede">His straight left is the punch people remember: the pull counter on Aldo, the counters on Mendes and Alvarez. We found every one we could in fifteen fights, frame by frame at the broadcast's own rate, and set each against his opponents' rear straight thrown in the same fights.</p>
+  <div class="answer"><p><strong>What made it his isn't how it moved. It's how often he threw it.</strong> Measured from the body, his left is an ordinary fast rear straight: the same speed, reach and footwork as the rear hands thrown back at him. But he threw it about {{rate_ratio}} times as often as his opponents threw theirs, in {{rate_n}} fights. And he threw it without a jab: a lead-hand set-up came before it half as often as before theirs.</p></div>
+  {{hero_clip}}
+</header>
+
+<section aria-labelledby="watch-h">
+  <span class="label">Watch it</span>
+  <h2 id="watch-h">The left, as thrown</h2>
+  <p class="col">Chosen by rule, not taste: the fastest clearly tracked straight left from each fight, plus the fastest example of each set-up. Half speed, the tracked skeleton in red, from 0.8 s before the punch starts to 0.6 s after full extension. Hover or tap to play.</p>
+  <div class="clips">{{clips}}</div>
+</section>
+
+<section aria-labelledby="vol-h">
+  <span class="label">How often</span>
+  <h2 id="vol-h">The rear hand as the main weapon</h2>
+  <div class="stat-row">
+    <div class="stat"><b class="mcg">{{rate_mcg}}</b><span>McGregor straight lefts<br>per upright minute</span></div>
+    <div class="stat"><b>{{rate_opp}}</b><span>opponents' rear straights<br>per upright minute</span></div>
+    <div class="stat"><b>{{rate_n}}</b><span>fights where he threw his<br>more than they threw theirs</span></div>
+  </div>
+  <p class="col" style="margin-top:22px">Per-fight difference, median over fights: {{rate_ci}} punches a minute (95 % interval, resampling fights). Fights with under a minute of upright footage (Brimage, Poirier 1, O'Keeffe, Cerrone) are left out of the rate.</p>
+  <div class="legend"><span><i class="l-late"></i>McGregor's left</span><span><i class="l-opp"></i>opponent's rear straight</span></div>
+  <div class="chart-wrap" style="max-width:720px">{{rate_chart}}</div>
+</section>
+
+<section aria-labelledby="avg-h">
+  <span class="label">How it moved</span>
+  <h2 id="avg-h">The average left</h2>
+  <p class="col">Every detected straight left lined up at the start of the punch and averaged: his hips at the centre, scaled to his torso, the opponent to the right. He's drawn as he stood, southpaw, so the arm that extends is his real left.</p>
+  <div class="seq">{{avg_left}}</div>
+</section>
+
+<section aria-labelledby="vs-h">
+  <span class="label">The same punch, thrown back at him</span>
+  <h2 id="vs-h">Side by side</h2>
+  <p class="col">For each fight, McGregor's fastest straight left (red) beside his opponent's fastest rear straight (blue), both at half speed. Numbers are peak fist speed in the thrower's own torso lengths per second.</p>
+  {{pairs}}
+  <h3 style="margin-top:44px">His average left against their average rear hand</h3>
+  <p class="col" style="margin-top:8px">The median of every McGregor straight left and of every opponent rear straight, time-aligned and playing in step. Opponents throwing with the right hand are relabelled so the punching arm lines up with his; positions are as filmed.</p>
+  <div class="pair"><figure><div class="stage"><canvas id="avgM" width="600" height="450" aria-label="McGregor's average left"></canvas></div><figcaption id="capM">McGregor</figcaption></figure>
+    <figure><div class="stage"><canvas id="avgO" width="600" height="450" aria-label="Opponents' average rear straight"></canvas></div><figcaption id="capO">Opponents</figcaption></figure></div>
+</section>
+
+<section aria-labelledby="replay-h">
+  <span class="label">Every punch, as skeletons</span>
+  <h2 id="replay-h">Replay any left</h2>
+  <p class="col">Each punch time-aligned: 0.8 s before it starts, the punch itself stretched to the same length, then 0.3 s after. McGregor in red, the opponent in the same frames in grey, both drawn around McGregor's hips.</p>
+  <div class="player">
+    <div><div class="stage"><canvas id="stage" width="800" height="600" aria-label="Skeleton replay of the selected punch"></canvas></div>
+      <div class="controls"><button id="play" aria-pressed="true">Pause</button><button id="slow">½×</button><input id="scrub" type="range" min="0" max="28" step="1" value="0" aria-label="Moment in the punch"><span id="phase">onset</span></div></div>
+    <div><div class="controls" style="margin:0 0 8px"><label for="who">Punches by</label><select id="who"><option value="mcg">McGregor</option><option value="opp">opponents</option></select><label for="era">from</label><select id="era"><option value="all">all years</option><option value="early">2012–2015</option><option value="late">2016–2021</option></select></div>
+      <div class="plist" id="plist"></div></div>
+  </div>
+  <h3 style="margin-top:44px">Early against late, averaged</h3>
+  <p class="col" style="margin-top:8px">The median punch from 2012–2015 and from 2016–2021, playing in step.</p>
+  <div class="pair"><figure><div class="stage"><canvas id="avgE" width="600" height="450" aria-label="Average left, 2012 to 2015"></canvas></div><figcaption id="capE">2012–2015</figcaption></figure>
+    <figure><div class="stage"><canvas id="avgL" width="600" height="450" aria-label="Average left, 2016 to 2021"></canvas></div><figcaption id="capL">2016–2021</figcaption></figure></div>
+</section>
+
+<section aria-labelledby="stack-h">
+  <span class="label">Stacked</span>
+  <h2 id="stack-h">Every left at once</h2>
+  <p class="col">Every straight left of a kind, drawn on top of each other and played in step: 0.8 s of the build-up, the punch, the follow-through. Each faint figure is one real punch; the bold figure is their median at each moment, so it moves with them. Beside it, his opponents' rear straights.</p>
+  <div class="controls" style="margin-top:14px"><label for="stackSet">Set-up</label><select id="stackSet">
+    <option value="all">every left</option><option value="pull counter">pull counters</option><option value="slip counter">slip counters</option>
+    <option value="counter, head still">counters, head still</option><option value="caught coming in">caught coming in</option>
+    <option value="behind the paw">behind the paw</option><option value="straight lead">straight leads</option></select>
+    <label for="stackEra">from</label><select id="stackEra"><option value="all">all years</option><option value="early">2012–2015</option><option value="late">2016–2021</option></select>
+    <button id="stackPlay" aria-pressed="true">Pause</button><span id="stackPhase" class="mono">before</span></div>
+  <div class="pair" style="max-width:none"><figure><div class="stage"><canvas id="stackM" width="700" height="525" aria-label="McGregor's lefts stacked"></canvas></div><figcaption id="stackMcap">McGregor</figcaption></figure>
+    <figure><div class="stage"><canvas id="stackO" width="700" height="525" aria-label="Opponents' rear straights stacked"></canvas></div><figcaption id="stackOcap">Opponents</figcaption></figure></div>
+</section>
+
+<section aria-labelledby="slip-h">
+  <span class="label">Before the left · the head and the torso</span>
+  <h2 id="slip-h">Slip and rip, or stand and fire?</h2>
+  <p class="col">The 0.8 s before each straight left, his head measured against his own hips, so his footwork and the camera's pan drop out. A broadcast camera sees a pull (head back) and a dip (head down) clearly; a slip toward or away from the camera it can't, so these are lower bounds.</p>
+  <div class="bigstats">
+    <div><b class="mcg">{{big_mcg}}</b><span>of his lefts came after a big head move<br>(≥ 0.4 torso lengths)</span></div>
+    <div><b>{{big_base}}</b><span>of random moments of him<br>standing, with no punch near</span></div>
+    <div><b>{{big_opp}}</b><span>of opponents' rear straights<br>came after one</span></div>
+  </div>
+  <p class="col"><b>Before most lefts he moved his head no more than at any other moment.</b> His opponents moved theirs twice as often before throwing. Most of the time the left came from a still head, set off by timing and distance, not a slip. When he did move first, the move was real and it came in two distinct shapes.</p>
+  <div class="overlay" style="grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);align-items:start;margin-top:22px">
+    <div class="chart-wrap">{{head_paths}}</div>
+    <div class="prose">
+      <div class="legend"><span><i class="l-late"></i>pull counter</span><span><i class="l-early"></i>slip counter</span><span><i class="l-opp"></i>other lefts</span></div>
+      <p><b>The pull counter is two beats.</b> The head goes back, away from the punch, about 0.17 torso lengths, with little drop. The left follows about 170 ms after the head reaches its furthest point: away, then back in.</p>
+      <p><b>The slip counter is one motion.</b> The head drops about 0.16 torso lengths, with little backward travel, and the left is already going at the bottom of the dip: the punch and the slip are the same movement.</p>
+      <p><b>Over time</b> a growing share of his lefts came off some head or torso movement (ρ +0.57, p 0.08: suggestive), and the moves got slightly bigger after 2016.</p>
+    </div>
+  </div>
+  <div class="table-wrap"><table>
+    <thead><tr><th scope="col">Set-up</th><th scope="col" class="num">Head back</th><th scope="col" class="num">Head down</th><th scope="col" class="num">Torso swing</th><th scope="col" class="num">Fired after the move</th><th scope="col" class="num">Fist speed</th><th scope="col" class="num">Range at start</th></tr></thead>
+    <tbody>{{counter_rows}}</tbody>
+  </table></div>
+  <p class="col" style="margin-top:10px;font-size:14px;color:var(--ink-3)">Medians. Lengths in his torso lengths; "fired after the move" is the time from the head's furthest point to the punch starting. Pull and slip counters are 7 and 12 punches: describe, don't generalise.</p>
+</section>
+
+<section aria-labelledby="paw-h">
+  <span class="label">The lead hand</span>
+  <h2 id="paw-h">Why not behind the jab?</h2>
+  <p class="col">His opponents threw their rear straight behind the lead hand twice as often as he did. The obvious guess was that he held his lead hand out still, as a range-finder, and fired past it. The data says no: in the second before a left, his lead hand was never held out and still. It was busy, but it wasn't jabbing.</p>
+  <div class="bigstats">
+    <div><b class="mcg">{{jab_mcg}}</b><span>his jabs per upright minute<br>(opponents {{jab_opp}})</span></div>
+    <div><b class="mcg">{{jabbed_mcg}}</b><span>of his lefts had a jab in the second before<br>(opponents' rear straights {{jabbed_opp}})</span></div>
+    <div><b class="mcg">{{leadmove_mcg}}</b><span>torso lengths his lead fist travelled<br>in that second (opponents {{leadmove_opp}})</span></div>
+  </div>
+  <p class="col">The lead hand moved, pawed, touched and measured, but it rarely snapped out as a punch. The left wasn't the second half of a one-two; it was the first punch, timed off the opponent rather than set up by his own jab. That is also why "straight lead" and "caught coming in" are his two most common set-ups.</p>
+</section>
+
+<section aria-labelledby="sel-h">
+  <span class="label">Strike selection, 2012 → 2021</span>
+  <h2 id="sel-h">What he threw</h2>
+  <p class="col">Every fast extension of either arm (jabs and hooks included), sorted by hand and by the shape of the fist's path, plus kicks, per upright minute. Red: him, with a robust trend line; grey, dashed: his opponents in the same footage.</p>
+  <div class="bigstats"><div><b class="mcg">{{rear_mcg}}</b><span>of his hand strikes came from the rear<br>(left) hand, 2012–2015</span></div><div><b>{{rear_opp}}</b><span>for his opponents' rear hands<br>in the same fights</span></div></div>
+  <p class="col"><b>The rear hand was his main hand all along:</b> about half his punches, against roughly a third for the men he fought, higher in 10 of 11 fights. <b>The left hook faded</b> (from about 2.3 to 0.9 a minute, ρ −0.56, p 0.08) while the straight left held steady near 3.7 a minute: over the years the left got straighter. Total volume, jabs and kicks did not change in a way the opponents didn't share.</p>
+  <div class="hyps">{{selection}}</div>
+</section>
+
+<section aria-labelledby="time-h">
+  <span class="label">How the punch changed, 2012 → 2021 · exploratory</span>
+  <h2 id="time-h">The left over time</h2>
+  <p class="col">One dot per fight: the median over his straight lefts in that fight (red), and over his opponent's rear straights (grey); whiskers are 95 % intervals. Angles are measured in the 2-D broadcast image, so read them against the grey dots filmed by the same camera. Nine measures, no correction: a "trend" here is a lead, not a finding.</p>
+  <div class="hyps">{{time_charts}}</div>
+</section>
+
+<section aria-labelledby="mech-h">
+  <span class="label">Against the same punch thrown at him</span>
+  <h2 id="mech-h">Mechanics</h2>
+  <p class="col">Per-fight medians, his left against his opponents' rear straight in the same fights. The interval is for the median per-fight difference, resampling fights. Nothing here separates his left from theirs.</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th scope="col">Measure</th><th scope="col" class="num">McGregor</th><th scope="col" class="num">Opponents</th><th scope="col" class="num">Difference (95 %)</th><th scope="col" class="num">His higher in</th><th scope="col">Result</th></tr></thead>
+    <tbody>{{mechanics}}</tbody>
+  </table></div>
+  <p class="col" style="margin-top:12px;font-size:14px;color:var(--ink-3)">At 30 frames a second a punch lasts four or five frames, so onset-to-extension time can only resolve about 33 ms. Speeds are in the puncher's own torso lengths per second, so a bigger fighter isn't faster by definition.</p>
+</section>
+
+<section aria-labelledby="set-h">
+  <span class="label">What came before it · exploratory</span>
+  <h2 id="set-h">How he set it up</h2>
+  <p class="col">Each punch is sorted by what happened in the 0.6 s before it, by fixed rules. <b>Counters</b> come within 0.7 s of an opponent attack: a <b>pull counter</b> if his head first moved ≥ 0.15 torso lengths away, a <b>slip counter</b> if it dropped ≥ 0.12, otherwise <b>head still</b>. <b>Caught coming in</b>: the opponent was advancing. <b>Behind the paw</b>: his lead hand had reached out first. <b>Straight lead</b>: none of these.</p>
+  <div class="legend"><span><i class="l-late"></i>McGregor's left</span><span><i class="l-opp"></i>opponent's rear straight</span></div>
+  <div class="chart-wrap" style="max-width:720px">{{setups}}</div>
+  <div class="prose" style="margin-top:14px">
+    <p><b>The clearest difference:</b> his opponents threw their rear straight behind the lead hand (the one-two) 37 % of the time; McGregor 18 %. He threw it cold, as a lead, or into a man walking forward, about twice as often as they did.</p>
+    <p><b>The famous pull counter is real but rare:</b> 9 % of his lefts (7 punches), against 5 % of theirs. All counters together: 36 % of his lefts, 31 % of theirs. Counters became a larger share of his lefts over his career (ρ {{counter_rho}}, p {{counter_p}}: suggestive only). By fight: {{counter_points}}.</p>
+  </div>
+</section>
+
+<section aria-labelledby="lim-h">
+  <span class="label">Limits</span>
+  <h2 id="lim-h">What could fool this</h2>
+  <div class="prose"><ul>
+    <li><b>Detection.</b> A punch is a fast extension of the arm toward the opponent (opens ≥ 0.2 of its length within 400 ms to ≥ 0.65, wrist ≥ 8 torso lengths/s, ≥ 0.3 torso lengths forward). Checked by eye on random samples: about three in four detections are committed left hands; the rest are feints, clinch hand-fighting or unclear angles. Straight vs hook (from the wrist's path) is right more often than not, not always.</li>
+    <li><b>Recall.</b> A punch thrown away from the camera or behind the opponent's body can't be seen. Rates are lower bounds, and the comparison with opponents shares the same blind spots.</li>
+    <li><b>Landed vs missed.</b> The video can't say. The opponent's head moving away in the next 250 ms was measured and differed little by set-up; it's noisy and isn't proof of contact.</li>
+    <li><b>Small numbers.</b> {{n_lefts}} straight lefts (plus {{n_hooks}} hook-shaped ones) and {{n_opp}} opponent rear straights in fifteen fights. Set-up shares carry wide intervals.</li>
+    <li><b>Fixed after looking.</b> The detector was tuned by eye on the Khabib fight before any other fight was run, and a frame-rate bug (the 25 fps Siver upload) was fixed. Both are logged in the pre-registration file.</li>
+  </ul></div>
+</section>
+
+<script>
+(function () {
+  const BONES = [[5,6],[5,7],[7,9],[6,8],[8,10],[5,11],[6,12],[11,12],[11,13],[13,15],[12,14],[14,16],[15,19],[19,17],[16,22],[22,20]];
+  const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  let data = null, cur = 0, f = 0, playing = true, rate = 1, acc = 0, last = performance.now();
+  let who = 'mcg';
+  const S = () => who === 'mcg' ? data.seqs : data.oseqs;
+  function draw(cv, pose, color, scale, ox, oy, w) {
+    const c = cv.getContext('2d'); if (!pose) return;
+    c.strokeStyle = color; c.fillStyle = color; c.lineWidth = w; c.lineCap = 'round';
+    const P = i => pose[i] && pose[i][0] != null ? [ox + pose[i][0] * scale, oy + pose[i][1] * scale] : null;
+    for (const [a, b] of BONES) { const p = P(a), q = P(b); if (p && q) { c.beginPath(); c.moveTo(...p); c.lineTo(...q); c.stroke(); } }
+    const face = [0,1,2,3,4].map(P).filter(Boolean);
+    if (face.length >= 2) { const cx = face.reduce((s,p)=>s+p[0],0)/face.length, cy = face.reduce((s,p)=>s+p[1],0)/face.length;
+      c.beginPath(); c.arc(cx, cy, .2 * scale, 0, 7); c.stroke(); }
+    for (const i of [9]) { const p = P(i); if (p) { c.beginPath(); c.arc(...p, w * 2.2, 0, 7); c.fill(); } }
+  }
+  function frame(cv, me, opp, k, meColor) {
+    const c = cv.getContext('2d'); c.clearRect(0, 0, cv.width, cv.height);
+    const s = cv.width / 6.2, ox = cv.width * .3, oy = cv.height * .5;
+    c.strokeStyle = css('--rule'); c.lineWidth = 1; c.beginPath(); c.moveTo(0, oy + 1.55 * s); c.lineTo(cv.width, oy + 1.55 * s); c.stroke();
+    if (opp) draw(cv, opp[k], css('--opp'), s, ox, oy, cv.width / 260);
+    draw(cv, me[k], meColor || css('--mcg'), s, ox, oy, cv.width / 170);
+  }
+  const N = () => data.pre + data.mid + data.post;
+  const phase = k => k < data.pre ? 'before' : k < data.pre + data.mid ? 'punch' : 'after';
+  function list() {
+    const era = document.getElementById('era').value, el = document.getElementById('plist'); el.innerHTML = '';
+    S().forEach((s, i) => {
+      const y = +s.date.slice(0, 4); if (era === 'early' && y >= 2016 || era === 'late' && y < 2016) return;
+      const b = document.createElement('button'); b.innerHTML = `<span>${s.date.slice(0,4)} ${s.opponent.split(' ').pop()}</span><span>${s.setup} · ${s.speed}</span>`;
+      if (i === cur) b.className = 'on';
+      b.onclick = () => { cur = i; f = 0; list(); }; el.appendChild(b);
+    });
+  }
+  function tick(now) {
+    const dt = Math.min(.1, (now - last) / 1000); last = now;
+    if (data) {
+      if (playing) { acc += dt * 30 * rate * (phase(f) === 'punch' ? .45 : 1); while (acc >= 1) { acc -= 1; f = (f + 1) % N(); } }
+      const s = S()[cur]; frame(document.getElementById('stage'), s.me, s.opp, f, who === 'opp' ? css('--early') : null);
+      frame(document.getElementById('avgM'), data.avg.mcg.me, null, f); frame(document.getElementById('avgO'), data.avg.opp.me, null, f, css('--early'));
+      frame(document.getElementById('avgE'), data.avg.early.me, null, f); frame(document.getElementById('avgL'), data.avg.late.me, null, f);
+      document.getElementById('scrub').value = f; document.getElementById('phase').textContent = phase(f);
+    }
+    requestAnimationFrame(tick);
+  }
+  document.getElementById('play').onclick = e => { playing = !playing; e.target.textContent = playing ? 'Pause' : 'Play'; e.target.setAttribute('aria-pressed', playing); };
+  document.getElementById('slow').onclick = e => { rate = rate === 1 ? .5 : 1; e.target.textContent = rate === 1 ? '½×' : '1×'; };
+  document.getElementById('scrub').oninput = e => { f = +e.target.value; playing = false; document.getElementById('play').textContent = 'Play'; };
+  document.getElementById('era').onchange = list;
+  document.getElementById('who').onchange = e => { who = e.target.value; cur = 0; f = 0; list(); };
+  fetch('replay.json').then(r => r.json()).then(d => { data = d; cur = d.seqs.reduce((b, s, i) => s.speed > d.seqs[b].speed ? i : b, 0);
+    document.getElementById('scrub').max = N() - 1; document.getElementById('capE').textContent = `2012–2015 · median of ${d.avg.early.n} lefts`;
+    document.getElementById('capL').textContent = `2016–2021 · median of ${d.avg.late.n} lefts`;
+    document.getElementById('capM').textContent = `McGregor's left · median of ${d.avg.mcg.n}`; document.getElementById('capO').textContent = `Opponents' rear straight · median of ${d.avg.opp.n}`; list(); });
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) playing = false;
+  requestAnimationFrame(tick);
+  // stacked overlays
+  let stackPlaying = !matchMedia('(prefers-reduced-motion: reduce)').matches, sk = 0, sacc = 0, slast = performance.now();
+  function medianPose(poses, k) {
+    const out = [];
+    for (let i = 0; i < 23; i++) { const xs = [], ys = [];
+      for (const p of poses) { const q = p[k] && p[k][i]; if (q && q[0] != null) { xs.push(q[0]); ys.push(q[1]); } }
+      if (xs.length < 3) { out.push(null); continue; }
+      xs.sort((a, b) => a - b); ys.sort((a, b) => a - b); out.push([xs[xs.length >> 1], ys[ys.length >> 1]]); }
+    return out;
+  }
+  function stack(id, seqs, col, k) {
+    const cv = document.getElementById(id), c = cv.getContext('2d'); c.clearRect(0, 0, cv.width, cv.height);
+    const s = cv.width / 6.2, ox = cv.width * .32, oy = cv.height * .5;
+    c.strokeStyle = css('--rule'); c.lineWidth = 1; c.beginPath(); c.moveTo(0, oy + 1.55 * s); c.lineTo(cv.width, oy + 1.55 * s); c.stroke();
+    c.globalAlpha = Math.max(.08, Math.min(.35, 3 / Math.max(1, seqs.length)));
+    for (const sq of seqs) draw(cv, sq.me[k], col, s, ox, oy, cv.width / 300);
+    c.globalAlpha = 1;
+    if (seqs.length >= 3) draw(cv, medianPose(seqs.map(q => q.me), k), col, s, ox, oy, cv.width / 140);
+  }
+  function stackTick(now) {
+    const dt = Math.min(.1, (now - slast) / 1000); slast = now;
+    if (data) {
+      const n = data.pre + data.mid + data.post;
+      if (stackPlaying) { sacc += dt * 30 * (phase(sk) === 'punch' ? .35 : .8); while (sacc >= 1) { sacc -= 1; sk = (sk + 1) % n; } }
+      const set = document.getElementById('stackSet').value, era = document.getElementById('stackEra').value;
+      const keep = q => (set === 'all' || q.setup === set) && (era === 'all' || (era === 'early') === (+q.date.slice(0, 4) < 2016));
+      const m = data.seqs.filter(keep), o = data.oseqs.filter(keep);
+      stack('stackM', m, css('--mcg'), sk); stack('stackO', o, css('--early'), sk);
+      document.getElementById('stackMcap').textContent = `McGregor · ${m.length} left${m.length === 1 ? '' : 's'}`;
+      document.getElementById('stackOcap').textContent = `Opponents' rear straights · ${o.length}${o.length < 3 ? ' (too few for a median)' : ''}`;
+      document.getElementById('stackPhase').textContent = phase(sk);
+    }
+    requestAnimationFrame(stackTick);
+  }
+  document.getElementById('stackPlay').onclick = e => { stackPlaying = !stackPlaying; e.target.textContent = stackPlaying ? 'Pause' : 'Play'; e.target.setAttribute('aria-pressed', stackPlaying); };
+  requestAnimationFrame(stackTick);
+  // clips: play on hover / when on screen
+  const vids = document.querySelectorAll('.clip video');
+  const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? e.target.play().catch(() => {}) : e.target.pause()), { threshold: .6 });
+  vids.forEach(v => io.observe(v));
+})();
+</script>
+
+<footer>Ghost Fight lab · RTMW-x pose at the broadcast frame rate, UFC-trained detector, no training · after Peter Wang's per-stroke tennis analysis · code in mma/study/mcgregor (strikes.py, leftstudy.py)</footer>
+</div>

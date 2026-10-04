@@ -1,0 +1,785 @@
+<title>McGregor, Frame by Frame</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;800&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+/* One column, generous margins, ink on paper; signal red is McGregor, grey is everyone he fought. */
+:root {
+  --paper: #ffffff; --ink: #111111; --ink2: #3d3d3d; --mute: #737373; --rule: #e6e6e3; --soft: #f6f6f3;
+  --red: #e52228; --grey: #a3a3a3;
+  --sans: Geist, "Helvetica Neue", Arial, sans-serif; --mono: "Geist Mono", ui-monospace, Menlo, monospace;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--paper); }
+html { overflow-x: clip; }
+[hidden] { display: none !important; }
+:root { --night: #070a08; --fog: #2bd16a; --bone: #efe9dc; --steel: #8fb6cc; }
+.hero { position: relative; width: 100vw; margin-left: calc(50% - 50vw); height: min(78vh, 640px); min-height: 460px; background: var(--night); color: #f4f2ec; overflow: hidden; }
+.hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.hero .in { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; height: 100%; padding: 30px 32px 44px; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box; pointer-events: none; }
+.hero .in a { pointer-events: auto; }
+.hero .mark { color: #f4f2ec; border: 0; margin: 0; padding: 0; }
+.hero .meta { color: #9aa59c; margin-bottom: 14px; }
+.hero h1 { color: #fff; font-size: clamp(34px, 6vw, 56px); letter-spacing: -2px; line-height: 1.02; margin-bottom: 14px; text-shadow: 0 2px 30px rgba(0,0,0,.6); }
+.hero .byline { color: #c9cfc8; margin: 0; }
+.hero .whisper { position: absolute; right: 32px; bottom: 18px; z-index: 1; font: 12px var(--mono); color: #6f7a71; }
+.after-hero { height: 56px; }
+body { margin: 0; color: var(--ink); font: 400 17px/1.6 var(--sans); padding-inline: 32px; padding-block: 0 96px; -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 960px; margin: 0 auto; }
+.mark { display: block; padding: 34px 0 30px; border-bottom: 1px solid var(--rule); margin-bottom: 64px; font: 800 30px/1 var(--sans); letter-spacing: -1px; color: var(--ink); text-decoration: none; }
+.mark i { display: inline-block; width: 7px; height: 7px; background: var(--red); margin-left: 2px; }
+.meta { font: 14px var(--mono); color: var(--mute); margin-bottom: 26px; }
+h1 { font: 600 34px/1.15 var(--sans); letter-spacing: -1.3px; margin: 0 0 16px; }
+.byline { font-size: 17px; color: var(--ink2); margin: 0 0 40px; }
+h2 { font: 600 34px/1.1 var(--sans); letter-spacing: -1.2px; margin: 72px 0 10px; }
+@media (min-width: 641px) { h2 { white-space: nowrap; } }
+h2:first-child { margin-top: 8px; }
+h3 { font: 600 24px/1.2 var(--sans); letter-spacing: -.6px; margin: 40px 0 8px; }
+p { margin: 0 0 16px; color: var(--ink2); }
+p b { color: var(--ink); font-weight: 600; }
+.lede { font-size: 19px; line-height: 1.55; color: var(--ink); }
+.small { font-size: 14px; color: var(--mute); }
+.mono { font-family: var(--mono); }
+a { color: inherit; text-decoration-color: var(--rule); text-underline-offset: 3px; }
+a:hover { text-decoration-color: var(--ink); }
+:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+
+/* tabs */
+.tabs { display: flex; flex-wrap: wrap; gap: 8px; scrollbar-width: none; position: sticky; top: env(safe-area-inset-top, 0px); background: var(--paper); padding: 12px 0; z-index: 5; border-bottom: 1px solid var(--rule); margin-bottom: 40px; }
+.tabs button { flex: none; white-space: nowrap; font: 500 15px var(--sans); color: var(--mute); background: var(--paper); border: 1px solid var(--rule); padding: 9px 18px; cursor: pointer; border-radius: 0; }
+.tabs button[aria-selected=true] { color: var(--ink); border-color: var(--ink); }
+[role=tabpanel][hidden] { display: none; }
+
+/* findings */
+.finding { margin-top: 72px; }
+.finding:first-of-type { margin-top: 24px; }
+.say { font: 500 15px/1.5 var(--sans); color: var(--ink); margin: 0 0 18px; }
+.say span { color: var(--mute); font-weight: 400; }
+figure { margin: 22px 0 0; }
+figcaption, .cap { font: 13px/1.5 var(--mono); color: var(--mute); margin-top: 8px; }
+.box { border: 1px solid var(--rule); padding: 18px; background: var(--paper); }
+video { width: 100%; display: block; background: #111; }
+.pairs .ptabs { display: flex; gap: 6px; margin-bottom: 10px; }
+.pairs .ptabs button { font: 13px var(--mono); color: var(--mute); background: none; border: 1px solid var(--rule); padding: 5px 12px; cursor: pointer; }
+.pairs .ptabs button[aria-selected=true] { color: var(--ink); border-color: var(--ink); }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 22px; }
+.cell { margin: 0; min-width: 0; }
+.mclip { aspect-ratio: 4 / 3; max-width: 100%; }
+.mtabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.mtabs button { font: 13px var(--mono); color: var(--mute); background: var(--paper); border: 1px solid var(--rule); padding: 5px 12px; cursor: pointer; border-radius: 0; }
+.mtabs button[aria-selected=true] { color: var(--ink); border-color: var(--ink); }
+.mstrip { aspect-ratio: 1218 / 394; max-width: 100%; margin-top: 4px; }
+svg.era .hollow { fill: var(--paper); stroke-width: 2; } svg.era .hollow.m { stroke: var(--red); } svg.era .hollow.o { stroke: var(--grey); }
+svg.era .mark8 { stroke: var(--ink); stroke-width: 1; stroke-dasharray: 1 3; }
+.mdef { font-size: 14px; line-height: 1.5; margin: 10px 0 6px; }
+svg.era { width: 100%; height: auto; display: block; }
+svg.era .g { stroke: var(--rule); stroke-width: 1; }
+svg.era .tk { font: 12px var(--mono); fill: var(--mute); }
+svg.era .axl { font: 12px var(--sans); fill: var(--ink2); }
+svg.era .ln { fill: none; stroke-width: 2.2; }
+svg.era .ln.m { stroke: var(--red); } svg.era .ln.o { stroke: var(--grey); stroke-dasharray: 5 5; }
+svg.era .ci { stroke-width: 2; } svg.era .ci.m { stroke: var(--red); } svg.era .ci.o { stroke: var(--grey); }
+svg.era .pt.m { fill: var(--red); } svg.era .pt.o { fill: var(--grey); }
+svg.era .star { font: 600 16px var(--mono); fill: var(--ink); }
+svg.era .bar { stroke-width: 7; stroke-linecap: butt; } svg.era .bar.m { stroke: var(--red); } svg.era .bar.o { stroke: var(--grey); } svg.era .bar.k { stroke: var(--ink); }
+svg.era .ln.k { stroke: var(--ink); } svg.era .hp.k { stroke: var(--ink); } svg.era .pt.k { fill: var(--ink); }
+svg.era .hp { fill: none; stroke-width: 1.4; } svg.era .hp.m { stroke: var(--red); } svg.era .hp.o { stroke: var(--grey); }
+.key { display: flex; flex-wrap: wrap; gap: 6px 20px; font: 13px var(--mono); color: var(--mute); margin: 10px 0 0; }
+.key i { display: inline-block; width: 16px; height: 2px; vertical-align: middle; margin-right: 6px; }
+.key .m { background: var(--red); } .key .o { background: var(--grey); } .key .k { background: var(--ink); }
+canvas.fig { width: 100%; display: block; background: var(--soft); }
+.ctrl { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; margin-top: 10px; font: 13px var(--mono); color: var(--mute); }
+.ctrl select, .ctrl button { font: 13px var(--mono); color: var(--ink); background: var(--paper); border: 1px solid var(--rule); padding: 5px 10px; border-radius: 0; cursor: pointer; }
+
+/* syllables */
+.smapctl { justify-content: space-between; margin: 26px 0 10px; }
+.seg { display: inline-flex; } .seg button { border-right-width: 0; } .seg button:last-child { border-right-width: 1px; }
+.seg button[aria-checked=true] { background: var(--ink); color: var(--paper); }
+.smgrid { display: grid; grid-template-columns: minmax(0, 180px) minmax(0, 1fr); gap: 20px; align-items: start; }
+#sylmapc { width: 100%; display: block; aspect-ratio: 3 / 2; touch-action: none; cursor: crosshair; background: var(--soft); }
+.smhint { margin-top: 6px; }
+.slist button i { display: inline-block; width: 8px; height: 8px; margin-right: 8px; vertical-align: 1px; }
+.lens { margin-top: 22px; }
+.lens .three video, .lens .three canvas { aspect-ratio: 3 / 4; object-fit: cover; width: 100%; display: block; }
+#lensFig { margin-top: 12px; }
+.syl { display: grid; grid-template-columns: minmax(0, 210px) minmax(0, 1fr); gap: 26px; margin-top: 26px; align-items: start; }
+.slist { border-top: 1px solid var(--rule); }
+.slist button { display: block; width: 100%; text-align: left; background: none; border: 0; border-bottom: 1px solid var(--rule); padding: 9px 2px; font: 15px var(--sans); color: var(--ink2); cursor: pointer; }
+.slist button span { display: block; font: 12px var(--mono); color: var(--mute); }
+.slist button[aria-selected=true] { color: var(--red); }
+.three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.three video { aspect-ratio: 3 / 4; object-fit: cover; }
+.methods dt { font: 600 16px var(--sans); color: var(--ink); margin-top: 26px; }
+.methods dd { margin: 6px 0 0; color: var(--ink2); }
+.methods ul { padding-left: 18px; margin: 8px 0 0; } .methods li { margin-bottom: 6px; }
+/* section heads */
+.intro { font-size: 18px; color: var(--ink); margin: 8px 0 10px; }
+ul.keys { list-style: none; padding: 0; margin: 0 0 8px; border-top: 1px solid var(--rule); }
+ul.keys li { padding: 10px 0 10px 22px; border-bottom: 1px solid var(--rule); position: relative; color: var(--ink2); }
+ul.keys li::before { content: ''; position: absolute; left: 2px; top: 19px; width: 8px; height: 8px; background: var(--red); }
+ul.keys li b { color: var(--ink); font-weight: 600; }
+blockquote.pull { margin: 40px 0 24px; padding: 0; font: 600 clamp(28px, 4.6vw, 42px)/1.12 var(--sans); letter-spacing: -1.2px; color: var(--ink); }
+blockquote.pull em { font-style: normal; color: var(--red); }
+blockquote.pull cite { display: block; font: 14px var(--mono); font-style: normal; color: var(--mute); letter-spacing: 0; margin-top: 12px; }
+#gnext { display: block; width: 100%; margin-top: 12px; padding: 16px; font: 600 18px var(--sans); }
+h1.sect { font: 600 clamp(30px, 5vw, 44px)/1.08 var(--sans); letter-spacing: -1.5px; margin: 96px 0 12px; padding-top: 32px; border-top: 1px solid var(--rule); }
+p.big { font-size: 18px; color: var(--ink2); margin: 0 0 16px; }
+p.big b { font-weight: 600; color: var(--ink); }
+p.big span { display: block; font: 13px var(--mono); color: var(--mute); margin-top: 6px; }
+.finding > video { width: 100%; display: block; background: #111; margin-bottom: 12px; }
+.opts4 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+.opts4 button { font: 500 15px var(--sans); text-align: left; padding: 12px 14px; border: 1px solid var(--rule); background: var(--paper); color: var(--ink); cursor: pointer; border-radius: 0; }
+.opts4 button span { display: block; font: 12px var(--mono); color: var(--mute); margin-top: 2px; }
+.opts4 button:hover { border-color: var(--ink); }
+.opts4 button.right { border-color: var(--red); background: #fdeeee; } .opts4 button.wrong { opacity: .45; }
+
+/* stat cards */
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin: 26px 0; }
+.stats > div { background: var(--paper); padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 6px; }
+.stats b { font: 600 32px/1 var(--sans); letter-spacing: -1px; color: var(--red); }
+.stats b small { font: 400 14px var(--mono); color: var(--mute); letter-spacing: 0; }
+.stats span { font-size: 14px; line-height: 1.35; color: var(--ink); }
+.stats i { font: 12px var(--mono); font-style: normal; color: var(--mute); }
+.reel { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.reel figure { margin: 0; } .reel video { aspect-ratio: 560 / 460; }
+.minis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 14px; margin: 18px 0; }
+.minis figure { margin: 0; padding: 8px; }
+.mini svg.era .tk { font-size: 11px; } .mini svg.era .axl { font-size: 13px !important; font-weight: 500; }
+.moved { display: grid; grid-template-columns: minmax(0, 1fr); gap: 34px; margin-top: 20px; }
+.mv h3 { margin: 0 0 4px; } .mv .num { font: 600 26px var(--sans); letter-spacing: -.8px; color: var(--red); } .mv .num small { font: 13px var(--mono); color: var(--mute); }
+.mv .row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 260px); gap: 14px; align-items: center; margin-top: 8px; }
+
+/* the game */
+.stage { position: relative; background: #f7f6f2; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid var(--rule); }
+.stage canvas, .stage video { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.stage video { opacity: 0; transition: opacity .7s ease; object-fit: cover; }
+.stage.revealed video { opacity: 1; }
+.stage .hud { position: absolute; left: 16px; right: 16px; top: 12px; display: flex; justify-content: space-between; align-items: baseline; font: 13px var(--mono); color: var(--mute); z-index: 2; pointer-events: none; }
+.stage .hud b { font: 600 34px/1 var(--sans); color: var(--ink); letter-spacing: -1px; }
+.stage.revealed .hud, .stage.revealed .hud b { color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,.6); }
+.stage .cover { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; z-index: 3; text-align: center; color: var(--ink); background: rgba(247,246,242,.72); }
+.stage .cover h3 { font: 600 clamp(24px, 4vw, 36px)/1.1 var(--sans); letter-spacing: -1px; margin: 0; }
+.stage .cover p { color: var(--ink2); margin: 0; font-size: 15px; max-width: 30em; }
+.gbtn { font: 500 15px var(--sans); padding: 10px 22px; border: 1px solid var(--ink); background: var(--ink); color: var(--paper); cursor: pointer; border-radius: 0; }
+.gbtn.ghost { background: transparent; color: #fff; }
+.ask { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; margin-top: 12px; min-height: 46px; }
+.ask .q { font: 600 18px var(--sans); }
+.ask .opts { display: flex; gap: 8px; }
+.ask .opts button { font: 500 15px var(--sans); padding: 9px 16px; border: 1px solid var(--ink); background: var(--paper); color: var(--ink); cursor: pointer; border-radius: 0; display: inline-flex; align-items: center; gap: 8px; }
+.ask .opts button i { width: 12px; height: 12px; display: inline-block; }
+.ask .opts button:hover { background: var(--ink); color: var(--paper); }
+.verdict { font-size: 16px; color: var(--ink2); margin: 0; }
+.verdict b { color: var(--ink); }
+
+@media (max-width: 640px) {
+  body { padding-inline: 16px; font-size: 16px; }
+  .mark { margin-bottom: 40px; } h1 { font-size: 28px; }
+  .grid { grid-template-columns: 1fr; } .syl { grid-template-columns: 1fr; } .smgrid { grid-template-columns: 1fr; } .slist { display: flex; flex-wrap: wrap; gap: 4px 12px; border: 0; } .slist button { width: auto; border: 0; padding: 2px 0; } .slist button span { display: none; }
+  .two { grid-template-columns: 1fr; }
+  .tabs button { padding: 8px 12px; font-size: 14px; }
+  .stats { grid-template-columns: 1fr; } .opts4 { grid-template-columns: 1fr; } .reel { grid-template-columns: 1fr; } .minis { grid-template-columns: repeat(2, minmax(0, 1fr)); } .mv .row { grid-template-columns: 1fr; }
+  .hero .in { padding: 22px 16px 30px; } .hero .whisper { right: 16px; } .stage .hud b { font-size: 24px; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
+</style>
+
+<div class="wrap">
+<header class="hero">
+  <canvas id="heroc" aria-hidden="true"></canvas>
+  <div class="in">
+    <span></span>
+    <div>
+      <div class="meta">Sports / Machine learning&nbsp;&nbsp;3 October 2026</div>
+      <h1>McGregor,<br>Frame by Frame</h1>
+      <p class="byline">Nico Christie and Peter Wang</p>
+    </div>
+  </div>
+  <div class="whisper">UFC 205, round 1: the left that dropped Alvarez. Tracked joints only.</div>
+</header>
+<div class="after-hero"></div>
+<p class="lede">Every live second of fifteen McGregor fights, 2012 to 2021, measured frame by frame against the man in front of him.</p>
+
+<div class="tabs" role="tablist" aria-label="Sections">
+  <button role="tab" aria-selected="true" aria-controls="t-left" id="b-left">The left hand</button>
+  <button role="tab" aria-selected="false" aria-controls="t-stance" id="b-stance">Karate Stance McGregor</button>
+  <button role="tab" aria-selected="false" aria-controls="t-late" id="b-late">Cardio issues?</button>
+  <button role="tab" aria-selected="false" aria-controls="t-play" id="b-play">Can you guess the fight?</button>
+  <button role="tab" aria-selected="false" aria-controls="t-syl" id="b-syl">Syllables</button>
+  <button role="tab" aria-selected="false" aria-controls="t-methods" id="b-methods">Methods</button>
+</div>
+
+<!-- STANCE -->
+<section role="tabpanel" id="t-stance" aria-labelledby="b-stance" hidden>
+  <p class="intro">The karate stance, the one Lyoto Machida, Stephen "Wonderboy" Thompson and Michael "Venom" Page made famous in MMA, rests on three things: stand side-on to give a narrow target and a long reach, keep the head tall to see everything coming, and let the hands hang low. McGregor brought it from taekwondo and kickboxing, and it noticeably faded away over the course of his career.</p>
+  <ul class="keys">
+    <li><b>Head higher than every opponent</b>: 17 cm above the shoulders against 12, in all 14 fights.</li>
+    <li><b>Hands lower</b>: 23 cm below the shoulders against 18, in 12 of 14.</li>
+    <li><b>More bladed until Diaz</b>: about 10° more side-on in 6 of 7 early fights; by 2021 he stood squarer.</li>
+  </ul>
+
+  <div class="finding">
+    <h2>His head sat higher than every opponent's</h2>
+    {{head_video}}
+    <figure class="box">{{head_chart}}<div class="key"><span><i class="m"></i>McGregor</span><span><i class="o"></i>opponents</span></div></figure>
+  </div>
+
+  <div class="finding">
+    <h2>His hands hung lower than his opponents'</h2>
+    {{hands_video}}
+    <figure class="box">{{guard_chart}}<div class="key"><span><i class="m"></i>McGregor</span><span><i class="o"></i>opponents</span></div></figure>
+  </div>
+
+  <div class="finding">
+    <h2>He stood more side-on, until Diaz</h2>
+    {{blade_video}}
+    <figure class="box">{{blade_chart}}<div class="key"><span><i class="m"></i>McGregor</span><span><i class="o"></i>opponents</span></div></figure>
+  </div>
+
+  <h1 class="sect">Did the karate stance go away?</h1>
+  <p class="say">Partly. By the Poirier fights he stood squarer, leaned in more and moved his feet less. The head stayed high. <span>2012–15 against the two 2021 fights: two fights is a pattern, not proof.</span></p>
+  {{moved}}
+
+  <h3>Everything else held steady</h3>
+  {{grid}}
+</section>
+
+<!-- LEFT HAND -->
+<section role="tabpanel" id="t-left" aria-labelledby="b-left">
+  <ul class="keys">
+    <li><b>3–4x better at pull and slip counters</b>: after a punch missed him he fired back within 0.6 s 15 % of the time; his opponents, 4 %.</li>
+    <li><b>Conor threw the rear straight 3x as often</b>: 2.5 straight lefts a minute against 0.8, more in every fight.</li>
+    <li><b>Half his punches came from the back hand</b>, against about a third for his opponents.</li>
+    <li><b>"Timing beats speed"</b>: at 13 mph at the fist, his left was no faster than the men he fought.</li>
+  </ul>
+  <div class="finding">
+    <h2>3–4x better at pull and slip counters</h2>
+    {{counter_video}}
+    <figure class="box">{{ctr_chart}}<div class="key"><span><i class="m"></i>McGregor</span><span><i class="o"></i>opponents</span></div></figure>
+    <p class="small">The pull itself was ordinary: of punches that would have landed, he made {{ev_pull_m}} miss by pulling, his opponents {{ev_pull_o}}, with the same few centimetres to spare. The difference is the second beat.</p>
+    <figure class="box">{{counter_traces}}<figcaption>The pull counter is two beats: back, then {{pull_ms}} ms later the left. The slip counter is one motion: the left goes as the head drops. Medians, with the middle half shaded.</figcaption></figure>
+  </div>
+
+  <div class="finding">
+    <h2>Conor threw the rear straight 3x as often</h2>
+    <div class="reel">{{drops_two}}</div>
+    <figure class="box">{{rates}}<div class="key"><span><i class="m"></i>McGregor's left</span><span><i class="o"></i>opponent's rear straight</span></div></figure>
+  </div>
+
+  <div class="finding">
+    <h2>Seventy lefts, one shape, for a decade</h2>
+    {{study_video}}
+    <figcaption>Left: his lefts, one after another, from 2012 to 2018. Right: every straight left he threw, as tracked joints, moving in step; red is the median, black the one playing.</figcaption>
+  </div>
+
+  <div class="finding">
+    <h2>Half of everything he threw was the back hand</h2>
+    {{rear_video}}
+    <figure class="box">{{rear_chart}}<div class="key"><span><i class="m"></i>McGregor</span><span><i class="o"></i>opponents</span></div></figure>
+  </div>
+
+  <div class="finding">
+    <h2>He did not become a headhunter over his career</h2>
+    {{era_video}}
+    <div class="grid" style="margin-top:14px">
+      <figure class="cell box">{{counters_late}}<figcaption>Lefts thrown as counters: {{cs_e}} % → {{cs_l}} % (corrected p {{cs_h}}).</figcaption></figure>
+      {{hunt_one}}
+    </div>
+  </div>
+  <div class="finding">
+    <blockquote class="pull">“Precision beats power, and <em>timing beats speed</em>.”<cite>Conor McGregor</cite></blockquote>
+    <h2>His left was no faster than theirs</h2>
+    {{speed_video}}
+    <figure class="box">{{speed_chart}}<div class="key"><span><i class="m"></i>his left, median per fight</span><span><i class="o"></i>opponent's rear straight</span></div><figcaption>Peak fist speed in the picture plane: a floor on the real speed, the same floor for both men.</figcaption></figure>
+  </div>
+
+</section>
+
+<!-- LATE ROUNDS -->
+<section role="tabpanel" id="t-late" aria-labelledby="b-late" hidden>
+  <p class="intro">The other half of the legend: sharp for eight minutes, then tired. Diaz walked through him, Khabib ground him down. We put every second of his long fights on the fight clock and followed his feet and hands, against the man in front of him in the same minutes.</p>
+  <ul class="keys">
+    <li><b>No minute-8 cliff</b>: across his long fights his steps a minute barely moved, 60 to 53.</li>
+    <li><b>The hands go first, and early</b>: about 3 cm lower every five minutes, from minute 2.</li>
+    <li><b>Diaz 2 is the exception</b>: from 60 steps a minute to under 30, while Diaz climbed toward 80.</li>
+  </ul>
+  <p class="small" style="margin-top:20px">Steps a minute through every fight that went long. Red: McGregor; grey: opponent.</p>
+  <div class="minis">{{late_grid}}</div>
+
+  <div class="finding">
+    <h2>His feet didn't fade at minute 8</h2>
+    <figure class="box">{{steps_dumb}}<div class="key"><span><i class="m"></i>McGregor</span><span><i class="o"></i>opponent</span></div></figure>
+    <figure class="box">{{steps_break}}<figcaption>Best-fitting break: minute {{s_tau}}, which only Diaz 2 reaches; anywhere from {{s_lo}} to {{s_hi}} fits almost as well. No sign of a minute-8 fade in his feet.</figcaption></figure>
+  </div>
+
+  <div class="finding">
+    <h2>His hands dropped first, from minute 2</h2>
+    {{late_hands_video}}
+    <figure class="box">{{guard_break}}</figure>
+  </div>
+
+  <div class="finding">
+    <h2>Diaz 2: the one fight he truly faded</h2>
+    {{late_steps_video}}
+    <figure class="box">{{d2_steps}}<div class="key"><span><i class="m"></i>McGregor</span><span><i class="o"></i>Nate Diaz</span></div></figure>
+  </div>
+</section>
+
+<!-- PLAY -->
+<section role="tabpanel" id="t-play" aria-labelledby="b-play" hidden>
+  <p class="intro">Ten fights, one exchange from each, drawn only from the tracked joints. McGregor wears the crown.</p>
+  <ul class="keys">
+    <li><b>Read the clues</b>: the opponent's build, stance and southpaw or orthodox lead, and McGregor's own stance as it changed.</li>
+    <li><b>Then watch the real footage</b>: it fades in once you answer.</li>
+  </ul>
+  <div class="stage" id="stage" style="margin-top:22px">
+    <canvas id="gamec" aria-label="McGregor in red and his opponent in blue, drawn from their tracked joints"></canvas>
+    <video id="gamev" muted playsinline loop preload="none" aria-label="The real footage"></video>
+    <div class="hud"><span id="ground"></span><span><b id="gscore">0 / 0</b></span></div>
+    <div class="cover" id="gcover"><h3>Which Conor fight is this?</h3><p>Ten fights, one exchange each. McGregor in red.</p><button class="gbtn" id="gplay">Play</button></div>
+  </div>
+  <div class="opts4" id="gask"></div>
+  <p class="verdict" id="gverdict"></p>
+</section>
+
+<!-- SYLLABLES -->
+<section role="tabpanel" id="t-syl" aria-labelledby="b-syl" hidden>
+  {{syllables}}
+</section>
+
+<!-- METHODS -->
+<section role="tabpanel" id="t-methods" aria-labelledby="b-methods" hidden>
+  <dl class="methods">
+    <dt>The footage</dt>
+    <dd>Fifteen fights, 2012 to 2021: three Cage Warriors title fights and twelve UFC fights, from official UFC, Fight Pass and broadcaster uploads (two fan uploads where no official one exists). Only live action counts: the fight clock is detected on screen in every frame, so walkouts, replays, slow motion and breaks drop out. The Aldo fight survives only as a replay package and is left out.</dd>
+    <dt>Finding the fighters</dt>
+    <dd>A YOLOv8 detector fine-tuned on UFC footage finds both men in each frame, ignoring the referee and crowd. Who is who comes from the colour of their shorts, held through clinches by following each body from frame to frame.</dd>
+    <dt>The skeletons</dt>
+    <dd>RTMW-x, a whole-body pose model (via rtmlib), places 133 points on each fighter: body, feet, hands and face. It runs every frame at the broadcast's own rate (30 a second). Points near the frame edge or below a confidence threshold are treated as unseen; nothing is drawn or measured that the model didn't see.</dd>
+    <dt>Units</dt>
+    <dd>Centimetres come from McGregor's height (175 cm): his leg is about 49 % of it, which sets his torso at about {{torso_cm}} cm. Speeds are the fist's peak speed in the picture, so they read a little low, equally for both men.</dd>
+    <dt>Punches, steps and counters</dt>
+    <dd>A punch is the arm opening fast toward the opponent; straight or hook from the shape of the fist's path (about three in four detections confirmed as committed punches by eye). A step is one foot moving against the other, so camera pans can't fake one. A pull or slip is the head moving back or down at least 5 cm against the hips while a punch comes in; a counter is a punch of his own within 0.6 s.</dd>
+    <dt>The comparison and the bar</dt>
+    <dd>Every number is McGregor against the man in front of him, in the same frames and under the same camera, with zoom, viewing angle and distance regressed out. Each fight counts once. A finding must survive Holm correction across everything tested in its family and be at least 0.4 of the normal moment-to-moment spread; others are labelled as patterns.</dd>
+    <dt>The fade</dt>
+    <dd>Every half-minute of standing footage in his long fights, placed on the fight clock, fitted with a flat-then-declining line whose starting minute the data chooses. Whole fights are resampled 2,000 times to see how stable that minute is.</dd>
+    <dt>Syllables</dt>
+    <dd>keypoint-MoSeq (Weinreb et al., 2024), a model from behavioural neuroscience, fitted to 17 body points on side-on footage only. The map is a t-SNE of each occurrence's model state; names were given by watching the clips.</dd>
+    <dt>Limits</dt>
+    <dd>Fifteen fights is not many, and a broadcast is a flat picture: movement toward the camera is invisible and whether a punch landed can't be measured. Everything was checked by eye on samples, not hand-labelled. Full rules and every test are in the <a href="https://github.com/nicodunks/mma-frame-by-frame" target="_blank" rel="noopener">code</a>.</dd>
+  </dl>
+</section>
+</div>
+
+<script>
+(function () {
+  const BONES = [[5,6],[5,7],[7,9],[6,8],[8,10],[5,11],[6,12],[11,12],[11,13],[13,15],[12,14],[14,16],[15,19],[19,17],[16,22],[22,20]];
+  const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // tabs (with #hash deep links)
+  const tabs = [...document.querySelectorAll('.tabs [role=tab]')];
+  function show(id) { tabs.forEach(b => { const on = b.getAttribute('aria-controls') === id; b.setAttribute('aria-selected', on); document.getElementById(b.getAttribute('aria-controls')).hidden = !on; }); }
+  tabs.forEach(b => b.onclick = () => { show(b.getAttribute('aria-controls')); history.replaceState(null, '', '#' + b.id.slice(2)); });
+  const h = location.hash.slice(1); if (h && document.getElementById('t-' + h)) show('t-' + h);
+  // pair tabs
+  document.querySelectorAll('.pairs').forEach(g => g.querySelectorAll('.ptabs button').forEach(b => b.onclick = () => {
+    g.querySelectorAll('.ptabs button').forEach(x => x.setAttribute('aria-selected', x === b));
+    g.querySelectorAll('.pp').forEach(p => { p.hidden = p.dataset.i !== b.dataset.i; p.querySelectorAll('video').forEach(v => p.hidden ? v.pause() : v.play().catch(() => {})); });
+  }));
+  // videos play when on screen
+  const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && !e.target.closest('[hidden]') ? e.target.play().catch(() => {}) : e.target.pause()), { threshold: .5 });
+  const watch = () => document.querySelectorAll('video').forEach(v => io.observe(v)); watch();
+
+  function fig(c, pose, col, s, ox, oy, w, alpha) {
+    if (!pose) return; c.globalAlpha = alpha; c.strokeStyle = col; c.fillStyle = col; c.lineWidth = w; c.lineCap = 'round'; c.lineJoin = 'round';
+    const P = i => pose[i] && pose[i][0] != null ? [ox + pose[i][0] * s, oy + pose[i][1] * s] : null;
+    for (const [a, b] of BONES) { const p = P(a), q = P(b); if (p && q) { c.beginPath(); c.moveTo(...p); c.lineTo(...q); c.stroke(); } }
+    const f = [0,1,2,3,4].map(P).filter(Boolean);
+    if (f.length >= 1) { const x = f.reduce((a, p) => a + p[0], 0) / f.length, y = f.reduce((a, p) => a + p[1], 0) / f.length; c.beginPath(); c.arc(x, y, .19 * s, 0, 7); c.stroke(); }
+    c.globalAlpha = 1;
+  }
+  function med(poses) {
+    const out = [];
+    for (let i = 0; i < 23; i++) { const xs = [], ys = [];
+      for (const p of poses) if (p && p[i] && p[i][0] != null) { xs.push(p[i][0]); ys.push(p[i][1]); }
+      if (xs.length < Math.max(1, poses.length * .15)) { out.push(null); continue; } xs.sort((a, b) => a - b); ys.sort((a, b) => a - b); out.push([xs[xs.length >> 1], ys[ys.length >> 1]]); }
+    return out;
+  }
+  function floor(c, cv, y) { c.strokeStyle = css('--rule'); c.lineWidth = 2; c.beginPath(); c.moveTo(0, y); c.lineTo(cv.width, y); c.stroke(); }
+  let k = 0, acc = 0, last = performance.now();
+  let CL = null, RP = null, SY = null, cur = 0;
+  // crowd: early (ink) left, late (red) right
+  function crowd() {
+    const cv = document.getElementById('crowd'); if (!CL || !cv || cv.closest('[hidden]')) return;
+    const c = cv.getContext('2d'); c.clearRect(0, 0, cv.width, cv.height);
+    const s = cv.height / 4.4, oy = cv.height * .41;
+    floor(c, cv, oy + 1.95 * s);
+    for (const [era, ox, col] of [['early', cv.width * .27, css('--ink')], ['late', cv.width * .73, css('--red')]]) {
+      const now = CL[era].runs.map(r => r[k % r.length]);
+      for (const p of now) fig(c, p, col, s, ox, oy, 2, .12);
+      fig(c, med(now), col, s, ox, oy, 5, 1);
+    }
+  }
+  // every left, stacked, with the differences called out on the median figures
+  function stack() {
+    const cv = document.getElementById('stack'); if (!RP || !cv || cv.closest('[hidden]')) return;
+    const c = cv.getContext('2d'); c.clearRect(0, 0, cv.width, cv.height);
+    const n = RP.pre + RP.mid + RP.post, f = Math.floor(k / 1.5) % n;
+    const s = cv.height / 4.6, oy = cv.height * .40, TCM = 47;
+    floor(c, cv, oy + 1.95 * s);
+    const meds = [];
+    for (const [seqs, ox, col, mc] of [[RP.seqs, cv.width * .28, css('--red'), css('--red')], [RP.oseqs, cv.width * .72, css('--grey'), '#6f6f6f']]) {
+      for (const q of seqs) fig(c, q.me[f], col, s, ox, oy, 2, Math.max(.05, Math.min(.25, 3 / seqs.length)));
+      const m = med(seqs.map(q => q.me[f])); fig(c, m, mc, s, ox, oy, 5, 1); meds.push([m, ox, mc]);
+    }
+    // callouts: head above the shoulder line, hands below it, how far the fist is out at the punch
+    c.font = `500 26px ${css('--mono')}`;
+    for (const [m, ox, col] of meds) {
+      const P = i => m[i] ? [ox + m[i][0] * s, oy + m[i][1] * s, m[i]] : null;
+      const sh = P(5) && P(6) ? (m[5][1] + m[6][1]) / 2 : null;
+      const face = [0, 1, 2, 3, 4].map(i => m[i]).filter(Boolean);
+      const lab = (txt, x, y) => { c.fillStyle = col; c.textAlign = 'left'; c.fillText(txt, x, y); };
+      if (sh != null && face.length) { const hy = face.reduce((a, p) => a + p[1], 0) / face.length; const hx = face.reduce((a, p) => a + p[0], 0) / face.length;
+        c.strokeStyle = col; c.lineWidth = 1.5; c.setLineDash([4, 6]); c.beginPath(); c.moveTo(ox + (hx - .9) * s, oy + sh * s); c.lineTo(ox + (hx + .9) * s, oy + sh * s); c.stroke(); c.setLineDash([]);
+        lab(`head +${Math.round((sh - hy) * TCM)} cm`, ox + (hx + .45) * s, oy + (hy - .15) * s); }
+      const wr = [9, 10].map(i => m[i]).filter(Boolean);
+      if (sh != null && wr.length && f < RP.pre) { const wy = Math.max(...wr.map(p => p[1])); lab(`hands ${Math.round((sh - wy) * TCM)} cm`, ox + .55 * s, oy + (wy + .1) * s); }
+      if (f >= RP.pre && m[9] && m[5] && m[6]) { const reach = Math.abs(m[9][0] - (m[5][0] + m[6][0]) / 2); lab(`fist ${Math.round(reach * TCM)} cm out`, ox - .2 * s, oy - 1.25 * s); }
+    }
+    c.fillStyle = css('--mute'); c.font = `400 24px ${css('--mono')}`; c.textAlign = 'center';
+    c.fillText('McGregor', cv.width * .28, cv.height - 18); c.fillText('his opponents', cv.width * .72, cv.height - 18); c.textAlign = 'left';
+    document.getElementById('stackPhase').textContent = f < RP.pre ? 'build-up' : f < RP.pre + RP.mid ? 'the punch' : 'follow-through';
+  }
+  // syllables: the map (zoom, pan, a circle you drop, drag and size), its lens, and the usage chart
+  const SYLC = ['#c8102e', '#e8a33d', '#2f7f8a', '#3d5a99', '#7a4f9a', '#6a9a55', '#b36b4a', '#8c8c8c'];
+  const yearCol = y => { const u = Math.min(1, Math.max(0, (y - 2012) / 9)); const a = [200, 200, 200], b = [17, 17, 17]; return `rgb(${a.map((v, i) => Math.round(v + (b[i] - v) * u)).join(',')})`; };
+  let INST = null, instReq = false, SMAP = null;
+  function decode(flat) {
+    const COCO = [0, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20, 22], out = [];
+    for (let f = 0; f < 12; f++) { const pose = new Array(23).fill(null);
+      COCO.forEach((c, j) => { const x = flat[(f * 17 + j) * 2], y = flat[(f * 17 + j) * 2 + 1]; if (x !== -9999 && y !== -9999) pose[c] = [x / 100, y / 100]; });
+      out.push(pose); }
+    return out;
+  }
+  function sylMap() {
+    const el = document.getElementById('sylmap'); if (!SY || !el) return;
+    const S = SY.syllables[cur], F = SY.fights, W = 640, H = 230, L = 46, R = 16, T = 14, B = 34;
+    const yr = d => +d.slice(0, 4) + (+d.slice(5, 7) - 1) / 12, x0 = 2012, x1 = 2021.5;
+    const top = Math.max(.1, Math.ceil(Math.max(...S.per_fight.filter(v => v != null)) * 10 + .5) / 10);
+    const X = v => L + (yr(v) - x0) / (x1 - x0) * (W - L - R), Y = v => T + (1 - v / top) * (H - T - B);
+    let o = '';
+    for (let v = 0; v <= top + 1e-9; v += top / 2) o += `<line x1="${L}" x2="${W - R}" y1="${Y(v)}" y2="${Y(v)}" class="g"/><text x="${L - 8}" y="${Y(v) + 4}" class="tk" text-anchor="end">${Math.round(v * 100)} %</text>`;
+    for (const y of [2012, 2014, 2016, 2018, 2020]) o += `<text x="${X(y + '-01')}" y="${H - 10}" class="tk" text-anchor="middle">${y}</text>`;
+    const xs = X('2016-01'); o += `<line x1="${xs}" x2="${xs}" y1="${T}" y2="${H - B}" class="g" stroke-dasharray="3 4"/>`;
+    o += `<line x1="${X('2012-01')}" x2="${xs}" y1="${Y(S.early)}" y2="${Y(S.early)}" class="ln m" style="stroke-width:1.5;opacity:.6"/><line x1="${xs}" x2="${X('2021-07')}" y1="${Y(S.late)}" y2="${Y(S.late)}" class="ln m" style="stroke-width:1.5;opacity:.6"/>`;
+    F.forEach((f, i) => { const v = S.per_fight[i]; if (v == null) return; o += `<circle cx="${X(f.date)}" cy="${Y(v)}" r="5" class="pt m"><title>${f.date.slice(0, 4)} vs ${f.opponent}: ${(v * 100).toFixed(0)} %</title></circle>`; });
+    el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" class="era" role="img" aria-label="Share of his time in ${S.name}, fight by fight">${o}</svg>`;
+  }
+  function detail(i) {
+    if (i === cur && document.getElementById('sylname').dataset.done) return;
+    cur = i; const S = SY.syllables[i]; document.getElementById('sylname').dataset.done = 1;
+    document.getElementById('sylname').textContent = S.name;
+    document.getElementById('syldesc').textContent = `${S.desc} ${(S.share * 100).toFixed(0)} % of his time on his feet; a typical one lasts ${S.median_s.toFixed(1)} s.`;
+    document.getElementById('syluse').textContent = `${(S.early * 100).toFixed(0)} % of his time in 2012–15, ${(S.late * 100).toFixed(0)} % in 2016–21 · corrected p ${S.holm_p.toFixed(2)}.`;
+    document.querySelectorAll('#slist button').forEach((b, j) => b.setAttribute('aria-selected', j === i));
+    sylMap();
+  }
+  function setupMap() {
+    const cv = document.getElementById('sylmapc'); if (!cv || !SY) return;
+    const P = SY.map, order = SY.syllables.map(s => s.id), idx = id => order.indexOf(id);
+    const sp = P.map(p => p[4]).filter(v => v != null).sort((a, b) => a - b), sLo = sp[Math.floor(sp.length * .05)], sHi = sp[Math.floor(sp.length * .95)];
+    const speedCol = v => { if (v == null) return '#ccc'; const u = Math.min(1, Math.max(0, (v - sLo) / (sHi - sLo))); const a = [246, 200, 201], b = [138, 13, 18]; return `rgb(${a.map((c, i) => Math.round(c + (b[i] - c) * u)).join(',')})`; };
+    const st = { cx: .5, cy: .5, z: 1, mode: 'syl', circle: null, hi: null };
+    const PAD = 40;
+    const toS = (x, y) => [((x - st.cx) * st.z + .5) * (cv.width - 2 * PAD) + PAD, ((y - st.cy) * st.z + .5) * (cv.height - 2 * PAD) + PAD];
+    const toM = (sx, sy) => [(((sx - PAD) / (cv.width - 2 * PAD)) - .5) / st.z + st.cx, (((sy - PAD) / (cv.height - 2 * PAD)) - .5) / st.z + st.cy];
+    const rPx = () => st.circle ? st.circle.r * st.z * (cv.width - 2 * PAD) : 0;
+    const colOf = p => st.mode === 'syl' ? SYLC[idx(p[2])] : st.mode === 'year' ? yearCol(p[3]) : speedCol(p[4]);
+    const cents = SY.syllables.map(S => { const q = P.filter(p => p[2] === S.id); const xs = q.map(p => p[0]).sort((a, b) => a - b), ys = q.map(p => p[1]).sort((a, b) => a - b);
+      return [xs[xs.length >> 1], ys[ys.length >> 1]]; });
+    function key() {
+      const el = document.getElementById('smkey');
+      el.innerHTML = st.mode === 'syl' ? '' : st.mode === 'year'
+        ? `<span><i style="background:${yearCol(2012)}"></i>2012</span><span><i style="background:${yearCol(2016)}"></i>2016</span><span><i style="background:${yearCol(2021)}"></i>2021</span>`
+        : `<span><i style="background:${speedCol(sLo)}"></i>${Math.round(sLo)} cm/s</span><span><i style="background:${speedCol((sLo + sHi) / 2)}"></i>${Math.round((sLo + sHi) / 2)}</span><span><i style="background:${speedCol(sHi)}"></i>${Math.round(sHi)} cm/s body speed</span>`;
+      document.querySelectorAll('#slist button i').forEach((dot, j) => dot.style.background = st.mode === 'syl' ? SYLC[j] : 'transparent');
+    }
+    function draw() {
+      const c = cv.getContext('2d'); c.clearRect(0, 0, cv.width, cv.height);
+      c.fillStyle = css('--soft'); c.fillRect(0, 0, cv.width, cv.height);
+      const rr = Math.max(4.5, Math.min(9, 4.8 * Math.sqrt(st.z)));
+      for (const p of P) { const [x, y] = toS(p[0], p[1]); if (x < -10 || y < -10 || x > cv.width + 10 || y > cv.height + 10) continue;
+        c.globalAlpha = st.hi == null || p[2] === st.hi ? .85 : .22; c.fillStyle = colOf(p); c.beginPath(); c.arc(x, y, rr, 0, 7); c.fill(); }
+      c.globalAlpha = 1;
+      if (st.mode === 'syl') { c.font = `500 22px ${css('--mono')}`; c.textAlign = 'center';
+        const boxes = [];
+        SY.syllables.forEach((S, j) => { let [x, y] = toS(...cents[j]); const w = c.measureText(S.name).width + 8;
+          while (boxes.some(b => Math.abs(b[0] - x) < (b[2] + w) / 2 && Math.abs(b[1] - y) < 24)) y += 24;
+          boxes.push([x, y, w]); c.lineWidth = 5; c.strokeStyle = css('--soft'); c.strokeText(S.name, x, y); c.fillStyle = css('--ink'); c.fillText(S.name, x, y); }); }
+      if (st.circle) { const [x, y] = toS(st.circle.x, st.circle.y), r = rPx();
+        c.lineWidth = 2.5; c.strokeStyle = css('--ink'); c.fillStyle = 'rgba(17,17,17,.04)'; c.beginPath(); c.arc(x, y, r, 0, 7); c.fill(); c.stroke();
+        c.fillStyle = css('--paper'); c.beginPath(); c.arc(x + r, y, 9, 0, 7); c.fill(); c.stroke(); }
+    }
+    let lensTimer = 0;
+    function lens() {
+      clearTimeout(lensTimer); lensTimer = setTimeout(() => {
+        const say = document.getElementById('lensSay'), clips = document.getElementById('lensClips');
+        if (!st.circle) { SMAP.inside = []; say.textContent = 'Click a dot, or pick a syllable.'; clips.innerHTML = ''; return; }
+        const d = P.map((p, i) => [Math.hypot(p[0] - st.circle.x, p[1] - st.circle.y), i]).filter(([dd]) => dd <= st.circle.r).sort((a, b) => a[0] - b[0]);
+        SMAP.inside = d.map(([, i]) => i);
+        if (!d.length) { say.textContent = 'Nothing in the circle. Drag it over some dots.'; clips.innerHTML = ''; return; }
+        const counts = {}; d.forEach(([, i]) => counts[P[i][2]] = (counts[P[i][2]] || 0) + 1);
+        const top = Object.entries(counts).sort((a, b) => b[1] - a[1])[0], name = SY.syllables[idx(+top[0])].name;
+        const yrs = d.map(([, i]) => P[i][3]), early = yrs.filter(y => y < 2016).length;
+        say.innerHTML = `<b>${d.length} movement${d.length > 1 ? 's' : ''} in the circle.</b> <span>Mostly ${name.charAt(0).toLowerCase() + name.slice(1)} (${Math.round(top[1] / d.length * 100)} %) · ${early} from 2012–15, ${d.length - early} from 2016–21.</span>`;
+        detail(idx(+top[0]));
+        const withClip = d.filter(([, i]) => P[i][5]).slice(0, 3), cards = withClip.concat(d.filter(([, i]) => !P[i][5]).slice(0, 3 - withClip.length));
+        clips.innerHTML = cards.map(([, i]) => P[i][5]
+          ? `<figure style="margin:0"><video src="${P[i][5]}#t=0.1" muted loop playsinline autoplay preload="metadata"></video><figcaption>${P[i][6]}</figcaption></figure>`
+          : `<figure style="margin:0"><canvas class="fig lensSk" data-i="${i}" width="300" height="400"></canvas><figcaption>${P[i][6]}</figcaption></figure>`).join('');
+        clips.querySelectorAll('video').forEach(v => v.play().catch(() => {}));
+      }, 60);
+    }
+    function setCircle(x, y, r) { st.circle = { x, y, r }; draw(); lens(); if (!INST && !instReq) { instReq = true; fetch('syllables_inst.json').then(r => r.json()).then(a => { INST = a.map(decode); }); } }
+    const pos = e => { const b = cv.getBoundingClientRect(); return [(e.clientX - b.left) * cv.width / b.width, (e.clientY - b.top) * cv.height / b.height]; };
+    const ptrs = new Map(); let drag = null;
+    cv.addEventListener('pointerdown', e => {
+      cv.setPointerCapture(e.pointerId); ptrs.set(e.pointerId, pos(e));
+      if (ptrs.size === 2) { const [a, b] = [...ptrs.values()]; drag = { mode: 'pinch', d0: Math.hypot(a[0] - b[0], a[1] - b[1]), z0: st.z }; return; }
+      const [sx, sy] = pos(e); let mode = 'pan';
+      if (st.circle) { const [x, y] = toS(st.circle.x, st.circle.y), dd = Math.hypot(sx - x, sy - y), r = rPx();
+        if (Math.abs(dd - r) < 16) mode = 'size'; else if (dd < r) mode = 'move'; }
+      drag = { mode, sx, sy, cx: st.cx, cy: st.cy, moved: false, c0: st.circle && { ...st.circle } };
+    });
+    cv.addEventListener('pointermove', e => {
+      if (!drag) { if (st.circle) { const [sx, sy] = pos(e), [x, y] = toS(st.circle.x, st.circle.y), dd = Math.hypot(sx - x, sy - y), r = rPx();
+        cv.style.cursor = Math.abs(dd - r) < 16 ? 'ew-resize' : dd < r ? 'move' : 'crosshair'; } return; }
+      ptrs.set(e.pointerId, pos(e));
+      if (drag.mode === 'pinch' && ptrs.size === 2) { const [a, b] = [...ptrs.values()]; st.z = Math.min(12, Math.max(1, drag.z0 * Math.hypot(a[0] - b[0], a[1] - b[1]) / drag.d0)); draw(); return; }
+      const [sx, sy] = pos(e); if (Math.hypot(sx - drag.sx, sy - drag.sy) > 4) drag.moved = true;
+      const k_ = 1 / (st.z * (cv.width - 2 * PAD)), ky = 1 / (st.z * (cv.height - 2 * PAD));
+      if (drag.mode === 'pan') { st.cx = drag.cx - (sx - drag.sx) * k_; st.cy = drag.cy - (sy - drag.sy) * ky; draw(); }
+      else if (drag.mode === 'move') { setCircle(drag.c0.x + (sx - drag.sx) * k_, drag.c0.y + (sy - drag.sy) * ky, drag.c0.r); }
+      else if (drag.mode === 'size') { const [x, y] = toS(st.circle.x, st.circle.y); setCircle(st.circle.x, st.circle.y, Math.max(.008, Math.hypot(sx - x, sy - y) * k_)); }
+    });
+    const up = e => {
+      ptrs.delete(e.pointerId);
+      if (drag && drag.mode === 'pan' && !drag.moved) {
+        const [sx, sy] = pos(e); let best = null, bd = 18;
+        P.forEach((p, i) => { const [x, y] = toS(p[0], p[1]), dd = Math.hypot(sx - x, sy - y); if (dd < bd) { bd = dd; best = i; } });
+        if (best != null) { st.hi = null; setCircle(P[best][0], P[best][1], st.circle ? st.circle.r : .05); }
+      }
+      if (!ptrs.size) drag = null;
+    };
+    cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up);
+    cv.addEventListener('wheel', e => { e.preventDefault(); const [sx, sy] = pos(e), [mx, my] = toM(sx, sy);
+      st.z = Math.min(12, Math.max(1, st.z * Math.exp(-e.deltaY * .0015)));
+      const [nx, ny] = toM(sx, sy); st.cx += mx - nx; st.cy += my - ny; draw(); }, { passive: false });
+    document.querySelectorAll('.seg button').forEach(b => b.onclick = () => { st.mode = b.dataset.c;
+      document.querySelectorAll('.seg button').forEach(x => x.setAttribute('aria-checked', x === b)); key(); draw(); });
+    function pickSyl(j) {
+      const id = order[j], q = P.filter(p => p[2] === id), [x, y] = cents[j];
+      const ds = q.map(p => Math.hypot(p[0] - x, p[1] - y)).sort((a, b) => a - b);
+      st.hi = id; st.z = 1; st.cx = .5; st.cy = .5; setCircle(x, y, Math.min(.12, ds[Math.floor(ds.length * .4)] || .05)); detail(j);
+    }
+    document.getElementById('smReset').onclick = () => { st.z = 1; st.cx = .5; st.cy = .5; st.hi = null; st.circle = null; draw(); lens(); };
+    const L = document.getElementById('slist');
+    L.innerHTML = SY.syllables.map((S, i) => `<button role="option" aria-selected="${i === 0}"><i></i>${S.name}<span>${(S.share * 100).toFixed(0)} % of his time</span></button>`).join('');
+    L.querySelectorAll('button').forEach((b, i) => b.onclick = () => pickSyl(i));
+    SMAP = { inside: [], draw }; key(); draw(); pickSyl(0);
+  }
+  function lensFig() {
+    const cv = document.getElementById('lensFig'); if (!SMAP || !cv || cv.closest('[hidden]')) return;
+    const c = cv.getContext('2d'); c.clearRect(0, 0, cv.width, cv.height);
+    const f = Math.floor(k / 2) % 12, s = cv.height / 4.2, oy = cv.height * .43;
+    floor(c, cv, oy + 1.9 * s);
+    if (!INST || !SMAP.inside.length) return;
+    const qs = SMAP.inside.slice(0, 60).map(i => INST[i]).filter(Boolean);
+    for (const q of qs) fig(c, q[f], css('--red'), s, cv.width / 2, oy, 2, Math.max(.08, Math.min(.35, 4 / qs.length)));
+    if (qs.length >= 3) fig(c, med(qs.map(q => q[f])), css('--red'), s, cv.width / 2, oy, 5, 1);
+    document.querySelectorAll('.lensSk').forEach(sk => { const q = INST[+sk.dataset.i]; const cc = sk.getContext('2d'); cc.clearRect(0, 0, sk.width, sk.height);
+      cc.fillStyle = css('--soft'); cc.fillRect(0, 0, sk.width, sk.height); const s2 = sk.height / 4.4; fig(cc, q[f], css('--red'), s2, sk.width / 2, sk.height * .42, 4, 1); });
+  }
+
+  // ---------- the entrance: dry ice, tricolour smoke, a real exchange ----------
+  (function hero() {
+    const cv = document.getElementById('heroc'); if (!cv) return;
+    const c = cv.getContext('2d'), fogc = document.createElement('canvas'); fogc.width = 200; fogc.height = 112; const fc = fogc.getContext('2d');
+    const COL = [[43, 209, 106], [255, 140, 40], [235, 242, 238]];
+    const blobs = Array.from({ length: 16 }, (_, i) => { const kind = i % 3 === 0 ? 1 : 0;
+      return { kind, x: Math.random() * 1.4 - .2, y: kind === 2 ? .15 + Math.random() * .4 : .1 + Math.random() * .55, r: kind === 2 ? .2 + Math.random() * .25 : .12 + Math.random() * .2,
+        vx: (Math.random() < .5 ? -1 : 1) * (.006 + Math.random() * .014), vy: -.004 - Math.random() * .008, a: .045 + Math.random() * .07, ph: Math.random() * 6 }; });
+    let w = 0, h = 0, HX = null, t0 = performance.now();
+    const icec = document.createElement('canvas'); icec.width = 320; icec.height = 90; const ic = icec.getContext('2d');
+    const ice = Array.from({ length: 60 }, () => ({ x: Math.random() * 1.3 - .15, y: .3 + Math.random() * .6, rx: .04 + Math.random() * .1, ry: .14 + Math.random() * .3,
+      vx: (Math.random() < .5 ? -1 : 1) * (.006 + Math.random() * .02), a: .12 + Math.random() * .2, ph: Math.random() * 6, bob: .02 + Math.random() * .05 }));
+    function dryIce(T, floorY, kneeY) {
+      ic.clearRect(0, 0, 320, 90);
+      for (const b of ice) { if (!reduce) { b.x += b.vx / 60; if (b.x < -.3) b.x = 1.3; if (b.x > 1.3) b.x = -.3; }
+        const y = b.y + Math.sin(T * .7 + b.ph) * b.bob, a = b.a * (.75 + .25 * Math.sin(T * .4 + b.ph * 2));
+        ic.save(); ic.translate(b.x * 320, y * 90); ic.scale(b.rx * 320, b.ry * 90);
+        const g = ic.createRadialGradient(0, 0, 0, 0, 0, 1); g.addColorStop(0, `rgba(236,244,240,${a})`); g.addColorStop(.6, `rgba(220,232,226,${a * .45})`); g.addColorStop(1, 'rgba(220,232,226,0)');
+        ic.fillStyle = g; ic.beginPath(); ic.arc(0, 0, 1, 0, 7); ic.fill(); ic.restore(); }
+      // thin out toward the knees
+      ic.globalCompositeOperation = 'destination-in';
+      const m = ic.createLinearGradient(0, 0, 0, 90); m.addColorStop(0, 'rgba(0,0,0,0)'); m.addColorStop(.3, 'rgba(0,0,0,.7)'); m.addColorStop(.7, 'rgba(0,0,0,1)'); m.addColorStop(1, 'rgba(0,0,0,0)');
+      ic.fillStyle = m; ic.fillRect(0, 0, 320, 90);
+      const mx = ic.createLinearGradient(0, 0, 320, 0); mx.addColorStop(0, 'rgba(0,0,0,0)'); mx.addColorStop(.18, 'rgba(0,0,0,1)'); mx.addColorStop(.82, 'rgba(0,0,0,1)'); mx.addColorStop(1, 'rgba(0,0,0,0)');
+      ic.fillStyle = mx; ic.fillRect(0, 0, 320, 90); ic.globalCompositeOperation = 'source-over';
+      const top = kneeY, bot = floorY + (floorY - kneeY) * .35;
+      c.save(); c.filter = 'blur(6px)'; c.globalCompositeOperation = 'screen'; c.drawImage(icec, -w * .02, top, w * 1.04, bot - top); c.restore();
+    }
+    const size = () => { const r = cv.getBoundingClientRect(), d = Math.min(2, devicePixelRatio || 1); w = cv.width = Math.round(r.width * d); h = cv.height = Math.round(r.height * d); };
+    size(); addEventListener('resize', size);
+    fetch('hero.json').then(r => r.json()).then(d => { HX = d; t0 = performance.now(); });
+    function octagon(cx, cy, rx, ry, alpha) { c.strokeStyle = `rgba(200,220,205,${alpha})`; c.lineWidth = Math.max(1, w / 900); c.beginPath();
+      for (let i = 0; i <= 8; i++) { const a = Math.PI / 8 + i * Math.PI / 4; const x = cx + Math.cos(a) * rx, y = cy + Math.sin(a) * ry; i ? c.lineTo(x, y) : c.moveTo(x, y); } c.stroke(); }
+    function body(pose, cx, cy, s, col, glow, crown) {
+      if (!pose) return; c.save(); c.shadowColor = col; c.shadowBlur = glow; c.strokeStyle = col; c.fillStyle = col; c.lineCap = 'round'; c.lineJoin = 'round'; c.lineWidth = Math.max(1.5, s * .012);
+      const P = i => pose[i] ? [cx + pose[i][0] * s, cy + pose[i][1] * s] : null;
+      for (const [a, b] of BONES) { const p = P(a), q = P(b); if (p && q) { c.beginPath(); c.moveTo(...p); c.lineTo(...q); c.stroke(); } }
+      for (let i = 5; i < 23; i++) { const p = P(i); if (p) { c.beginPath(); c.arc(p[0], p[1], Math.max(1.5, s * .006), 0, 7); c.fill(); } }
+      const fpts = [0, 1, 2, 3, 4].map(P).filter(Boolean);
+      if (fpts.length) { const x = fpts.reduce((a, p) => a + p[0], 0) / fpts.length, y = fpts.reduce((a, p) => a + p[1], 0) / fpts.length, r = s * .05;
+        c.beginPath(); c.arc(x, y, r, 0, 7); c.stroke(); for (const p of fpts) { c.beginPath(); c.arc(p[0], p[1], Math.max(1, s * .004), 0, 7); c.fill(); }
+        if (crown) { const g = '#e2b347', bw = r * 1.5, by = y - r * 1.15, ch = r * .9; c.strokeStyle = g; c.fillStyle = g; c.shadowColor = g; c.shadowBlur = glow * .8; c.lineWidth = Math.max(1.5, s * .008);
+          c.beginPath(); c.moveTo(x - bw / 2, by); c.lineTo(x - bw / 2, by - ch * .55); c.lineTo(x - bw / 4, by - ch * .25); c.lineTo(x, by - ch); c.lineTo(x + bw / 4, by - ch * .25); c.lineTo(x + bw / 2, by - ch * .55); c.lineTo(x + bw / 2, by); c.closePath(); c.stroke();
+          for (const px of [-bw / 2, 0, bw / 2]) { c.beginPath(); c.arc(x + px, by - (px ? ch * .55 : ch) - 2, Math.max(1.5, s * .006), 0, 7); c.fill(); } } }
+      c.restore();
+    }
+    function frame(now) {
+      c.clearRect(0, 0, w, h); const T = now / 1000;
+      const g = c.createRadialGradient(w * .5, h * .6, 10, w * .5, h * .6, w * .5); g.addColorStop(0, 'rgba(60,95,70,.22)'); g.addColorStop(1, 'rgba(7,10,8,0)'); c.fillStyle = g; c.fillRect(0, 0, w, h);
+      if (HX) { const n = HX.mcg.length, L = n + 45, fr = reduce ? n - 30 : Math.floor((now - t0) / 1000 * 30) % L, i = Math.min(n - 1, fr);
+        const fade = fr > n + 25 ? Math.max(0, 1 - (fr - n - 25) / 20) : fr < 10 ? fr / 10 : 1;
+        const s = Math.min(h * .44, w * .38); c.globalAlpha = fade;
+        body(HX.opp[i], w * .5, h * .62, s, 'rgba(239,233,220,.95)', 16, false); body(HX.mcg[i], w * .5, h * .62, s, 'rgba(229,34,40,.98)', 22, true); c.globalAlpha = 1;
+        dryIce(T, h * .62, h * .62 - s * .42); }
+      else dryIce(T, h * .62, h * .62 - h * .13);
+      fc.clearRect(0, 0, 200, 112);
+      for (const b of blobs) { if (!reduce) { b.x += b.vx / 60; b.y += b.vy / 60; if (b.y < -.3) { b.y = .9 + Math.random() * .3; } if (b.x < -.4) b.x = 1.4; if (b.x > 1.4) b.x = -.4; }
+        const [r_, g_, bl] = COL[b.kind], a = b.a * (.7 + .3 * Math.sin(T * .5 + b.ph));
+        const gg = fc.createRadialGradient(b.x * 200, b.y * 112, 0, b.x * 200, b.y * 112, b.r * 200);
+        gg.addColorStop(0, `rgba(${r_},${g_},${bl},${a})`); gg.addColorStop(1, `rgba(${r_},${g_},${bl},0)`); fc.fillStyle = gg; fc.fillRect(0, 0, 200, 112); }
+      c.save(); c.filter = 'blur(8px)'; c.globalCompositeOperation = 'screen'; c.drawImage(fogc, 0, 0, w, h); c.restore();
+      const v = c.createRadialGradient(w * .5, h * .5, h * .25, w * .5, h * .5, w * .75); v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,.82)'); c.fillStyle = v; c.fillRect(0, 0, w, h);
+      if (!reduce) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame); if (reduce) setTimeout(() => requestAnimationFrame(frame), 1500);
+  })();
+
+  // ---------- Which Conor fight is this? ----------
+  (function game() {
+    const stage = document.getElementById('stage'); if (!stage) return;
+    const cv = document.getElementById('gamec'), c = cv.getContext('2d'), vid = document.getElementById('gamev');
+    const ask = document.getElementById('gask'), verdict = document.getElementById('gverdict');
+    const RED = '#c8202a', BLUE = '#2a5aa8', INK = '#1e1d1c';
+    let R = null, order = [], i = 0, score = 0, done = 0, phase = 'cover', t0 = 0;
+    const size = () => { const r = cv.getBoundingClientRect(), d = Math.min(2, devicePixelRatio || 1); cv.width = Math.round(r.width * d); cv.height = Math.round(r.height * d); };
+    const sub = (a, b) => [a[0] - b[0], a[1] - b[1]], len = a => Math.hypot(a[0], a[1]), lerp = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
+    // a pen stroke through the points, weight swelling in the middle (the Ghost Fight line)
+    function stroke(pts, w, color, taper = .45) {
+      if (pts.length < 2) return; const S = [];
+      for (let k = 0; k < pts.length - 1; k++) { const p0 = pts[k - 1] || pts[k], p1 = pts[k], p2 = pts[k + 1], p3 = pts[k + 2] || p2;
+        for (let q = 0; q < 8; q++) { const t = q / 8, t2 = t * t, t3 = t2 * t;
+          S.push([0, 1].map(d => .5 * (2 * p1[d] + (-p0[d] + p2[d]) * t + (2 * p0[d] - 5 * p1[d] + 4 * p2[d] - p3[d]) * t2 + (-p0[d] + 3 * p1[d] - 3 * p2[d] + p3[d]) * t3))); } }
+      S.push(pts[pts.length - 1]);
+      let tot = 0; const acc = [0]; for (let k = 1; k < S.length; k++) acc.push(tot += len(sub(S[k], S[k - 1])));
+      const L = [], Rr = [];
+      for (let k = 0; k < S.length; k++) { const d = sub(S[Math.min(S.length - 1, k + 1)], S[Math.max(0, k - 1)]), dl = len(d) || 1, nv = [-d[1] / dl, d[0] / dl];
+        const h = w * (taper + (1 - taper) * Math.sin(Math.PI * (acc[k] / (tot || 1)))) / 2; L.push([S[k][0] + nv[0] * h, S[k][1] + nv[1] * h]); Rr.push([S[k][0] - nv[0] * h, S[k][1] - nv[1] * h]); }
+      c.beginPath(); c.moveTo(...L[0]); for (const p of L) c.lineTo(...p); for (const p of Rr.reverse()) c.lineTo(...p); c.closePath(); c.fillStyle = color; c.fill();
+    }
+    const CHAINS = [[9, 7, 5], [10, 8, 6], [11, 13, 15], [12, 14, 16]], BODY = [[5, 6], [5, 11], [6, 12], [11, 12]], FEET = [[15, 19], [19, 17], [16, 22], [22, 20]];
+    function person(P, color) {
+      const sh = P[5] && P[11] ? len(sub(P[5], P[11])) : null; if (!sh) return; const w = Math.max(1.2, sh * .045);
+      if (P[5] && P[6] && P[12] && P[11]) { c.save(); c.globalAlpha = .07; c.beginPath(); c.moveTo(...P[5]); c.lineTo(...P[6]); c.lineTo(...P[12]); c.lineTo(...P[11]); c.closePath(); c.fillStyle = color; c.fill(); c.restore(); }
+      for (const ch of CHAINS) { const pts = []; for (const j of ch) { if (!P[j]) break; pts.push(P[j]); } if (pts.length >= 2) stroke(pts, w, color); }
+      for (const [a, b] of BODY) if (P[a] && P[b]) stroke([P[a], P[b]], w, color);
+      for (const [a, b] of FEET) if (P[a] && P[b]) stroke([P[a], P[b]], w * .7, color, .6);
+      const fp = [0, 1, 2, 3, 4].map(j => P[j]).filter(Boolean);
+      if (fp.length >= 2) { const ctr = [fp.reduce((t, p) => t + p[0], 0) / fp.length, fp.reduce((t, p) => t + p[1], 0) / fp.length], r = sh * .2, ring = [];
+        for (let k = 0; k <= 36; k++) { const t = -2.2 + (Math.PI * 2 + .35) * k / 36; ring.push([ctr[0] + Math.cos(t) * r, ctr[1] + Math.sin(t) * r * 1.06]); }
+        stroke(ring, w * .85, color, .15); c.fillStyle = color; for (const p of fp) { c.beginPath(); c.arc(p[0], p[1], w * .6, 0, 7); c.fill(); }
+        if (color === RED) { const g = '#c9962b', bw = r * 1.5, by = ctr[1] - r * 1.2, ch = r * .85, X0 = ctr[0];
+          const crown = [[X0 - bw / 2, by], [X0 - bw / 2, by - ch * .6], [X0 - bw / 4, by - ch * .25], [X0, by - ch], [X0 + bw / 4, by - ch * .25], [X0 + bw / 2, by - ch * .6], [X0 + bw / 2, by], [X0 - bw / 2, by]];
+          stroke(crown, w * .8, g, .7); c.fillStyle = g; for (const px of [-bw / 2, 0, bw / 2]) { c.beginPath(); c.arc(X0 + px, by - (px ? ch * .6 : ch) - w, w * .9, 0, 7); c.fill(); } } }
+      c.fillStyle = color; for (let j = 5; j <= 16; j++) if (P[j]) { c.beginPath(); c.arc(P[j][0], P[j][1], w * .8, 0, 7); c.fill(); }
+    }
+    function shadow(P, sh) {
+      const feet = [15, 16, 17, 19, 20, 22].map(j => P[j]).filter(Boolean); if (feet.length < 2) return;
+      const xs = feet.map(p => p[0]), y = Math.max(...feet.map(p => p[1])) + 3, cx = (Math.min(...xs) + Math.max(...xs)) / 2, rx = (Math.max(...xs) - Math.min(...xs)) / 2 + sh * .5;
+      c.save(); c.translate(cx, y); c.scale(1, .13); const g = c.createRadialGradient(0, 0, 0, 0, 0, rx); g.addColorStop(0, 'rgba(30,29,28,.16)'); g.addColorStop(1, 'rgba(30,29,28,0)');
+      c.fillStyle = g; c.beginPath(); c.arc(0, 0, rx, 0, 7); c.fill(); c.restore();
+    }
+    let view = null;
+    function frameView(r) {                          // zoomed out: both men, whole clip, in the middle 55 % of the stage height
+      const all = r.seq.flatMap(f => [...f.m, ...f.o]).filter(Boolean);
+      const xs = all.map(p => p[0]).sort((a, b) => a - b), ys = all.map(p => p[1]).sort((a, b) => a - b);
+      const q = (a, f) => a[Math.floor(a.length * f)]; return { x0: q(xs, .02), x1: q(xs, .98), y0: q(ys, .02), y1: q(ys, .995) };
+    }
+    function draw(now) {
+      if (cv.clientWidth && Math.abs(cv.width - cv.clientWidth * Math.min(2, devicePixelRatio || 1)) > 2) size();
+      const W = cv.width, H = cv.height; if (!W || !H) { requestAnimationFrame(draw); return; }
+      c.fillStyle = '#f7f6f2'; c.fillRect(0, 0, W, H);
+      if (R && (phase === 'ask' || phase === 'reveal')) {
+        const r = R[order[i]], v = view, sc = Math.min(H * .55 / ((v.y1 - v.y0) * 9 / 16), W * .6 / (v.x1 - v.x0));
+        const mapp = p => p && [W / 2 + (p[0] - (v.x0 + v.x1) / 2) * sc, H * .80 - (v.y1 - p[1]) * sc * 9 / 16];
+        c.strokeStyle = 'rgba(30,29,28,.18)'; c.lineWidth = Math.max(1, W / 900); c.beginPath(); c.moveTo(W * .12, H * .82); c.lineTo(W * .88, H * .82); c.stroke();
+        const dur = r.seq[r.seq.length - 1].t + .5, tt = ((now - t0) / 1000) % dur; let j = 0; while (j < r.seq.length - 1 && r.seq[j + 1].t <= tt) j++;
+        const fr = r.seq[j], M = fr.m.map(mapp), O = fr.o.map(mapp);
+        const shM = M[5] && M[11] ? len(sub(M[5], M[11])) : 40, shO = O[5] && O[11] ? len(sub(O[5], O[11])) : 40;
+        shadow(O, shO); shadow(M, shM); person(O, BLUE); person(M, RED);
+      }
+      requestAnimationFrame(draw);
+    }
+    const label = r => `${r.opponent}`, sublab = r => `${r.event ? r.event + ' · ' : ''}${r.date.slice(0, 4)}`;
+    function hud() { document.getElementById('ground').textContent = R && phase !== 'cover' ? `Round ${Math.min(i + 1, R.length)} of ${R.length}` : ''; document.getElementById('gscore').textContent = `${score} / ${done}`; }
+    function start() { order = R.map((_, k) => k).sort(() => Math.random() - .5); i = 0; score = 0; done = 0; next(); }
+    function next() {
+      if (i >= R.length) return end();
+      phase = 'ask'; stage.classList.remove('revealed'); vid.pause(); vid.removeAttribute('src'); vid.load();
+      document.getElementById('gcover').hidden = true; verdict.innerHTML = '';
+      const r = R[order[i]]; view = frameView(r); t0 = performance.now(); hud();
+      const others = R.filter(x => x !== r).sort(() => Math.random() - .5).slice(0, 3), opts = [r, ...others].sort(() => Math.random() - .5);
+      ask.innerHTML = opts.map(o => `<button data-k="${R.indexOf(o)}">${label(o)}<span>${sublab(o)}</span></button>`).join('');
+      ask.querySelectorAll('button').forEach(bt => bt.onclick = () => guess(+bt.dataset.k, bt));
+      vid.src = r.clip; vid.preload = 'auto';
+    }
+    function guess(k, bt) {
+      if (phase !== 'ask') return; const r = R[order[i]], right = k === order[i]; done++; if (right) score++;
+      phase = 'reveal'; ask.querySelectorAll('button').forEach(b => { b.disabled = true; if (+b.dataset.k === order[i]) b.classList.add('right'); else if (b === bt) b.classList.add('wrong'); });
+      stage.classList.add('revealed'); vid.currentTime = 0; vid.play().catch(() => {}); hud();
+      verdict.innerHTML = `<b>${right ? 'Yes.' : 'No.'}</b> ${r.date.slice(0, 4)} vs ${r.opponent}${r.round ? ', round ' + r.round : ''}${r.mirrored ? ' (mirrored)' : ''}.<button class="gbtn" id="gnext">${i + 1 < R.length ? 'Next fight →' : 'See your score'}</button>`;
+      document.getElementById('gnext').onclick = () => { i++; next(); };
+    }
+    function end() {
+      phase = 'end'; vid.pause(); stage.classList.remove('revealed'); ask.innerHTML = ''; hud();
+      const cover = document.getElementById('gcover'); cover.hidden = false;
+      const line = score >= 8 ? 'You know your McGregor.' : score >= 5 ? 'A real fan.' : 'Back to the tapes.';
+      cover.innerHTML = `<h3>${score} of ${R.length}</h3><p>${line}</p><button class="gbtn" id="gplay">Play again</button>`;
+      document.getElementById('gplay').onclick = start; verdict.innerHTML = '';
+    }
+    document.getElementById('gplay').onclick = () => { if (R) start(); };
+    fetch('game.json').then(r => r.json()).then(d => { R = d; hud(); });
+    requestAnimationFrame(draw);
+  })();
+
+  // stance evolution: one measure at a time
+  document.querySelectorAll('.mpick').forEach(g => g.querySelectorAll('.mtabs button').forEach(b => b.onclick = () => {
+    g.querySelectorAll('.mtabs button').forEach(x => x.setAttribute('aria-selected', x === b));
+    g.querySelectorAll('.mpan').forEach(p => { p.hidden = p.dataset.m !== b.dataset.m; p.querySelectorAll('video').forEach(v => { if (p.hidden) v.pause(); else { v.preload = 'auto'; v.play().catch(() => {}); } }); });
+  }));
+  function tick(now) {
+    const dt = Math.min(.1, (now - last) / 1000); last = now;
+    if (!reduce) { acc += dt * 12; while (acc >= 1) { acc -= 1; k++; } }
+    crowd(); stack(); lensFig();
+    requestAnimationFrame(tick);
+  }
+  fetch('clouds.json').then(r => r.json()).then(d => { CL = d; });
+  fetch('syllables.json').then(r => r.json()).then(d => { SY = d; setupMap(); });
+    requestAnimationFrame(tick);
+})();
+</script>

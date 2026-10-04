@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.DS_Store
+/work/
+*.npz
+*.onnx
+*.pt

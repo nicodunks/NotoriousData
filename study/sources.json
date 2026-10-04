@@ -1,0 +1,22 @@
+{
+  "what": "Every McGregor MMA fight with a public upload, for a style-over-time study. Official uploads (UFC, UFC Fight Pass, TNT Sports, ufcespanol) where they exist; fan uploads only where no official one was found (marked). The Cage Warriors fights come from UFC Fight Pass's official compilation and are cut into fights after download.",
+  "fights": [
+    {"id": "2011_cw_run",       "date": "2011-09-08", "event": "Cage Warriors run 2011-2012 (compilation)", "opponent": "several", "youtube": "nzgbw4dXE-w", "source": "UFC FIGHT PASS", "official": true, "note": "split into fights by hand after download"},
+    {"id": "2012_buchinger",    "date": "2012-12-31", "event": "Cage Warriors 51", "opponent": "Ivan Buchinger",  "youtube": "zCpFKCnpBS8", "source": "UFC FIGHT PASS", "official": true},
+    {"id": "2013_brimage",      "date": "2013-04-06", "event": "UFC on Fuel TV 9", "opponent": "Marcus Brimage",  "youtube": "HelivOF6vI8", "source": "UFC", "official": true},
+    {"id": "2013_holloway",     "date": "2013-08-17", "event": "UFC Fight Night 26", "opponent": "Max Holloway",  "youtube": "BCOy-PG8EIw", "source": "UFC", "official": true},
+    {"id": "2014_brandao",      "date": "2014-07-19", "event": "UFC Fight Night 46", "opponent": "Diego Brandao",  "youtube": "gfoOvT-Ut7g", "source": "TNT Sports", "official": true},
+    {"id": "2014_poirier",      "date": "2014-09-27", "event": "UFC 178", "opponent": "Dustin Poirier",           "youtube": "fbqepymLEe4", "source": "ufcespanol", "official": true},
+    {"id": "2015_siver",        "date": "2015-01-18", "event": "UFC Fight Night 59", "opponent": "Dennis Siver",   "youtube": "HjSur0yPcuA", "source": "fan upload", "official": false},
+    {"id": "2015_mendes",       "date": "2015-07-11", "event": "UFC 189", "opponent": "Chad Mendes",              "youtube": "hoQdMji2y1M", "source": "UFC", "official": true},
+    {"id": "2015_aldo",         "date": "2015-12-12", "event": "UFC 194", "opponent": "Jose Aldo",                "youtube": "7qrVQwjieac", "source": "UFC", "official": true},
+    {"id": "2016_diaz1",        "date": "2016-03-05", "event": "UFC 196", "opponent": "Nate Diaz",                "youtube": "IRHlsMeTptE", "source": "fan upload", "official": false},
+    {"id": "2016_diaz2",        "date": "2016-08-20", "event": "UFC 202", "opponent": "Nate Diaz",                "youtube": "W9jPiCO35wk", "source": "UFC", "official": true},
+    {"id": "2016_alvarez",      "date": "2016-11-12", "event": "UFC 205", "opponent": "Eddie Alvarez",            "youtube": "YCE8TDYj7aU", "source": "UFC", "official": true},
+    {"id": "2018_khabib",       "date": "2018-10-06", "event": "UFC 229", "opponent": "Khabib Nurmagomedov",      "youtube": "JuBBIJ7adjM", "source": "UFC", "official": true},
+    {"id": "2020_cerrone",      "date": "2020-01-18", "event": "UFC 246", "opponent": "Donald Cerrone",           "youtube": "to9GcH1mEGQ", "source": "UFC", "official": true},
+    {"id": "2021_poirier2",     "date": "2021-01-23", "event": "UFC 257", "opponent": "Dustin Poirier",           "youtube": "6yu2AWK4rxo", "source": "UFC Eurasia", "official": true},
+    {"id": "2021_poirier3",     "date": "2021-07-10", "event": "UFC 264", "opponent": "Dustin Poirier",           "youtube": "xLcgtHhugqM", "source": "UFC", "official": true}
+  ],
+  "not_included": "Mayweather 2017 (boxing, not MMA); pre-2011 regional fights (no reliable uploads found); Cage Warriors fights also on fan uploads are taken from the official compilation instead."
+}
