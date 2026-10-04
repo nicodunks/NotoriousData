@@ -77,15 +77,18 @@ def head_guard(im, k, col, scale_px):
     return head_cm, (np.mean(drops) if drops else np.nan)
 
 
-def mph_sign(im, mph, sub='fist speed'):
-    """Big speed sign, bottom left."""
+def mph_sign(im, mph, sub='screen speed · torso lengths a second'):
+    """Big speed sign, bottom left: the fist's peak speed on screen, in the fighter's own torso lengths per second
+    (the argument arrives in the old picture-plane mph and is converted back). Not a real-world speed."""
     if mph is None or not np.isfinite(mph): return
+    v = mph / (TORSO_CM / 100 * 2.237)
     H_, W_ = im.shape[:2]
-    txt = f'{mph:.0f} mph'
+    txt = f'{v:.1f}'
     sc = 1.5 * W_ / 640
     (tw, th), _ = cv2.getTextSize(txt, cv2.FONT_HERSHEY_DUPLEX, sc, 2)
+    (sw, _), _ = cv2.getTextSize(sub, FONT, .45 * W_ / 640, 1)
     x, y = int(14 * W_ / 640), H_ - int(16 * W_ / 640)
-    cv2.rectangle(im, (x - 10, y - th - int(30 * W_ / 640)), (x + tw + 12, y + 12), (20, 20, 20), -1)
+    cv2.rectangle(im, (x - 10, y - th - int(30 * W_ / 640)), (x + max(tw, sw) + 12, y + 12), (20, 20, 20), -1)
     cv2.putText(im, sub, (x, y - th - int(12 * W_ / 640)), FONT, .45 * W_ / 640, (170, 170, 170), 1, cv2.LINE_AA)
     cv2.putText(im, txt, (x, y), cv2.FONT_HERSHEY_DUPLEX, sc, (255, 255, 255), 2, cv2.LINE_AA)
 

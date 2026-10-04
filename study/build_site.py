@@ -261,14 +261,14 @@ def rate_pairs(rows, unit, title):
 
 
 def speed_chart(rows):
-    """Per fight: median fist speed of his left (red) and the opponent's rear straight (grey), mph."""
+    """Per fight: median screen speed of his left (red) and the opponent's rear straight (grey), torso lengths a second."""
     W, rh, L, R = 640, 30, 130, 30
     lo, hi = 8, 20
     X = lambda v: L + (v - lo) / (hi - lo) * (W - L - R)
     H = len(rows) * rh + 50
     s = [f'<svg viewBox="0 0 {W} {H}" class="era" role="img" aria-label="Fist speed per fight, his left against the opponent rear straight">']
     for v in (10, 12, 14, 16, 18):
-        s.append(f'<line x1="{X(v):.1f}" x2="{X(v):.1f}" y1="8" y2="{H - 30}" class="g"/><text x="{X(v):.1f}" y="{H - 12}" class="tk" text-anchor="middle">{v} mph</text>')
+        s.append(f'<line x1="{X(v):.1f}" x2="{X(v):.1f}" y1="8" y2="{H - 30}" class="g"/><text x="{X(v):.1f}" y="{H - 12}" class="tk" text-anchor="middle">{v}</text>')
     for i, (lab, m, o) in enumerate(rows):
         y = 20 + i * rh
         s.append(f'<text x="{L - 12}" y="{y + 4}" class="tk" text-anchor="end" style="font-size:13px">{esc(lab)}</text>')
@@ -470,7 +470,7 @@ def main():
     ev_rates = [('after a pull', 100 * po_['mcg']['counter_after_pull'], 100 * po_['opp']['counter_after_pull'], ''),
                 ('after a slip', 100 * po_['mcg']['counter_after_slip'], 100 * po_['opp']['counter_after_slip'], '')]
     evl = [e for e in json.loads((RES / 'left' / 'events.json').read_text()) if e['kind'] == 'straight']
-    mph_ = lambda e: e['peak_speed'] * tc / 100 * 2.237
+    mph_ = lambda e: e['peak_speed']                          # screen speed, torso lengths a second
     sp_rows = []
     for f in sorted({e['fight'] for e in evl}, key=lambda f: f):
         m = [mph_(e) for e in evl if e['fight'] == f and e['who'] == 'mcg']; o = [mph_(e) for e in evl if e['fight'] == f and e['who'] == 'opp']
