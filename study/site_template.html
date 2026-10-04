@@ -135,21 +135,34 @@ p.big span { display: block; font: 13px var(--mono); color: var(--mute); margin-
 .opts4 button:hover { border-color: var(--ink); }
 .opts4 button.right { border-color: var(--red); background: #fdeeee; } .opts4 button.wrong { opacity: .45; }
 
+/* the game arena: one near-black panel */
+.arena { background: #0c0d0e; padding: 10px 10px 12px; margin-top: 22px; }
+.arena .stage { border: 0; }
+.arena .opts4 button { background: #141618; border-color: #25282b; color: #ecebe8; }
+.arena .opts4 button span { color: #8b8f93; }
+.arena .opts4 button:hover { border-color: #ecebe8; }
+.arena .opts4 button.right { border-color: #ff3b42; background: #2a1112; }
+.arena .opts4 button.wrong { opacity: .4; }
+.arena .verdict { color: #b9bcbf; padding: 0 4px; } .arena .verdict b { color: #f2f2f0; }
+.arena .verdict:empty { display: none; }
+.arena #gnext { background: #f2f2f0; color: #0c0d0e; border-color: #f2f2f0; }
+
 /* final score card */
-.stage .cover.final { background: #f7f6f2; padding: 4% 6%; }
+.stage .cover.final { background: #0c0d0e; padding: 4% 6%; }
 .stage .cover.final .card { width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 2.2%; text-align: left; }
-.stage .cover.final .kicker { font: 500 clamp(12px, 1.7vw, 16px) var(--mono); color: var(--mute); }
-.stage .cover.final .big { font: 700 clamp(56px, 11vw, 120px)/.9 var(--sans); letter-spacing: -4px; color: var(--red); }
-.stage .cover.final .big small { font-size: .42em; color: var(--ink); letter-spacing: -1px; margin-left: 4px; }
-.stage .cover.final .line { font: 600 clamp(18px, 2.8vw, 30px) var(--sans); letter-spacing: -.8px; color: var(--ink); }
+.stage .cover.final .kicker { font: 500 clamp(12px, 1.7vw, 16px) var(--mono); color: #8b8f93; }
+.stage .cover.final .big { font: 700 clamp(56px, 11vw, 120px)/.9 var(--sans); letter-spacing: -4px; color: #ff3b42; }
+.stage .cover.final .big small { font-size: .42em; color: #f2f2f0; letter-spacing: -1px; margin-left: 4px; }
+.stage .cover.final .line { font: 600 clamp(18px, 2.8vw, 30px) var(--sans); letter-spacing: -.8px; color: #f2f2f0; }
 .stage .cover.final .grid10 { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; margin-top: 1%; }
-.sc { border: 1px solid var(--rule); background: var(--paper); padding: 6px 8px; display: flex; flex-direction: column; gap: 1px; min-width: 0; }
-.sc b { font: 700 clamp(13px, 1.8vw, 18px) var(--sans); } .sc.ok b { color: var(--red); } .sc.no b { color: #b5b5b5; }
-.sc span { font: 500 clamp(11px, 1.5vw, 14px) var(--sans); color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.sc i { font: clamp(10px, 1.2vw, 12px) var(--mono); font-style: normal; color: var(--mute); }
-.sc.no span, .sc.no i { color: #b5b5b5; }
-.stage .cover.final .foot { display: flex; justify-content: space-between; align-items: center; margin-top: 1.5%; font: clamp(10px, 1.3vw, 13px) var(--mono); color: var(--mute); }
+.sc { border: 1px solid #25282b; background: #141618; padding: 6px 8px; display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.sc b { font: 700 clamp(13px, 1.8vw, 18px) var(--sans); } .sc.ok b { color: #ff3b42; } .sc.no b { color: #4a4e52; }
+.sc span { font: 500 clamp(11px, 1.5vw, 14px) var(--sans); color: #ecebe8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sc i { font: clamp(10px, 1.2vw, 12px) var(--mono); font-style: normal; color: #8b8f93; }
+.sc.no span, .sc.no i { color: #4a4e52; }
+.stage .cover.final .foot { display: flex; justify-content: space-between; align-items: center; margin-top: 1.5%; font: clamp(10px, 1.3vw, 13px) var(--mono); color: #8b8f93; }
 .stage .cover.final .gbtn { padding: 8px 18px; }
+.stage .gbtn { background: #f2f2f0; color: #0c0d0e; border-color: #f2f2f0; }
 
 /* stat cards */
 .stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin: 26px 0; }
@@ -168,16 +181,16 @@ p.big span { display: block; font: 13px var(--mono); color: var(--mute); margin-
 .mv .row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 260px); gap: 14px; align-items: center; margin-top: 8px; }
 
 /* the game */
-.stage { position: relative; background: #f7f6f2; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid var(--rule); }
+.stage { position: relative; background: #0c0d0e; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid #0c0d0e; }
 .stage canvas, .stage video { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .stage video { opacity: 0; transition: opacity .7s ease; object-fit: cover; }
 .stage.revealed video { opacity: 1; }
-.stage .hud { position: absolute; left: 16px; right: 16px; top: 12px; display: flex; justify-content: space-between; align-items: baseline; font: 13px var(--mono); color: var(--mute); z-index: 2; pointer-events: none; }
-.stage .hud b { font: 600 34px/1 var(--sans); color: var(--ink); letter-spacing: -1px; }
+.stage .hud { position: absolute; left: 16px; right: 16px; top: 12px; display: flex; justify-content: space-between; align-items: baseline; font: 13px var(--mono); color: #8b8f93; z-index: 2; pointer-events: none; }
+.stage .hud b { font: 600 34px/1 var(--sans); color: #f2f2f0; letter-spacing: -1px; }
 .stage.revealed .hud, .stage.revealed .hud b { color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,.6); }
-.stage .cover { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; z-index: 3; text-align: center; color: var(--ink); background: rgba(247,246,242,.72); }
+.stage .cover { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; z-index: 3; text-align: center; color: #f2f2f0; background: rgba(12,13,14,.72); }
 .stage .cover h3 { font: 600 clamp(24px, 4vw, 36px)/1.1 var(--sans); letter-spacing: -1px; margin: 0; }
-.stage .cover p { color: var(--ink2); margin: 0; font-size: 15px; max-width: 30em; }
+.stage .cover p { color: #b9bcbf; margin: 0; font-size: 15px; max-width: 30em; }
 .gbtn { font: 500 15px var(--sans); padding: 10px 22px; border: 1px solid var(--ink); background: var(--ink); color: var(--paper); cursor: pointer; border-radius: 0; }
 .gbtn.ghost { background: transparent; color: #fff; }
 .ask { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; margin-top: 12px; min-height: 46px; }
@@ -346,7 +359,8 @@ p.big span { display: block; font: 13px var(--mono); color: var(--mute); margin-
   <ul class="keys">
     <li><b>Then watch the real footage!</b></li>
   </ul>
-  <div class="stage" id="stage" style="margin-top:22px">
+  <div class="arena">
+  <div class="stage" id="stage">
     <canvas id="gamec" aria-label="McGregor in red and his opponent in blue, drawn from their tracked joints"></canvas>
     <video id="gamev" muted playsinline loop preload="none" aria-label="The real footage"></video>
     <div class="hud"><span id="ground"></span><span><b id="gscore">0 / 0</b></span></div>
@@ -354,6 +368,7 @@ p.big span { display: block; font: 13px var(--mono); color: var(--mute); margin-
   </div>
   <div class="opts4" id="gask"></div>
   <p class="verdict" id="gverdict"></p>
+  </div>
 </section>
 
 <!-- SYLLABLES -->
@@ -688,7 +703,7 @@ p.big span { display: block; font: 13px var(--mono); color: var(--mute); margin-
     const stage = document.getElementById('stage'); if (!stage) return;
     const cv = document.getElementById('gamec'), c = cv.getContext('2d'), vid = document.getElementById('gamev');
     const ask = document.getElementById('gask'), verdict = document.getElementById('gverdict');
-    const RED = '#c8202a', BLUE = '#2a5aa8', INK = '#1e1d1c';
+    const RED = '#ff3b42', BLUE = '#4f8ff0', INK = '#f2f2f0';
     let R = null, order = [], i = 0, score = 0, done = 0, phase = 'cover', t0 = 0, hist = [];
     const size = () => { const r = cv.getBoundingClientRect(), d = Math.min(2, devicePixelRatio || 1); cv.width = Math.round(r.width * d); cv.height = Math.round(r.height * d); };
     const sub = (a, b) => [a[0] - b[0], a[1] - b[1]], len = a => Math.hypot(a[0], a[1]), lerp = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
@@ -716,7 +731,7 @@ p.big span { display: block; font: 13px var(--mono); color: var(--mute); margin-
       if (fp.length >= 2) { const ctr = [fp.reduce((t, p) => t + p[0], 0) / fp.length, fp.reduce((t, p) => t + p[1], 0) / fp.length], r = sh * .2, ring = [];
         for (let k = 0; k <= 36; k++) { const t = -2.2 + (Math.PI * 2 + .35) * k / 36; ring.push([ctr[0] + Math.cos(t) * r, ctr[1] + Math.sin(t) * r * 1.06]); }
         stroke(ring, w * .85, color, .15); c.fillStyle = color; for (const p of fp) { c.beginPath(); c.arc(p[0], p[1], w * .6, 0, 7); c.fill(); }
-        if (color === RED) { const g = '#c9962b', bw = r * 1.5, by = ctr[1] - r * 1.2, ch = r * .85, X0 = ctr[0];
+        if (color === RED) { const g = '#e8b44a', bw = r * 1.5, by = ctr[1] - r * 1.2, ch = r * .85, X0 = ctr[0];
           const crown = [[X0 - bw / 2, by], [X0 - bw / 2, by - ch * .6], [X0 - bw / 4, by - ch * .25], [X0, by - ch], [X0 + bw / 4, by - ch * .25], [X0 + bw / 2, by - ch * .6], [X0 + bw / 2, by], [X0 - bw / 2, by]];
           stroke(crown, w * .8, g, .7); c.fillStyle = g; for (const px of [-bw / 2, 0, bw / 2]) { c.beginPath(); c.arc(X0 + px, by - (px ? ch * .6 : ch) - w, w * .9, 0, 7); c.fill(); } } }
       c.fillStyle = color; for (let j = 5; j <= 16; j++) if (P[j]) { c.beginPath(); c.arc(P[j][0], P[j][1], w * .8, 0, 7); c.fill(); }
@@ -724,7 +739,7 @@ p.big span { display: block; font: 13px var(--mono); color: var(--mute); margin-
     function shadow(P, sh) {
       const feet = [15, 16, 17, 19, 20, 22].map(j => P[j]).filter(Boolean); if (feet.length < 2) return;
       const xs = feet.map(p => p[0]), y = Math.max(...feet.map(p => p[1])) + 3, cx = (Math.min(...xs) + Math.max(...xs)) / 2, rx = (Math.max(...xs) - Math.min(...xs)) / 2 + sh * .5;
-      c.save(); c.translate(cx, y); c.scale(1, .13); const g = c.createRadialGradient(0, 0, 0, 0, 0, rx); g.addColorStop(0, 'rgba(30,29,28,.16)'); g.addColorStop(1, 'rgba(30,29,28,0)');
+      c.save(); c.translate(cx, y); c.scale(1, .13); const g = c.createRadialGradient(0, 0, 0, 0, 0, rx); g.addColorStop(0, 'rgba(255,255,255,.10)'); g.addColorStop(1, 'rgba(255,255,255,0)');
       c.fillStyle = g; c.beginPath(); c.arc(0, 0, rx, 0, 7); c.fill(); c.restore();
     }
     let view = null;
@@ -736,11 +751,11 @@ p.big span { display: block; font: 13px var(--mono); color: var(--mute); margin-
     function draw(now) {
       if (cv.clientWidth && Math.abs(cv.width - cv.clientWidth * Math.min(2, devicePixelRatio || 1)) > 2) size();
       const W = cv.width, H = cv.height; if (!W || !H) { requestAnimationFrame(draw); return; }
-      c.fillStyle = '#f7f6f2'; c.fillRect(0, 0, W, H);
+      c.fillStyle = '#0c0d0e'; c.fillRect(0, 0, W, H); { const sp = c.createRadialGradient(W * .5, H * .75, 0, W * .5, H * .75, W * .5); sp.addColorStop(0, 'rgba(255,255,255,.05)'); sp.addColorStop(1, 'rgba(255,255,255,0)'); c.fillStyle = sp; c.fillRect(0, 0, W, H); }
       if (R && (phase === 'ask' || phase === 'reveal')) {
         const r = R[order[i]], v = view, sc = Math.min(H * .55 / ((v.y1 - v.y0) * 9 / 16), W * .6 / (v.x1 - v.x0));
         const mapp = p => p && [W / 2 + (p[0] - (v.x0 + v.x1) / 2) * sc, H * .80 - (v.y1 - p[1]) * sc * 9 / 16];
-        c.strokeStyle = 'rgba(30,29,28,.18)'; c.lineWidth = Math.max(1, W / 900); c.beginPath(); c.moveTo(W * .12, H * .82); c.lineTo(W * .88, H * .82); c.stroke();
+        c.strokeStyle = 'rgba(255,255,255,.14)'; c.lineWidth = Math.max(1, W / 900); c.beginPath(); c.moveTo(W * .12, H * .82); c.lineTo(W * .88, H * .82); c.stroke();
         const dur = r.seq[r.seq.length - 1].t + .5, tt = ((now - t0) / 1000) % dur; let j = 0; while (j < r.seq.length - 1 && r.seq[j + 1].t <= tt) j++;
         const fr = r.seq[j], M = fr.m.map(mapp), O = fr.o.map(mapp);
         const shM = M[5] && M[11] ? len(sub(M[5], M[11])) : 40, shO = O[5] && O[11] ? len(sub(O[5], O[11])) : 40;
