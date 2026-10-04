@@ -323,9 +323,9 @@ p.big span { display: block; font: 13px var(--mono); color: var(--mute); margin-
   <div class="minis">{{late_grid}}</div>
 
   <div class="finding">
-    <h2>His feet didn't fade at minute 8</h2>
+    <h2>His steps per minute don't fade materially</h2>
     <figure class="box">{{steps_dumb}}<div class="key"><span><i class="m"></i>McGregor</span><span><i class="o"></i>opponent</span></div></figure>
-    <figure class="box">{{steps_break}}<figcaption>Best-fitting break: minute {{s_tau}}, which only Diaz 2 reaches; anywhere from {{s_lo}} to {{s_hi}} fits almost as well. No sign of a minute-8 fade in his feet.</figcaption></figure>
+    <figure class="box">{{steps_break}}<figcaption>His cardio suffered during Diaz 2.</figcaption></figure>
   </div>
 
   <div class="finding">
@@ -344,14 +344,13 @@ p.big span { display: block; font: 13px var(--mono); color: var(--mute); margin-
 <!-- PLAY -->
 <section role="tabpanel" id="t-play" aria-labelledby="b-play" hidden>
   <ul class="keys">
-    <li><b>Read the clues</b>: the opponent's build, stance and southpaw or orthodox lead, and McGregor's own stance as it changed.</li>
-    <li><b>Then watch the real footage</b>: it fades in once you answer.</li>
+    <li><b>Then watch the real footage!</b></li>
   </ul>
   <div class="stage" id="stage" style="margin-top:22px">
     <canvas id="gamec" aria-label="McGregor in red and his opponent in blue, drawn from their tracked joints"></canvas>
     <video id="gamev" muted playsinline loop preload="none" aria-label="The real footage"></video>
     <div class="hud"><span id="ground"></span><span><b id="gscore">0 / 0</b></span></div>
-    <div class="cover" id="gcover"><h3>Which Conor fight is this?</h3><p>Ten fights, one exchange each. McGregor in red.</p><button class="gbtn" id="gplay">Play</button></div>
+    <div class="cover" id="gcover"><h3>Which Conor fight is this?</h3><button class="gbtn" id="gplay">Play</button></div>
   </div>
   <div class="opts4" id="gask"></div>
   <p class="verdict" id="gverdict"></p>
@@ -773,7 +772,7 @@ p.big span { display: block; font: 13px var(--mono); color: var(--mute); margin-
       phase = 'end'; vid.pause(); stage.classList.remove('revealed'); ask.innerHTML = ''; verdict.innerHTML = '';
       document.getElementById('ground').textContent = ''; document.getElementById('gscore').textContent = '';
       const cover = document.getElementById('gcover'); cover.hidden = false; cover.classList.add('final'); stage.classList.add('done');
-      const line = score >= 9 ? 'You know your McGregor.' : score >= 7 ? 'Real fan.' : score >= 5 ? 'Casual.' : 'Back to the tapes.';
+      const line = score >= 9 ? 'I bet you watch the prelims.' : score >= 6 ? 'Real fan.' : score >= 4 ? 'Casual.' : 'Back to the tapes.';
       const cells = hist.slice().sort((a, b) => a.r.date.localeCompare(b.r.date)).map(h =>
         `<div class="sc ${h.right ? 'ok' : 'no'}"><b>${h.right ? '✓' : '✗'}</b><span>${h.r.opponent.split(' ').slice(-1)[0]}</span><i>${h.r.date.slice(0, 4)}</i></div>`).join('');
       cover.innerHTML = `<div class="card">
