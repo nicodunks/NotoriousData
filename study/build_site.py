@@ -342,8 +342,8 @@ def main():
 
     # stance: the null grid
     grid_keys = [('blade', 'Bladed shoulders', '°', '{:.0f}', 'How far the shoulder line is turned from square toward the opponent: 90° fully side-on (karate), 0° squared up (boxing).'),
-                 ('width', 'Stance width', ' cm', '{:.0f}', 'Ankle to ankle. Wide is the karate stance.'),
-                 ('length', 'Stance length', ' cm', '{:.0f}', 'How far the lead foot sits ahead of the rear, along the line to the opponent.'),
+                 ('width', 'Stance width', ' cm', '{:.0f}', 'Ankle to ankle.'),
+                 ('length', 'Stance length', ' cm', '{:.0f}', 'How far the lead foot sits ahead of the rear.'),
                  ('lean', 'Torso lean', '°', '{:.1f}', 'The hip-to-shoulder line against vertical; + is toward the opponent. The boxer leans in.'),
                  ('shoulder', 'Shoulder tilt', ' cm', '{:.1f}', 'Lead shoulder above the rear one; + is the boxer\'s shoulder raised over the chin.'),
                  ('crouch', 'Hip height', ' cm', '{:.0f}', 'Hips above the ankles. Lower is a deeper crouch.'),
@@ -364,7 +364,7 @@ def main():
         pans.append(f'<div class="mpan" data-m="{i}"{" hidden" if i else ""}>'
                     f'<video class="mstrip" src="clips/measure_{k}.mp4#t=0.1" muted loop playsinline preload="{"metadata" if i == 0 else "none"}" aria-label="{esc(lab)} in each era, drawn on McGregor"></video>'
                     f'<p class="cap">{esc(eras_txt)} · the most typical steady stretch of each era for this measure</p>'
-                    f'<p class="mdef"><b>{esc(lab)}.</b> {esc(dfn)} Across the eras: {f.format(mm["early"])}{u} in 2012–15, {f.format(mm["late"])}{u} in 2016–21 (corrected p {mm["holm_p"]:.2f}).</p>'
+                    f'<p class="mdef"><b>{esc(lab)}.</b> {esc(dfn)}</p>'
                     f'<figure class="box">{era_chart(ser(k, "mcg"), ser(k, "opp"), lab + (" (" + u.strip() + ")" if u.strip() else ""), u, f)}'
                     f'<div class="key"><span><i class="m"></i>McGregor</span><span><i class="o"></i>his opponents, same frames</span></div></figure></div>')
     grid = f'<div class="mpick"><div class="ptabs mtabs" role="tablist" aria-label="Measure">{"".join(btns)}</div>{"".join(pans)}</div>'
